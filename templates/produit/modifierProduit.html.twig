@@ -1,0 +1,57 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Produits{% endblock %}
+{% block css %}
+    <link href="{{ asset('back/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+          rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Produit</h2></div>
+           <hr>
+            {{ form_start(formProduit,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.nomProduit,"Nom Produit") }}</label>
+                    {{ form_widget (formProduit.nomProduit,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.description,"Description") }}</label>
+                    {{ form_widget (formProduit.description,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.image,"Image") }}</label>
+                    {{ form_widget (formProduit.image,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.prix,"Prix") }}</label>
+                    {{ form_widget (formProduit.prix,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.quantiteStock,"Quantite Stock") }}</label>
+                    {{ form_widget (formProduit.quantiteStock,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.categorie,"Categorie") }}</label>
+                    {{ form_widget (formProduit.categorie,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                        {{ form_row (formProduit.Modifier,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formProduit)}}
+
+            </form>
+                {{ form_end (formProduit)}}
+            <div>
+                <a href="{{ path('app_afficherProduit') }}">back to list</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}
