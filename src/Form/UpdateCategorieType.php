@@ -18,7 +18,7 @@ class UpdateCategorieType extends AbstractType
             ->add('nomCategorie')
             ->add('description')
             ->add('image',FileType::class,array('data_class' => null))
-            //->add('isEnabled',CheckboxType::class)
+            ->add('isEnabled',CheckboxType::class)
             ->add('Modifier',SubmitType::class)
             ;
     }

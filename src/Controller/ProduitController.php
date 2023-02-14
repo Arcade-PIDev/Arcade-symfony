@@ -45,6 +45,12 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produit->setCreationDate(new \DateTime("now"));
+
+            $file = $request->files->get('produit_form')['image'];
+            $filename = md5(uniqid()) . '.png';
+            $file->move($this->getParameter('eshop_directory'), $filename);
+            $produit->setImage($filename);
+
             $produit->setIsEnabled(1);
             $manager->persist($produit);
             $manager->flush();
@@ -66,6 +72,12 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produit->setModificationDate(new \DateTime("now"));
+
+            $file = $request->files->get('update_produit')['image'];
+            $filename = md5(uniqid()) . '.png';
+            $file->move($this->getParameter('eshop_directory'), $filename);
+            $produit->setImage($filename);
+
             $entityManager->persist($produit);
             $entityManager->flush();
             return $this->redirectToRoute('app_afficherProduit');

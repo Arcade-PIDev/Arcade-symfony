@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
@@ -17,12 +18,21 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message:"field required")]
+    #[Assert\Length (min:5)]
+    #[Assert\Length (max:15)]
+    #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"name must contain only letters")]
     private ?string $nomCategorie = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message:"field required")]
+    #[Assert\Length (min:5)]
+    #[Assert\Length (max:255)]
+    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"description must contain only letters")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank (message:"field required")]
     private ?string $image = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

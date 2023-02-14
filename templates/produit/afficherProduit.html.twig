@@ -27,7 +27,7 @@
             <div class="x_title" style="display: inline-flex;">
                 <h2>Table Produits</h2>
                 <div class="clearfix"></div>
-                <a href="{{ path('app_ajouterCategorie') }}">
+                <a href="{{ path('app_ajouterProduit') }}">
                     <button type="button" class="btn btn-info btn-xs"
                             style="position:absolute;top:15px;right:3%;">Ajouter un produit
                     </button>
@@ -35,7 +35,7 @@
             </div>
             <div class="x_content">
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-13">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -68,7 +68,7 @@
                                                     {% set images = prod.image| trim('*') | split("*") %}
                                                     <picture>
                                                         {% for image in images %}
-                                                            <img src="{{ asset('shop/images/'~image) }}" alt="image"
+                                                            <img src="{{ asset('eshop/'~image) }}" alt="image"
                                                                 style="width:100px ;margin-bottom:20%">
 
                                                         {% endfor %}
