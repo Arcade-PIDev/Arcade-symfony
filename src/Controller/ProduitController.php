@@ -45,10 +45,11 @@ class ProduitController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $produit->setCreationDate(new \DateTime("now"));
+            $produit->setModificationDate(null);
 
             $file = $request->files->get('produit_form')['image'];
             $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('eshop_directory'), $filename);
+            $file->move($this->getParameter('produit_directory'), $filename);
             $produit->setImage($filename);
 
             $produit->setIsEnabled(1);
@@ -67,7 +68,8 @@ class ProduitController extends AbstractController
     {
         $form = $this->createForm(UpdateProduitType::class, $produit);
         $form->handleRequest($request);
-        
+        $produit->getImage();
+        //$produit = $this->getDoctrine()->getRepository(Products::class)->find($id);
         $entityManager->getRepository(Produit::class)->find($id);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,27 +77,60 @@ class ProduitController extends AbstractController
 
             $file = $request->files->get('update_produit')['image'];
             $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('eshop_directory'), $filename);
+            $file->move($this->getParameter('produit_directory'), $filename);
             $produit->setImage($filename);
 
             $entityManager->persist($produit);
             $entityManager->flush();
             return $this->redirectToRoute('app_afficherProduit');
         }
+/*
+        $img=$produit->getImage();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $files = $request->files->get('update_produit')['image'];
+            if($files){
+                $filenames = "";
+                foreach ($files as $file) {
+                    $filename = md5(uniqid()) . '.png';
+                    $file->move($this->getParameter('produit_directory'), $filename);
+                    $filenames .= $filename . "*";
+                }
+                $produit->setImage($filenames);
+                //$entityManager->persist($produit);
+                $entityManager->flush();
+                return $this->redirect($this->generateUrl('productsshow'));
+            }
+            else
+            {
+                $produit->setImage($img);
+                //$entityManager->persist($produit);
+                $entityManager->flush();
+                return $this->redirect($this->generateUrl('productsshow'));
+            }*/
+            //$product->setCreationDate(null);
 
-        return $this->render('Produit/modifierProduit.html.twig', [
-            'formProduit' => $form->createView(),
+        return $this->render('produit/modifierProduit.html.twig', [
+            'formProd' => $form->createView(),
         ]);
     }
 
 
 
     //front
-    #[Route('/afficherProduitFront', name: 'app_afficherProduitFront')]
-    public function afficherProduitFront(ProduitRepository $repo)
+    #[Route('/afficherProduitFront/{cat}', name: 'app_afficherProduitFront')]
+    public function afficherProduitFront(ProduitRepository $repo,$cat)
     {
         return $this->render('produit/afficherProduitFront.html.twig', [
-            'produit' => $repo->findAll(),
+            'produit' => $repo->findByCategorie($cat),
+        ]);
+    }
+
+    #[Route('/detailProduitFront/{id}', name: 'app_detailProduitFront')]
+    public function detailProduitFront(ProduitRepository $repo,$id)
+    {
+        return $this->render('produit/detailProduitFront.html.twig', [
+            'produit' => $repo->find($id),
         ]);
     }
 }

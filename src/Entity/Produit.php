@@ -18,34 +18,42 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
-    #[Assert\Length (min:5)]
-    #[Assert\Length (max:15)]
+    #[Assert\NotBlank (message:"obligatoire")]
+    #[Assert\Length ([
+        'min' => 5,
+        'max' => 255,
+        'minMessage' => 'min = 5 ',
+        'maxMessage' => 'max = 255',
+    ])]
     #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"name must contain only letters")]
     private ?string $nomProduit = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank (message:"field required")]
-    #[Assert\Positive]
+    #[Assert\NotBlank (message:"obligatoire")]
+    #[Assert\Positive (message:"prix doit etre positive")]
     private ?int $prix = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank (message:"field required")]
-    #[Assert\PositiveOrZero]
+    #[Assert\NotBlank (message:"obligatoire")]
+    #[Assert\PositiveOrZero (message:"quantité doit etre positive ou egale a zero")]
     private ?int $quantiteStock = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
+    #[Assert\NotBlank (message:"obligatoire")]
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
-    #[Assert\Length (min:5)]
-    #[Assert\Length (max:255)]
-    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"description must contain only letters")]
+    #[Assert\NotBlank (message:"obligatoire")]
+    #[Assert\Length ([
+        'min' => 5,
+        'max' => 255,
+        'minMessage' => 'min = 5 ',
+        'maxMessage' => 'max = 255',
+    ])]
+    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?-]/" , message:"description must contain only letters")]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $creationDate = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]    
@@ -55,9 +63,10 @@ class Produit
     private ?bool $isEnabled = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits', targetEntity: Categorie::class)]
+    #[Assert\NotBlank (message:"obligatoire")]
     private $categorie;
 
-    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Panier::class)]
+    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Panier::class, cascade:["remove"])]
     private Collection $paniers;
 
     public function __construct()

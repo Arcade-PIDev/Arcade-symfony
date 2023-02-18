@@ -19,15 +19,23 @@ class Categorie
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank (message:"field required")]
-    #[Assert\Length (min:5)]
-    #[Assert\Length (max:15)]
+    #[Assert\Length ([
+        'min' => 4,
+        'max' => 255,
+        'minMessage' => 'min = 4 ',
+        'maxMessage' => 'max = 255',
+    ])]
     #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"name must contain only letters")]
     private ?string $nomCategorie = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank (message:"field required")]
-    #[Assert\Length (min:5)]
-    #[Assert\Length (max:255)]
+    #[Assert\Length ([
+        'min' => 5,
+        'max' => 255,
+        'minMessage' => 'min = 5 ',
+        'maxMessage' => 'max = 255',
+    ])]
     #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"description must contain only letters")]
     private ?string $description = null;
 
@@ -55,6 +63,11 @@ class Categorie
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
 
     public function getNomCategorie(): ?string

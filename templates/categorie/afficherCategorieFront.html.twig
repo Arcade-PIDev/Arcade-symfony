@@ -1,7 +1,6 @@
 {% extends 'frontBase.html.twig' %}
 {% block title %}Categories{% endblock %}
-{% block css %}
-{% endblock %}
+
 {% block content %}
     <!-- banner-section start -->
     <section id="banner-section" class="inner-banner profile features shop">
@@ -40,8 +39,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="section-header text-center">
-                        <h2 class="title">Our Categories</h2>
-                        <p>We Try to Make Gamers All Around the World Happy </p>
+                        <h2 class="title">Categories</h2>
                     </div>
                 </div>
             </div>
@@ -53,14 +51,16 @@
                     <div class="single-item text-center" style="min-height: 370px;max-height: 370px" >
                         <div class="img">
                             <div class="img-area">
-                                <img src="{{asset('eshop/'~cat.image)}}" alt="{{asset('eshop/'~cat.image)}}">
+                                <img src="{{asset('eshop/categorie/'~cat.image)}}" style="width:351px;height:130px" alt="{{asset('eshop/categorie/'~cat.image)}}">
                             </div>
                         </div>
                         <div class="bottom-area d-flex justify-content-between"></div>
-                        <div>
+                        <div style="justify-content:center;display:flex;">
                             <h5>{{ cat.getNomCategorie() }}</h5>
                         </div>
-                        <p style="justify-content: center;display: flex;">{{ cat.getDescription() }}</p>
+                        <div style="justify-content:center;display:flex;">
+                            {{ cat.getDescription() }}
+                        </div>
                     </div>
                 </a>
                 </div>

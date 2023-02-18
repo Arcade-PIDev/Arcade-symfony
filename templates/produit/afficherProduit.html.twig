@@ -1,23 +1,5 @@
 {% extends 'backBase.html.twig' %}
 {% block title %}Produits{% endblock %}
-{% block css %}
-  <link href="{{asset('back/css/pace.min.css')}}" rel="stylesheet"/>
-  <script src="{{asset('back/js/pace.min.js')}}"></script>
-  <!--favicon-->
-  <link rel="icon" href="{{asset('back/images/favicon.ico')}}" type="image/x-icon">
-  <!-- simplebar CSS-->
-  <link href="{{asset('back/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
-  <!-- Bootstrap core CSS-->
-  <link href="{{asset('back/css/bootstrap.min.css')}}" rel="stylesheet"/>
-  <!-- animate CSS-->
-  <link href="{{asset('back/css/animate.css')}}" rel="stylesheet" type="text/css"/>
-  <!-- Icons CSS-->
-  <link href="{{asset('back/css/icons.css')}}" rel="stylesheet" type="text/css"/>
-  <!-- Sidebar CSS-->
-  <link href="{{asset('back/css/sidebar-menu.css')}}" rel="stylesheet"/>
-  <!-- Custom Style-->
-  <link href="{{asset('back/css/app-style.css')}}" rel="stylesheet"/>
-{% endblock %}
 {% block content %}
     <br>
     <br>
@@ -35,29 +17,27 @@
             </div>
             <div class="x_content">
                 <div class="row">
-                    <div class="col-sm-13">
+                    <div class="col-sm-12">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="col">ID</th>
-                                                <th class="col">Nom Produit</th>
-                                                <th class="col">Categorie </th>
-                                                <th class="col">Price</th>
-                                                <th class="col">Quantite stock</th>
+                                                <th class="col">Nom</th>
+                                                <th class="col">Categorie</th>
+                                                <th class="col">Prix</th>
+                                                <th class="col">Stock</th>
                                                 <th class="col">Image</th>
-                                                <th class="col">Description </th>
-                                                <th class="col">Creation Date </th>
-                                                <th class="col">Modification Date </th>
+                                                <th class="col">Description</th>
+                                                <th class="col">Creation Date</th>
+                                                <th class="col">Modif. Date</th>
                                                 <th class="col no-link last"><span class="nobr">IsEnabled</span>
                                                 </th>
                                                 <th></th><th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="width:100px">
                                             {% for prod in produit %}
                                             <tr class="even pointer">
-                                                <td>{{ prod.getId() }}</td>
                                                 <td>{{ prod.getNomProduit() }}</td>
                                                 <td>{{ prod.getCategorie().getNomCategorie() }}</td>
                                                 <td>{{ prod.getPrix() }}</td>
@@ -68,7 +48,7 @@
                                                     {% set images = prod.image| trim('*') | split("*") %}
                                                     <picture>
                                                         {% for image in images %}
-                                                            <img src="{{ asset('eshop/'~image) }}" alt="image"
+                                                            <img src="{{ asset('eshop/produit/'~image) }}" alt="image"
                                                                 style="width:100px ;margin-bottom:20%">
 
                                                         {% endfor %}
@@ -76,8 +56,8 @@
                                                     </picture>
                                                 </td>
                                                 <td>{{ prod.getDescription() }}</td>
-                                                <td>{{ prod.getCreationDate()| date }}</td>
-                                                <td>{{ prod.getModificationDate()| date }}</td>
+                                                <td>{{ prod.getCreationDate()| date('y-M-d') }}</td>
+                                                <td>{{ prod.getModificationDate()| date('y-M-d') }}</td>
                                                 <td>{% if prod.getIsEnabled() == 0 %}
                                                         <span class="badge badge-danger">isDisabled</span>
                                                     {% else %}
@@ -106,17 +86,3 @@
     </div>
 
 {% endblock %}
-{% block js %}
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{asset('back/js/jquery.min.js')}}"></script>
-  <script src="{{asset('back/js/popper.min.js')}}"></script>
-  <script src="{{asset('back/js/bootstrap.min.js')}}"></script>
-	
-  <!-- simplebar js -->
-  <script src="{{asset('back/plugins/simplebar/js/simplebar.js')}}"></script>
-  <!-- sidebar-menu js -->
-  <script src="{{asset('back/js/sidebar-menu.js')}}"></script>
-  
-  <!-- Custom scripts -->
-  <script src="{{asset('back/js/app-script.js')}}"></script>
-  {% endblock %}

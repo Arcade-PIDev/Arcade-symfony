@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProduitFormType extends AbstractType
 {
@@ -20,7 +21,9 @@ class ProduitFormType extends AbstractType
             ->add('prix')
             ->add('quantiteStock')
             ->add('image',FileType::class)
-            ->add('description')
+            ->add('description', TextareaType::class)
+            ->add('creationDate')
+            ->add('modificationDate')
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nomCategorie',

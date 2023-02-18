@@ -35,10 +35,11 @@ class CategorieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $categorie->setCreationDate(new \DateTime("now"));
+            $categorie->setModificationDate(null);
 
             $file = $request->files->get('categorie_form')['image'];
             $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('eshop_directory'), $filename);
+            $file->move($this->getParameter('categorie_directory'), $filename);
             $categorie->setImage($filename);
 
             $categorie->setIsEnabled(1);
@@ -74,7 +75,7 @@ class CategorieController extends AbstractController
             $categorie->setModificationDate(new \DateTime("now"));
             $file = $request->files->get('update_categorie')['image'];
             $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('eshop_directory'), $filename);
+            $file->move($this->getParameter('categorie_directory'), $filename);
             $categorie->setImage($filename);
             
             $entityManager->persist($categorie);
@@ -95,4 +96,5 @@ class CategorieController extends AbstractController
             'categorie' => $repo->findAll(),
         ]);
     }
+    
 }
