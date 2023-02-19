@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
-    
+
 <link rel="stylesheet" href="{{asset('front/css/xzoom.css')}}">
 <link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset('front/css/owl.theme.default.min.css')}}">
@@ -54,10 +54,10 @@
                                         <li><a href="tournaments-single.html">Coaching</a></li>
                                     </ul>
                                 </li>
-                                <li class="menu_has_children"><a href=""> Magasin</a>
+                                <li class="menu_has_children"><a href="{{ path('app_afficherCategorieFront') }}"> Magasin</a>
                                 <ul class="sub-menu">
-                                        <li><a href="">Categories</a></li>
-                                        <li><a href="">Panier</a></li>
+                                        <li><a href="{{ path('app_afficherCategorieFront') }}">Categories</a></li>
+                                        <li><a href="{{ path('app_afficherCategorieFront') }}">Panier</a></li>
                                         <li><a href="">Commandes</a>
                                         </li>
                                         <li><a href="">WishList</a></li>
@@ -147,7 +147,6 @@
 <script src="{{ asset("front/js/main.js") }}"></script>
 <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
 
-    <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
     <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('front/js/xzoom.js') }}"></script>
     <script src="{{ asset('front/js/xzoom-setup.js') }}"></script>

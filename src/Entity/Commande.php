@@ -24,7 +24,7 @@ class Commande
     #[ORM\Column]
     private ?bool $is_canceled = null;
 
-    #[ORM\OneToMany(mappedBy: 'commandes', targetEntity: Panier::class)]
+    #[ORM\OneToMany(mappedBy: 'commandes', targetEntity: Panier::class, cascade:["remove"])]
     private Collection $paniers;
 
     #[ORM\ManyToOne(inversedBy: 'commandes')]

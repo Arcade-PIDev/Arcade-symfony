@@ -42,8 +42,6 @@ class Jeux
     #[ORM\OneToMany(mappedBy: 'Idjeuxfk', targetEntity: Tournois::class,cascade:["remove"] )]
     private Collection $tournois;
 
-   
-
     public function __construct()
     {
         $this->tournois = new ArrayCollection();

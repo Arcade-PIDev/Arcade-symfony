@@ -133,4 +133,5 @@ class ProduitController extends AbstractController
             'produit' => $repo->find($id),
         ]);
     }
+
 }

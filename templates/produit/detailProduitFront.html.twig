@@ -75,12 +75,12 @@
                             </div>
                             <div class="bottom-area d-flex align-items-center">
                                 <h5>{{ produit.getPrix() }}DT</h5>
-                                <div class="qtySelector text-center">
+                                {# <div class="qtySelector text-center">
                                     <i class="fas fa-minus decreaseQty"></i>
                                     <input type="text" class="qtyValue" value="1">
                                     <i class="fas fa-plus increaseQty"></i>
-                                </div>
-                                <a href="#" class="cmn-btn">Add to Basket</a>
+                                </div> #}
+                                <a href="{{path('app_ajouterPanier',{ id:produit.getId() } )}}" class="cmn-btn">Ajouter au panier</a>
                             </div>
                             <div class="social d-flex align-items-center">
                                 <p>Share:</p>
