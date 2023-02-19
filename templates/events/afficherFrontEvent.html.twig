@@ -1,0 +1,120 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block title %}Evenement{% endblock %}
+
+{% block content %}
+   <section id="tournaments-section" class="pt-120 tournaments">
+        <div class="overlay pt-120 pb-120">
+            <div class="container wow fadeInUp">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <div class="section-header">
+                            <h2 class="title">Evenements de Gaming</h2>
+                            <p>Trouvez plusieurs evenements de gaming! </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-40 mp-none">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="single-input">
+                            <span>Lieu</span>
+                            <select>
+                                <option>Lieu</option>
+                                <option value="1">Upcoming 1</option>
+                                <option value="2">Upcoming 2</option>
+                                <option value="3">Upcoming 3</option>
+                                <option value="5">Upcoming 5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="single-input">
+                            <span>Rechercher</span>
+                            <input type="text" placeholder="Search">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="single-input">
+                            <span>Nombre Places</span>
+                            <select>
+                                <option>Choisir nbr de places</option>
+                                <option value="1">Size 1</option>
+                                <option value="2">Size 2</option>
+                                <option value="3">Size 3</option>
+                                <option value="4">Size 4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="single-input">
+                            <span>Prix Ticket</span>
+                            <select>
+                                <option>Choisir Prix Ticket</option>
+                                <option value="1">50</option>
+                                <option value="2">60</option>
+                                <option value="3">70</option>
+                                <option value="4">80</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {% for e in listEvents %}
+                 
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 d-flex align-items-center">
+                          
+                            <img class="top-img" src="{{ asset('esfiles/afficheEvent/'~e.AfficheE) }}" alt=src="{{ asset('esfiles/afficheEvent/'~e.AfficheE) }}"
+                             style="width:200px;height:300px ">
+                        </div>
+                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
+                            <div class="mid-area">
+                                <h4>{{ e.getNomEvent() }}</h4>
+                                <div class="title-bottom d-flex">
+                                    <div class="time-area bg">
+                                        <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
+                                        <span>Date de début</span>
+                                        <span class="time">{{  e.DateDebutE.format('d/m/Y') }}</span>
+                                    </div>
+                                     <div class="time-area bg">
+                                        <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
+                                        <span>Date de Fin</span>
+                                        <span class="time">{{  e.DateFinE.format('d/m/Y') }}</span>
+                                    </div>
+                                   
+                                </div>
+                                <div class="single-box d-flex">
+                                    <div class="box-item">
+                                        <span class="head">Places disponibles</span>
+                                        <span class="sub">{{  e.nbrPlaces }} </span>
+                                    </div>
+                                    <div class="box-item">
+                                        <span class="head">Lieu</span>
+                                        <span class="sub">{{  e.lieu }} </span>
+                                    </div>
+                                    <div class="box-item">
+                                        <span class="head"><a href="{{path('app_afficherFront_Sponsor',{ e:e.id()})}}" class="col-lg-11">Les sponsors de cet evenement</a></span>
+                                        
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center">
+                            <div class="prize-area text-center">
+                                <div class="contain-area">
+                                    <span class="prize"><img src="{{ asset("front/images/price-coin.png") }}" alt="image">Prix Ticket</span>
+                                    <h4 class="dollar">{{  e.PrixTicket }}DNT</h4>
+                                    <a href="tournaments-single.html" class="cmn-btn">S'inscrire</a>
+                                    <p>{{  e.DescriptionEvent }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

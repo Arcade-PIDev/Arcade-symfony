@@ -1,0 +1,88 @@
+ {% extends 'backBase.html.twig' %}
+
+
+{% block title %}Participations{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Sponsors</h2>
+                <div class="clearfix"></div>
+                <a href="{{ path('app_ajouter_Sponsor') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:15px;right:3%;">Ajouter Sponsor
+                    </button>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                       
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                               
+                                                <th class="col">Nom Sponsor</th>
+                                                <th class="col">Num Tel</th>
+                                                <th class="col">Email </th>
+                                                <th class="col">Domaine </th>
+                                                <th class="col">Adresse </th>
+                                                <th class="col">Logo </th>
+                                                <th class="col">Montant</th>
+                                                <th class="col">Evenement</th>
+                                                </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    {% for s in listSponsors %}
+                                    <tr class="even pointer">
+                                         
+                                          <td>{{  s.getNomSponsor }}</td> 
+                                          <td>{{  s.getNumTelSponsor }}</td> 
+                                          <td>{{  s.getEmailSponsor}}</td> 
+                                          <td>{{  s.getDomaineSponsor}}</td> 
+                                          <td>{{  s.getAdresseSponsor }}</td> 
+                                          
+                                          <td>
+       
+                                           <img src="{{ asset('esfiles/logoSponsor/'~s.logoSponsor) }}" alt="image" 
+                                             style="width:60px ">
+                                            
+                                        </td>
+                                          <td>{{  s.getMontantSponsoring }}</td>
+                                          <td>{{ s.getIDEventsFK().getNomEvent() }}</td> 
+                                          
+                                      
+                                        <td>
+                                   <button class="btn btn-primary"><a class="fa fa-pencil"
+                                               href="{{ path('app_modifier_Sponsor',{'id':s.id }) }}">modifier</a></button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger"><a class="fa fa-trash"
+                                               href="{{ path('app_supprimer_Sponsor',{'id':s.id }) }}">supprimer</a></button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+

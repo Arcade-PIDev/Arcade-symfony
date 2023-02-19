@@ -1,0 +1,67 @@
+ {% extends 'backBase.html.twig' %}
+ {% block title %} Modifier Evenements{% endblock %}
+
+
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Modifier Evenement</h2></div>
+           <hr>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+              <label for="input-2">{{form_label(form.NomEvent,"Nom")}}</label>
+              {{ form_widget(form.NomEvent, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.NomEvent) }}
+           </div>
+
+           <div class="form-group">
+              <label for="input-2">{{form_label(form.lieu,"Lieu")}}</label>
+              {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.lieu) }}
+           </div>
+
+           <div class="form-group">
+            <label for="input-3">{{form_label(form.DateDebutE, "Date Debut")}}</label>
+              {{ form_widget(form.DateDebutE, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.DateDebutE) }}
+           </div>
+           <div class="form-group">
+            <label for="input-4">{{form_label(form.DateFinE, "Date Fin")}}</label>
+              {{ form_widget(form.DateFinE, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.DateFinE) }}
+           </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.AfficheE, "Affiche")}}</label>
+            {{ form_widget(form.AfficheE, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.AfficheE) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.PrixTicket,"Prix Ticket")}}</label>
+              {{ form_widget(form.PrixTicket, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.PrixTicket) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.nbrPlaces,"Nbr Places")}}</label>
+              {{ form_widget(form.nbrPlaces, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.nbrPlaces) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.DescriptionEvent,"Description")}}</label>
+              {{ form_widget(form.DescriptionEvent, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.DescriptionEvent) }}
+           </div>
+           <div class="form-group">
+              {{ form_row(form.save, {'attr': {'class': 'btn btn-light px-5'}} )}}
+                </div>
+                    {{form_rest (form)}}
+
+            </form>
+                {{ form_end (form)}}
+            <div>
+                <a href="{{ path('app_afficher_Event') }}">Liste des Evenements</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}
