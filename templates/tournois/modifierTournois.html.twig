@@ -1,0 +1,58 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Tournois{% endblock %}
+{% block css %}
+    <link href="{{ asset('back/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+          rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Tournois</h2></div>
+           <hr>
+            {{ form_start(formTournois,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formTournois.NBRparticipants,"NBRparticipants") }}</label>
+                    {{ form_widget (formTournois.NBRparticipants,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formTournois.NBRparticipants) }}
+
+                </div>
+                 <div class="form-group">
+                    <label for="input-6">{{ form_label (formTournois.DureeTournois,"DureeTournois") }}</label>
+                    {{ form_widget (formTournois.DureeTournois,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formTournois.DureeTournois) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formTournois.DateDebutTournois,"DateDebutTournois") }}</label>
+                    {{ form_widget (formTournois.DateDebutTournois,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formTournois.DateDebutTournois) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formTournois.Idjeuxfk,"NomJeux") }}</label>
+                    {{ form_widget (formTournois.Idjeuxfk,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formTournois.Idjeuxfk) }}
+
+                </div>
+                
+                        
+                <div class="form-group">
+                        {{ form_row (formTournois.Modifier,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formTournois)}}
+            </form>
+                {{ form_end (formTournois)}}
+            <div>
+                <a href="{{ path('app_afficherTournois') }}">RETOUR</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

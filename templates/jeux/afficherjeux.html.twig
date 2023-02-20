@@ -1,0 +1,102 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Jeux{% endblock %}
+{% block css %}
+  <link href="{{asset('back/css/pace.min.css')}}" rel="stylesheet"/>
+  <script src="{{asset('back/js/pace.min.js')}}"></script>
+  <!--favicon-->
+  <link rel="icon" href="{{asset('back/images/favicon.ico')}}" type="image/x-icon">
+  <!-- simplebar CSS-->
+  <link href="{{asset('back/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
+  <!-- Bootstrap core CSS-->
+  <link href="{{asset('back/css/bootstrap.min.css')}}" rel="stylesheet"/>
+  <!-- animate CSS-->
+  <link href="{{asset('back/css/animate.css')}}" rel="stylesheet" type="text/css"/>
+  <!-- Icons CSS-->
+  <link href="{{asset('back/css/icons.css')}}" rel="stylesheet" type="text/css"/>
+  <!-- Sidebar CSS-->
+  <link href="{{asset('back/css/sidebar-menu.css')}}" rel="stylesheet"/>
+  <!-- Custom Style-->
+  <link href="{{asset('back/css/app-style.css')}}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Jeux</h2>
+                <div class="clearfix"></div>
+                <a href="{{ path('app_ajouterjeux') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:15px;right:3%;">Ajouter un jeu
+                    </button>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h5 class="card-title">Basic Table</h5>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col">ID</th>
+                                                <th class="col">Nom</th>
+                                                <th class="col">Description </th>
+                                                <th class="col">Image</th>
+                                                <th class="col">Genre </th>
+                                            </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    {% for jeu in Jeux %}
+                                    <tr class="even pointer">
+                                        <td>{{ jeu.getId() }}</td>
+                                        <td>{{ jeu.getNom() }}</td>
+                                        <td>{{ jeu.getDescription() }}</td>
+
+                                        <td>
+
+                                            <img src="{{ asset('Jeux/'~jeu.image) }}" alt="image"
+                                                         style="width:100px ;margin-bottom:20%">
+
+                                        </td>
+                                        <td>{{ jeu.getGenre() }}</td>
+                                    <td>
+                                            <a class="fa fa-pencil"
+                                               href="{{ path('app_updatejeux',{'id':jeu.id }) }}">Modif</a>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <a class="fa fa-trash"
+                                               href="{{ path('app_deletejeux',{'id':jeu.id }) }}">Supp</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+  <!-- Bootstrap core JavaScript-->
+  <script src="{{asset('back/js/jquery.min.js')}}"></script>
+  <script src="{{asset('back/js/popper.min.js')}}"></script>
+  <script src="{{asset('back/js/bootstrap.min.js')}}"></script>
+	
+  <!-- simplebar js -->
+  <script src="{{asset('back/plugins/simplebar/js/simplebar.js')}}"></script>
+  <!-- sidebar-menu js -->
+  <script src="{{asset('back/js/sidebar-menu.js')}}"></script>
+  
+  <!-- Custom scripts -->
+  <script src="{{asset('back/js/app-script.js')}}"></script>
+  {% endblock %}
