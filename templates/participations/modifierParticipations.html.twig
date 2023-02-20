@@ -1,0 +1,52 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}Participation{% endblock %}
+
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Participations</h2></div>
+           <hr>
+            {{ form_start(formParticipations,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.nomJoueur,"nomjoueur") }}</label>
+                    {{ form_widget (formParticipations.nomJoueur,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.nomJoueur) }}
+                     
+
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.nombreParticipants,"nombre participants") }}</label>
+                    {{ form_widget (formParticipations.nombreParticipants,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.nombreParticipants) }}
+                  
+
+
+                    
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.niveau,"niveau") }}</label>
+                    {{ form_widget (formParticipations.niveau,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                     
+
+                </div>
+                 <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.idseancefk," idseancefk") }}</label>
+                    {{ form_widget (formParticipations.idseancefk,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    
+                </div>
+                        
+                <div class="form-group">
+                        {{ form_row (formParticipations.Modifier,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formParticipations)}}
+            </form>
+                {{ form_end (formParticipations)}}
+            <div>
+                <a href="{{ path('app_afficherParticipations') }}">back to list</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

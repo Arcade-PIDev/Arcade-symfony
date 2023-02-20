@@ -1,0 +1,69 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}Seance Coaching{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Participations</h2>
+                <div class="clearfix"></div>
+                <a href="{{ path('app_ajouterParticipations') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:15px;right:3%;">Ajouter une Participation
+                    </button>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-9">
+                        
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                {# <th class="col">ID</th> #}
+                                                <th class="col">nomjoueur</th>
+                                                <th class="col">nombreParticipants</th>
+                                                <th class="col">niveau </th>
+                                                <th class="col">  dateParticipations </th>
+                                                <th class="col">  titre seance </th>
+                                                
+                                                </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    {% for Par in Participations %}
+                                    <tr class="even pointer">
+                                        {# <td>{{ Par.getId() }}</td> #}
+                                        <td>{{ Par.getNomJoueur() }}</td>
+                                        <td>{{ Par.getNombreParticipants()}}</td>
+                                        <td>{{ Par.getNiveau() }}</td>
+                                         <td>{{ Par.getDateParticipations()| date('y-M-d') }}</td>
+                                           <td>{{ Par.getIdseancefk().getTitreSeance()}}</td>  
+                                     
+                                        <td>
+                                            <a class="fa fa-pencil"
+                                               href="{{ path('app_updateParticipations',{'id':Par.id }) }}">update</a>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <a class="fa fa-trash"
+                                               href="{{ path('app_deleteParticipations',{'id':Par.id }) }}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

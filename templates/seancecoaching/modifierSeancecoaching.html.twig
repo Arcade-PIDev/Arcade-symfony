@@ -1,0 +1,59 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Seance Coaching{% endblock %}
+{% block content %}
+<div class="login-reg-main text" style="padding-left: 300px; padding-right: 600px;">
+<br>
+<br>
+ <br>
+<br>
+
+
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Seance Coaching</h2></div>
+            <br>
+           <br>
+           
+            {{ form_start(formSeancecoaching,{'attr': {'novalidate': 'novalidate'}} ) }}
+            
+            <div class="form-group">
+                    {{ form_label (formSeancecoaching.dateDebutSeance,"date Debut Seance :") }}
+                    {{ form_widget (formSeancecoaching.dateDebutSeance,{'attr':{'class':'form-control '}}) }}
+                     {{ form_errors (formSeancecoaching.dateDebutSeance) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label (formSeancecoaching.dateFinSeance,"date Fin Seance :") }}
+                    {{ form_widget (formSeancecoaching.dateFinSeance,{'attr':{'class':'form-control '}}) }}
+                     {{ form_errors (formSeancecoaching.dateFinSeance) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formSeancecoaching.prixSeance,"prix Seancecoaching") }}</label>
+                    {{ form_widget (formSeancecoaching.prixSeance,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formSeancecoaching.descriptionSeance,"Description") }}</label>
+                    {{ form_widget (formSeancecoaching.descriptionSeance,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formSeancecoaching.imageSeance,"Image") }}</label>
+                    {{ form_widget (formSeancecoaching.imageSeance,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                   <div class="form-group">
+                    <label for="input-6">{{ form_label (formSeancecoaching.titreSeance,"titre Seancecoaching") }}</label>
+                    {{ form_widget (formSeancecoaching.titreSeance,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                </div>
+                        
+                <div class="form-group">
+                        {{ form_row (formSeancecoaching.Modifier,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formSeancecoaching)}}
+            </form>
+                {{ form_end (formSeancecoaching)}}
+            <div>
+                <a href="{{ path('app_afficherSeancecoaching') }}">back to list</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

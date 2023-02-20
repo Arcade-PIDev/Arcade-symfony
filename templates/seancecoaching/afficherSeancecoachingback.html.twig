@@ -1,0 +1,90 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}Seances Coaching{% endblock %}
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Seance coaching</h2>
+                <br>
+    <br>
+                <div class="clearfix"></div>
+                {# <a href="{{ path('app_ajouterSeancecoaching') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:15px;right:3%;">Ajouter une seance
+                    </button>
+                </a> #}
+            </div>
+                    <br>
+    <br>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                             
+                                               {# <th class="col">ID</th> #}
+                                               <th class="col">titre Seance </th>
+                                                <th class="col">DateDebutSeance</th>
+                                                <th class="col">DateFinSeance</th>
+                                                <th class="col">Prix Seance </th>
+                                                <th class="col">Description Seance </th>
+                                                <th class="col"> Image Seance </th>
+                                                 
+                                                </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="width:200px">
+                                            {% for Se in Seancecoaching %}
+                                            <tr class="even pointer">
+                                                {# <td>{{ Se.getId() }}</td> #}
+                                                <td>{{ Se.getTitreSeance() }}</td>
+                                                <td>{{ Se.getDateDebutSeance()| date('y-M-d')}}</td>
+                                                <td>{{ Se.getDateFinSeance()| date('y-M-d') }}</td>
+                                                <td>{{ Se.getprixSeance()  }} DT </td>
+                                                <td>{{ Se.getdescriptionSeance() }}</td>
+
+                                                <td>
+
+                                                  {% set images = Se.imageSeance| trim('*') | split("*") %}
+                                            <picture>
+                                                {% for imageSeance in images %}
+                                                    <img src="{{ asset('imagesnada/'~imageSeance) }}" alt="imageSeance"
+                                                         style="width:100px ;margin-bottom:20%">
+
+                                                {% endfor %}
+                                                
+                                            
+                                                    </picture>
+                                                    </td>
+                                               
+                                             
+                                                
+                                                 <td>
+                                            <a class="fa fa-pencil"
+                                               href="{{ path('app_updateSeancecoaching',{'id':Se.id }) }}">update</a>
+                                            <br/>
+                                        </td>
+                                                <td>
+                                                    <a class="fa fa-trash"
+                                                    href="{{ path('app_deleteSeancecoaching',{'id':Se.id }) }}">Delete</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

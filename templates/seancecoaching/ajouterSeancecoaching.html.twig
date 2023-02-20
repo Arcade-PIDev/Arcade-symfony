@@ -1,0 +1,66 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Seance Coaching{% endblock %}
+
+{% block nada %}
+<br>
+<br>
+<br>
+<br>
+<div>
+<div class="login-reg-main text" style="padding-left: 300px; padding-right: 600px;">
+
+
+           <div class="card-title"><h2 style="color:pink">Formulaire Seance coaching</h2> </div>
+           <br>
+           <br>   
+
+            {{ form_start(formSeancecoaching,{'attr': {'novalidate': 'novalidate'}} ) }}
+                
+                <div class="form-group">
+                    <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.dateDebutSeance,"date Debut Seance :") }}</label>
+                    {{ form_widget (formSeancecoaching.dateDebutSeance,{'attr':{'class':'form-control '}}) }}
+                     {{ form_errors (formSeancecoaching.dateDebutSeance) }}
+                </div>
+
+                <div class="form-group">
+                    <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.dateFinSeance,"date Fin Seance :") }}</label>
+                    {{ form_widget (formSeancecoaching.dateFinSeance,{'attr':{'class':'form-control '}}) }}
+                     {{ form_errors (formSeancecoaching.dateFinSeance) }}
+                </div>
+                    
+                <div class="form-group">
+                    <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.prixSeance,"prix Seance Coaching :") }}</label>
+                    {{ form_widget (formSeancecoaching.prixSeance,{'attr':{'class':'form-control '}}) }}
+                     {{ form_errors (formSeancecoaching.prixSeance) }}
+                </div>
+                <div class="form-group">
+                    <label style="color:white" for="input-6" >{{ form_label (formSeancecoaching.descriptionSeance,"Description :") }}</label>
+                    {{ form_widget (formSeancecoaching.descriptionSeance,{'attr':{'class':'form-control '}}) }}
+                       {{ form_errors (formSeancecoaching.descriptionSeance) }}
+                    
+                </div>
+                <div class="form-group">
+                    <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.imageSeance,"Image :") }}</label>
+                    {{ form_widget (formSeancecoaching.imageSeance,{'attr':{'class':'form-control'}}) }}
+                     {{ form_errors (formSeancecoaching.imageSeance) }}
+                    
+                    
+                </div>
+                 <div class="form-group">
+                    <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.titreSeance,"titre Seance Coaching :") }}</label>
+                    {{ form_widget (formSeancecoaching.titreSeance,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                     {{ form_errors (formSeancecoaching.titreSeance) }}
+                </div> 
+                
+                <div class="form-group">
+                        {{ form_row (formSeancecoaching.Submit,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                {{ form_end (formSeancecoaching)}}
+            <div>
+                <a href="{{ path('app_afficherSeancecoaching') }}">back to list</a>
+            </div>
+         </div>
+</div>
+</div>
+
+{% endblock %}
