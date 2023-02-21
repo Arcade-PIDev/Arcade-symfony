@@ -29,7 +29,7 @@
                             <div class="breadcrumb-area">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb d-flex justify-content-center">
-                                        <li class="breadcrumb-item"><a>Home</a></li>
+                                        <li class="breadcrumb-item"><a>Accueil</a></li>
                                         <li class="breadcrumb-item"><a>Activites</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Jeux</li>
                                     </ol>
@@ -51,14 +51,14 @@
                 <div class="col-lg-10">
                     <div class="section-header text-center">
                         <h2 class="title">Nos Jeux</h2>
-                        <p>Vous pouvez trouver nos diffrents jeux </p>
+                        <p>Vous pouvez trouver nos diffrents jeux. </p>
                     </div>
                 </div>
             </div>
              <div class="testimonials-slider mp-none">
                          {% for jeu in Jeux %}
                 <div class="single" ><a href="{{path('app_afficherJeuxFront',{ jeu:jeu.getId()})}}">
-                    <div class="single-item text-center" style="min-height: 370px;max-height: 370px" >
+                    <div class="single-item text-center" style="min-height: 450px;max-height: 600px" >
                         <div class="img">
                             <div class="img-area">
                                 <img src="{{asset('Jeux/'~jeu.image)}}" alt="{{asset('Jeux/'~jeu.image)}}">
@@ -66,10 +66,10 @@
                         </div>
                         <div class="bottom-area d-flex justify-content-between"></div>
                         <div>
-                            <h5>{{ jeu.getNom() }}</h5>
+                            <h5>{{ jeu.getNom() }}</h5><br>
                         </div>
-                        <p style="justify-content: center;display: flex;">{{ jeu.getDescription() }}</p>
-                        <a href="afficherTournoisFront" class="cmn-btn">les Tournois</a>
+                        <p style="justify-content: center;display: flex;">{{ jeu.getDescription() }}</p><br>
+                         <a href="afficherTournoisFront" class="cmn-btn">les Tournois</a>
                     </div>       
                 </a>    
                 </div> 
@@ -78,6 +78,10 @@
         </div>
     </div>
 </section>
+            <h5 style="justify-content: center;display: flex;">Sans doute, les jeux ont de nombreux avantages:</h5>
+            <h5 style="justify-content: center;display: flex;">ils sont un moment de relaxation et de détente pour les individus</h5>
+            <h5 style="justify-content: center;display: flex;">ainsi qu'ils participent à l'épanouissement de leurs personnalité et développent</h5> 
+            <h5 style="justify-content: center;display: flex;">chez eux la créativité et l'élargissement de l'horizon.</h5>
 <!-- Testimonials In end -->
 
 <!-- Policy Start -->
