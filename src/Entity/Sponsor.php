@@ -19,6 +19,7 @@ class Sponsor
     private ?string $NomSponsor = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Positive(message:"Num Tel ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Num Tel ne doit pas etre vide")]
     private ?string $NumTelSponsor = null;
 

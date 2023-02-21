@@ -20,15 +20,15 @@
               {{ form_errors(form.lieu) }}
            </div>
 
-           <section id="checkout" class="pt-120 pb-120">
+           {# <section id="checkout" class="pt-120 pb-120">
                 <div class="form-group col-md-4">
                    <input type="date" class="form-control" id="date">
                 </div>
-            </section>
+            </section> #}
             
            <div class="form-group">
             <label for="input-3">{{form_label(form.DateDebutE)}}</label>
-              <input type="date" class="form-control" id="date"> {{ form_widget(form.DateDebutE, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_widget(form.DateDebutE, {'attr': {'class': 'form-control'}} ) }}
               {{ form_errors(form.DateDebutE) }}
            </div>
            

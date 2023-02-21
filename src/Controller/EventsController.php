@@ -15,13 +15,7 @@ use App\Form\ModifierEventType;
 
 class EventsController extends AbstractController
 { 
-   /* #[Route('/events', name: 'app_events')]
-    public function index(): Response
-    {
-        return $this->render('events/index.html.twig', [
-            'controller_name' => 'EventsController',
-        ]);
-    }*/
+  
     
 
     #[Route('/afficherEvent', name: 'app_afficher_Event')]
