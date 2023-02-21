@@ -82,7 +82,7 @@
                                         <div class="qtySelector text-center">
                                             <a href="{{path('app_moins',{ id:item.produit.getId() })}}"><i class="fas fa-minus decreaseQty"></i> </a>
 
-                                            <a href=""><input type="text" class="qtyValue" value="{{ item.quantite }}"></a>
+                                            <a href=""><input type="text" class="qtyValue" value="{{ item.quantite }}" name="quantity[]"></a>
                                             <a href="{{path('app_plus',{ id:item.produit.getId() })}}"><i class="fas fa-plus increaseQty "> </i> </a>
                                         </div>
                                     </td>
@@ -134,7 +134,7 @@
                                     <h4>{{total}} DT</h4>
                                 </li>
                             </ul>
-                            <a href="#" class="cmn-btn checkout">proceed to checkout</a>
+                            <a href="{{ path('app_ajouterCommande') }}" class="cmn-btn checkout">proceed to checkout</a>
                         </div>
                     </div>
                 </div>

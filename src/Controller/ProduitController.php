@@ -44,14 +44,14 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $produit->setCreationDate(new \DateTime("now"));
-            $produit->setModificationDate(null);
 
             $file = $request->files->get('produit_form')['image'];
             $filename = md5(uniqid()) . '.png';
             $file->move($this->getParameter('produit_directory'), $filename);
             $produit->setImage($filename);
 
+            $produit->setCreationDate(new \DateTime("now"));
+            $produit->setModificationDate(null);
             $produit->setIsEnabled(1);
             $manager->persist($produit);
             $manager->flush();

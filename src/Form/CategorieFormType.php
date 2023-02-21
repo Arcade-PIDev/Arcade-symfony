@@ -16,11 +16,15 @@ class CategorieFormType extends AbstractType
         $builder
             ->add('nomCategorie')
             ->add('description')
-            ->add('image',FileType::class)
+            ->add('image',FileType::class,[
+                //'mapped'=> false,
+                'label'=>'please upload pictures',
+                //'multiple'=>true   
+                ],array('data_class' => null),) 
             ->add('creationDate')
             ->add('modificationDate')
             ->add('isEnabled')
-            ->add('Submit',SubmitType::class)
+            ->add('Ajouter',SubmitType::class)
         ;
     }
 

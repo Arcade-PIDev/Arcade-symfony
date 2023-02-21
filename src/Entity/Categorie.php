@@ -18,29 +18,29 @@ class Categorie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
+    #[Assert\NotBlank (message:"Obligatoire")]
     #[Assert\Length ([
         'min' => 4,
         'max' => 255,
         'minMessage' => 'min = 4 ',
         'maxMessage' => 'max = 255',
     ])]
-    #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"name must contain only letters")]
+    #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"Nom doit contenir des lettres seulement")]
     private ?string $nomCategorie = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
+    #[Assert\NotBlank (message:"Obligatoire")]
     #[Assert\Length ([
         'min' => 5,
         'max' => 255,
         'minMessage' => 'min = 5 ',
         'maxMessage' => 'max = 255',
     ])]
-    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"description must contain only letters")]
+    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"Description doit contenir des lettres et des chiffres seulement")]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank (message:"field required")]
+    #[Assert\NotBlank (message:"obligatoire")]
     private ?string $image = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

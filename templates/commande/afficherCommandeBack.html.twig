@@ -1,0 +1,60 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Commandes{% endblock %}
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Commandes</h2>
+                <div class="clearfix"></div>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-5">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col">Prix Total</th>
+                                                <th class="col">Paiement</th>
+                                                <th class="col">Annulation</th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="width:100px">
+                                            {% for com in commande %}
+                                            <tr class="even pointer">
+                                                <td>{{ com.getPrixTotal() }}</td>
+                                                <td>{% if com.isPaid() == 0 %}
+                                                    <span class="badge badge-danger" style="color: white;font-size:unset">Pas encore</span>
+                                                    {% else %}
+                                                        <span class="badge badge-success" style="color: white;font-size:unset">Payée</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{% if com.isCanceled() == 1 %}
+                                                    <span class="badge badge-danger" style="color: white;font-size:unset">Annulée</span>
+                                                    {% else %}
+                                                        <span class="badge badge-success" style="color: white;font-size:unset">Confirmée</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if com.isCanceled() == 1 %}
+                                                    <a class="fa fa-trash"
+                                                    href="{{ path('app_deleteCommande',{'id':com.id }) }}">Supprimer</a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends 'backBase.html.twig' %}
-{% block title %}Produits{% endblock %}
+{% block title %}Categories{% endblock %}
 {% block content %}
 
 <div class="card-body">
@@ -28,7 +28,7 @@
                         {{ form_row (formCategorie.isEnabled )}}
                     </div>
                 <div class="form-group">
-                        {{ form_row (formCategorie.Submit,{'attr':{'class':'btn btn-success'}} )}}
+                        {{ form_row (formCategorie.Ajouter,{'attr':{'class':'btn btn-success'}} )}}
                 </div>
                     {{form_rest (formCategorie)}}
 

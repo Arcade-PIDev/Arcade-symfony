@@ -68,19 +68,35 @@ class CategorieController extends AbstractController
     {
         $form = $this->createForm(UpdateCategorieType::class, $categorie);
         $form->handleRequest($request);
-
+        $img=$categorie->getImage();
         $entityManager->getRepository(Categorie::class)->find($id);
+        $categorie->setImage($img);
         
         if ($form->isSubmitted() && $form->isValid()) {
             $categorie->setModificationDate(new \DateTime("now"));
             $file = $request->files->get('update_categorie')['image'];
-            $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('categorie_directory'), $filename);
-            $categorie->setImage($filename);
+            if ($file)
+            {
+                $filename = md5(uniqid()) . '.png';
+                $file->move($this->getParameter('categorie_directory'), $filename);
+                $categorie->setImage($filename);
+                $entityManager->persist($categorie);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_afficherCategorie');
+            }
+            else
+            {
+                $categorie->setImage($img);
+                $entityManager->persist($categorie);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_afficherCategorie');
+
+            }
             
-            $entityManager->persist($categorie);
-            $entityManager->flush();
-            return $this->redirectToRoute('app_afficherCategorie');
+            
+            //
+            
+            
         }
         return $this->render('categorie/modifierCategorie.html.twig', [
             'formCategorie' => $form->createView(),

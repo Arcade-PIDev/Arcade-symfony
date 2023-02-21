@@ -20,42 +20,25 @@ class PanierController extends AbstractController
     #[Route('/afficherPanier', name: 'app_afficherPanier')]
     public function afficherPanier(ProduitRepository $repo,SessionInterface $session)
     {
-        // $panier = $session->get("panier", []);
-
-        // $dataPanier = [];
-
-        // $total = 0;
-        // foreach ($panier as $id => $quantite) {
-        //     $product = $repo->find($id);
-        //     $dataPanier = [
-        //         "product" => $product,
-        //         "quantite" => $quantite
-        //     ];
-        //     $total += $product->getPrix() * $quantite;
-        // }
-        // return $this->render('panier/index.html.twig', compact("dataPanier", "total"));
-
         $panier = $session->get('panier', []);
         $dataPanier = [];
         foreach ($panier as $id => $quantite) {
             $dataPanier[] = [
                 'produit' => $repo->find($id),
                 'quantite' => $quantite
-
             ];
         }
 
         $total = 0;
         foreach ($dataPanier as $item) {
-            $totalItem = $item['produit']->getPrix() * $item['quantite'];
-            $total += $totalItem;
+            // $total += $item['produit']->getPrix() * $item['quantite'];
+            $total += $item['produit']->getPrix() * $item['quantite'];
         }
 
 
         return $this->render('panier/index.html.twig', [
             'dataPanier' =>  $dataPanier,
             'total' => $total,
-            //'user' => $this->getUser()
         ]);
     }
 
@@ -63,20 +46,19 @@ class PanierController extends AbstractController
     #[Route('/ajouterPanier/{id}', name: 'app_ajouterPanier')]
     public function ajouterPanier($id,ProduitRepository $repo,SessionInterface $session,EntityManagerInterface $manager)
     {
-        $panier = $session->get("panier", []);
+        $panier = $session->get('panier', []);
         //$id = $produit->getId();
-
+        // var_dump($panier);
         if(!empty($panier[$id])){
             $panier[$id]++;
-        }else{
-            $panier[$id] = 1;
         }
+        else
+        $panier[$id]=1;
 
         // On sauvegarde dans la session
-        $session->set("panier", $panier);
+        $session->set('panier', $panier);
 
         return $this->redirectToRoute("app_afficherPanier");
-
     }
 
     #[Route('/remove/{id}', name: 'app_remove')]
@@ -116,5 +98,13 @@ class PanierController extends AbstractController
         $session->set('panier', $panier);
 
         return $this->redirectToRoute("app_afficherPanier");
+    }
+
+    #[Route('/viderPanier', name: 'app_viderPanier')]
+    public function viderPanier(SessionInterface $session)
+    {
+        
+        $session->clear();
+        return $this->redirectToRoute("app_afficherCategorieFront");
     }
 }

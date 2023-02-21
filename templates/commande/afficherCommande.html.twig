@@ -1,0 +1,86 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}CheckOut{% endblock %}
+{% block content %}
+<!-- banner-section start -->
+<section id="banner-section" class="inner-banner profile features shop">
+    <div class="ani-img">
+        <img class="img-1" src="{{asset('front/images/banner-circle-1.png')}}" alt="icon">
+        <img class="img-2" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+        <img class="img-3" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+    </div>
+    <div class="banner-content d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="main-content">
+                        <h1>Check Out</h1>
+                        <div class="breadcrumb-area">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb d-flex justify-content-center">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Check Out</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner-section end -->
+
+<!-- Check Out Start -->
+<section id="checkout" class="pt-120 pb-120">
+    <div class="overlay">
+        <div class="container" style="margin-left:15%">
+            <div class="row" style="width: 300%;">
+                <div class="col-lg-4">
+                    <div class="right-sidebar">
+                        <div class="top-area">
+                            <div style="display: flex">
+                                <h5>Order Summary</h5>
+                                <div style="display: flex;margin-left:68%">
+                                <a href="{{ path('app_viderPanier')}}" style="margin-right:50%;" > <i class="fas fa-check"></i></a>
+                                <a href="{{ path('app_cancelOrder',{ 'id':commande.id})}}" > <i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                            {# <p>Price can change depending on shipping
+                                method and taxes of your state.</p> #}
+                        </div>
+                        <div class="bottom-side text-center">
+                            <ul class="bottom-area">
+                                <li>
+                                </li>
+                                {% for produit in produits %}
+                                <li>
+                                <img src="{{asset('eshop/produit/'~produit['produit'].image)}}" style="width:150px;height:80px" alt="">
+                                    <span style="margin-right:50%;margin-top:2%">{{produit['produit'].nomProduit}}</span>
+                                    <span style="margin-right:10%;margin-top:2%">{{produit['quantite']}}</span>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                            <ul>
+                                <li class="d-flex align-items-center" style="margin-right:5%">
+                                    <span>Total Order</span>
+                                    <h4>{{ commande.getPrixTotal() }} DT</h4>
+
+                                </li>
+                            </ul>
+                            <div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Shop Cart End -->
+
+{% endblock %}

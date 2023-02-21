@@ -20,7 +20,9 @@ class ProduitFormType extends AbstractType
             ->add('nomProduit')
             ->add('prix')
             ->add('quantiteStock')
-            ->add('image',FileType::class)
+            ->add('image',FileType::class,[
+                //'multiple'=>true   
+                ],array('data_class' => null),) 
             ->add('description', TextareaType::class)
             ->add('creationDate')
             ->add('modificationDate')

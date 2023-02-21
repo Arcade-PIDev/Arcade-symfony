@@ -25,7 +25,7 @@ class Produit
         'minMessage' => 'min = 5 ',
         'maxMessage' => 'max = 255',
     ])]
-    #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"name must contain only letters")]
+    #[Assert\Regex(pattern:"/[a-zA-Z]/" , message:"Nom doit contenir des lettres seulement")]
     private ?string $nomProduit = null;
 
     #[ORM\Column]
@@ -44,13 +44,13 @@ class Produit
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank (message:"obligatoire")]
+    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?]/" , message:"Description doit contenir des lettres et des chiffres seulement")]
     #[Assert\Length ([
         'min' => 5,
         'max' => 255,
         'minMessage' => 'min = 5 ',
         'maxMessage' => 'max = 255',
     ])]
-    #[Assert\Regex(pattern:"/[a-zA-Z0-9,.!?-]/" , message:"description must contain only letters")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

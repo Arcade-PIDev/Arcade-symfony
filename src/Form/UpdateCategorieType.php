@@ -15,9 +15,17 @@ class UpdateCategorieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nomCategorie')
-            ->add('description')
-            ->add('image',FileType::class,array('data_class' => null))
+            ->add('nomCategorie', null, [
+                'empty_data' => ''
+            ])
+            ->add('description', null, [
+                'empty_data' => ''
+            ])
+            ->add('image',FileType::class,[
+                'mapped'=> false,
+                'label'=>'please upload pictures',
+                //'multiple'=>true   
+                ],array('data_class' => null),) 
             ->add('isEnabled',CheckboxType::class)
             ->add('Modifier',SubmitType::class)
             ;

@@ -39,6 +39,14 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
+    // public function getOrders($id)
+    // {
+    //     return $this->getEntityManager()
+    //     ->createQuery("SELECT p.nomProduit,p.image,c.quantite,o.prixTotal FROM App\Entity\Commande o, App\Entity\Panier c, App\Entity\Produit p WHERE :id = c.commandes AND p.id = c.produits")
+    //     ->setParameter('id',$id)
+    //     ->getResult();
+    // }
+
 //    /**
 //     * @return Commande[] Returns an array of Commande objects
 //     */
