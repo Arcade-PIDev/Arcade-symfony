@@ -1,24 +1,22 @@
 {% extends 'frontBase.html.twig' %}
-{% block nada %}
+{% block content %}
 <!-- Browse Tournaments start -->
     <section id="tournaments-section">
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
-                        {# <div class="section-header">
-                            <h2 class="title">Browse Tournaments</h2>
-                            <p>Find the perfect tournaments for you. Head to head matches
-                                where you pick the game, rules and prize.</p>
-                                  
-                        </div> #}
+                       
                          <a href="{{ path('app_ajouterSeancecoaching') }}">
                     <button type="button" class="btn btn-info btn-xs"
                             style="position:absolute;top:15px;right:3%;">Ajouter une Seance
                     </button>
                 </a>
                     </div>
+                    
+
                 </div>
+               <br>
                  <div class="row mb-40 mp-none">
                  
                    
@@ -41,16 +39,16 @@
                          </div>
                         <div class="col-lg-6 col-md-9 d-flex align-items-center">
                             <div class="mid-area">
-                                <h4>{{Se.getTitreSeance()}}</h4>
+                                <h4><a  href="{{ path('app_detailSeancecoachingfront',{'id':Se.id }) }}">{{Se.getTitreSeance()}}</a></h4>
                                 <div class="title-bottom d-flex">
                                     <div class="time-area bg">
                                         
-                                        <span>Starts in</span>
+                                        <span>DEBUTE</span>
                                         <span class="time">{{Se.getDateDebutSeance()| date}}</span>
                                     </div>
                                     <div class="time-area bg">
                                         
-                                        <span>ends in</span>
+                                        <span>SE TERMINE</span>
                                         <span class="time">{{Se.getDateFinSeance()| date}}</span>
                                     </div>
                                 </div>

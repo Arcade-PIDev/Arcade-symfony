@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Arcade | {% block title %}{% endblock %} </title>
     {% block styleSheet %}
-    <link rel="shortcut icon" href="{{ asset("front/images/fav.png") }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset("front/images/logo3.png") }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset("front/css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/fontawesome.min.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/slick.css") }}">
@@ -34,8 +34,8 @@
         <div class="overlay">
             <div class="container">
                 <div class="d-flex header-area">
-                    <div class="logo-section flex-grow-1 d-flex align-items-center"><div>
-                        <a class="site-logo site-title" href="index-2.html"><img style="width:150px;height:80px" src="{{ asset('front/images/arcade.png') }}"
+                    <div class="logo-section flex-grow-1 d-flex align-items-center"><div><br>
+                        <a class="site-logo site-title" href="index-2.html"><img style="width:150px;height:120px" src="{{ asset('front/images/logo3.png') }}"
                                 alt="site-logo"></a></div>
                     </div>
                     <button class="navbar-toggler ml-auto collapsed" type="button" data-toggle="collapse"
@@ -47,10 +47,10 @@
                         <div class="navbar-collapse collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ml-auto">
                                 <li><a href="">Accueil</a></li>
-                                <li class="menu_has_children"><a href="#0">Tournois</a>
+                                <li class="menu_has_children"><a href="#0">Activités</a>
                                     <ul class="sub-menu">
-                                        <li><a href="tournaments.html">Tournois</a></li>
-                                        <li><a href="tournaments-single.html">Jeux</a></li>
+                                        <li><a href="tournaments.html">Jeux</a></li>
+                                        <li><a href="tournaments-single.html">Coaching</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu_has_children"><a href=""> Magasin</a>
@@ -62,13 +62,8 @@
                                         <li><a href="">WishList</a></li>
                                 </ul>
                                 </li>
-                                  <li class="menu_has_children"><a href="">Evenements</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Evenements</a></li>
-                                        <li><a href="">Sponsors</a></li>
-                                    </ul>
+                                  <li class=""><a href="">Evenements</a>
                                 </li>
-                                 <li><a href="">Coaching</a></li>
                                 <li><a href="">Blog</a></li>
                             </ul>
                         </div>
@@ -99,14 +94,14 @@
             <div class="container">
                 <div class="row d-flex">
                     <div class="col-lg-8 col-md-8 d-flex justify-content-md-between justify-content-center align-items-center cus-grid">
-                        <div class="logo-section">
-                            <a class="site-logo site-title" href="index-2.html"><img style="weight:100px;width:180px" src="{{ asset('front/images/arcade.png') }}" alt="site-logo"></a>
+                        <div class="logo-section"><br>
+                            <a class="site-logo site-title" href="index-2.html"><img style="height:280px;width:280px" src="{{ asset('front/images/logo3.png') }}" alt="site-logo"></a>
                             
                         </div>
                         <ul class="menu-side d-flex align-items-center">
-                            <li><a href="index-2.html" class="active">Accueil</a></li>
-                            <li><a href="about-us.html">A Propos</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="" class="active">Accueil</a></li>
+                            <li><a href="">A Propos</a></li>
+                            <li><a href="">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -127,8 +122,8 @@
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-lg-12 col-md-6">
                             <div class="left-area text-center">
-                                <p>Copyright © 2021. All Rights Reserved By
-                                    <a href="#">BEGAM</a>
+                                <p>Réalisé par
+                                    <a href="#">Arcade</a>
                                 </p>
                             </div>
                         </div>
@@ -149,6 +144,14 @@
 <script src="{{ asset("front/js/jquery.magnific-popup.min.js") }}"></script>
 <script src="{{ asset("front/js/wow.js") }}"></script>
 <script src="{{ asset("front/js/main.js") }}"></script>
+<script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
+
+    <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
+    <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom-setup.js') }}"></script>
+
+
 {% endblock %}
 </body>
 </html>

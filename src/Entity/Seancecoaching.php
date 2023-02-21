@@ -18,26 +18,29 @@ class Seancecoaching
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"date est invalide")]
     private ?\DateTimeInterface $dateDebutSeance = null;
     
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"date est invalide")]
     private ?\DateTimeInterface $dateFinSeance = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"prix is invalid")]
+    #[Assert\NotBlank(message:"prix est invalide")]
+    #[Assert\Positive (message:"prix doit etre positive")]
     private ?float $prixSeance = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"description is invalid")]
-    #[Assert\PositiveOrZero]
+    #[Assert\NotBlank(message:"description est invalide")]
     private ?string $descriptionSeance = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"image is invalid")]
+    #[Assert\NotBlank(message:"image est invalide")]
     private ?string $imageSeance = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"titre is invalid")]
+    #[Assert\NotBlank(message:"titre est invalide")]
+    #[Assert\Regex(pattern:"/[a-zA-Z]*/",message:"Le titre ne peut pas contenir des chiffres")]
     private ?string $titreSeance = null;
 
     #[ORM\OneToMany(mappedBy: 'idseancefk', targetEntity: Participations::class, cascade:["remove"])]
@@ -53,7 +56,11 @@ class Seancecoaching
     {
         return $this->id;
     }
-
+   
+    public function __toString()
+    {
+        return(string) $this->getId();
+    }
     public function getDateDebutSeance(): ?\DateTimeInterface
     {
         return $this->dateDebutSeance;

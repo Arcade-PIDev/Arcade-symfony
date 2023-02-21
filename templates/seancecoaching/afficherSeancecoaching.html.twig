@@ -1,7 +1,7 @@
 {% extends 'frontBase.html.twig' %}
 {% block title %}Seance Coaching{% endblock %}
 
-{% block content %}
+{% block nada %}
     <br>
     <br>
 
@@ -10,12 +10,17 @@
             <div class="x_title" style="display: inline-flex;">
                 <h2>Table Seances Coaching</h2>
                 <div class="clearfix"></div>
+                
                 <a href="{{ path('app_ajouterSeancecoaching') }}">
                     <button type="button" class="btn btn-info btn-xs"
                             style="position:absolute;top:15px;right:3%;">Ajouter une Seance
+                            
                     </button>
                 </a>
             </div>
+               
+               
+
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-9">

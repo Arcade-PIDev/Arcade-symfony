@@ -26,6 +26,8 @@
                 <div class="form-group">
                     <label for="input-6">{{ form_label (formParticipations.niveau,"Niveau DE SEANCE") }}</label>
                     {{ form_widget (formParticipations.niveau,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.niveau) }}
+
                     
                 </div>
                  <div class="form-group">
@@ -35,6 +37,8 @@
                       <div class="form-group">
                     <label for="input-6">{{ form_label (formParticipations.idseancefk," titreSeance") }}</label>
                     {{ form_widget (formParticipations.idseancefk,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                     {{ form_errors (formParticipations.idseancefk) }}
+
                     
                 </div>
                

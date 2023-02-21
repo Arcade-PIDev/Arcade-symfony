@@ -75,6 +75,6 @@ class ParticipationsController extends AbstractController
         return $this->render('Participations/modifierParticipations.html.twig', [
             'formParticipations' => $form->createView(),
         ]);
-    }
+    }   
 }
 

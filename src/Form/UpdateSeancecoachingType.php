@@ -29,10 +29,18 @@ class UpdateSeancecoachingType extends AbstractType
             'placeholder' => 'Select a value',
             'attr' => ['class' => 'js-datepicker'],
         ])
+         
             ->add('prixSeance')
-            ->add('descriptionSeance')
+            ->add('descriptionSeance', null, [
+                'empty_data' => ''
+            ])
+          
+            
             ->add('imageSeance',FileType::class,array('data_class' => null))
-            ->add('titreSeance')
+            ->add('titreSeance', null, [
+                'empty_data' => ''
+            ])
+          
             ->add('Modifier',SubmitType::class)
         ;
     }

@@ -10,6 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class SeancecoachingFormType extends AbstractType
 {
@@ -30,6 +32,7 @@ class SeancecoachingFormType extends AbstractType
                 'placeholder' => 'Select a value',
                 'attr' => ['class' => 'js-datepicker'],
             ])
+            
             ->add('prixSeance')
             ->add('descriptionSeance')
             ->add('titreSeance')

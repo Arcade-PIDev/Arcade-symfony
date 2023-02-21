@@ -26,22 +26,31 @@
                     
                 </div>
                 <div class="form-group">
+                        {{ form_row (formParticipations.dateParticipations )}}
+                       
+                    </div>
+                <div class="form-group">
                     <label for="input-6">{{ form_label (formParticipations.niveau,"niveau") }}</label>
                     {{ form_widget (formParticipations.niveau,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.niveau) }}
+
                      
 
                 </div>
                  <div class="form-group">
-                    <label for="input-6">{{ form_label (formParticipations.idseancefk," idseancefk") }}</label>
+                    <label for="input-6">{{ form_label (formParticipations.idseancefk," titre senace") }}</label>
                     {{ form_widget (formParticipations.idseancefk,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                                        {{ form_errors (formParticipations.idseancefk) }}
+
                     
-                </div>
-                        
+                 </div>  
+                          
                 <div class="form-group">
                         {{ form_row (formParticipations.Modifier,{'attr':{'class':'btn btn-success'}} )}}
                 </div>
                     {{form_rest (formParticipations)}}
-            </form>
+                     
+          
                 {{ form_end (formParticipations)}}
             <div>
                 <a href="{{ path('app_afficherParticipations') }}">back to list</a>

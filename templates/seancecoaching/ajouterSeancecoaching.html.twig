@@ -1,7 +1,7 @@
 {% extends 'frontBase.html.twig' %}
 {% block title %}Seance Coaching{% endblock %}
 
-{% block nada %}
+{% block content %}
 <br>
 <br>
 <br>
@@ -9,10 +9,13 @@
 <div>
 <div class="login-reg-main text" style="padding-left: 300px; padding-right: 600px;">
 
-
+ <br>
+           <br>  
+            <br>
            <div class="card-title"><h2 style="color:pink">Formulaire Seance coaching</h2> </div>
            <br>
-           <br>   
+            <br>
+           <br>  
 
             {{ form_start(formSeancecoaching,{'attr': {'novalidate': 'novalidate'}} ) }}
                 
@@ -26,8 +29,8 @@
                     <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.dateFinSeance,"date Fin Seance :") }}</label>
                     {{ form_widget (formSeancecoaching.dateFinSeance,{'attr':{'class':'form-control '}}) }}
                      {{ form_errors (formSeancecoaching.dateFinSeance) }}
-                </div>
-                    
+                 </div> 
+                     
                 <div class="form-group">
                     <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.prixSeance,"prix Seance Coaching :") }}</label>
                     {{ form_widget (formSeancecoaching.prixSeance,{'attr':{'class':'form-control '}}) }}
@@ -44,7 +47,7 @@
                     {{ form_widget (formSeancecoaching.imageSeance,{'attr':{'class':'form-control'}}) }}
                      {{ form_errors (formSeancecoaching.imageSeance) }}
                     
-                    
+                     
                 </div>
                  <div class="form-group">
                     <label style="color:white" for="input-6">{{ form_label (formSeancecoaching.titreSeance,"titre Seance Coaching :") }}</label>

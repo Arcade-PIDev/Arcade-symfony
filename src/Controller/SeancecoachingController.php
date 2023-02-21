@@ -96,7 +96,7 @@ class SeancecoachingController extends AbstractController
     }
     //details:
      #[Route('/detailSeancecoachingfront/{id}', name: 'app_detailSeancecoachingfront')]
-     public function detailSeancecoachingfront(ProduitRepository $repo,$id)
+     public function detailSeancecoachingfront(SeancecoachingRepository $repo,$id)
      {
          return $this->render('Seancecoaching/detailSeancecoachingfront.html.twig', [
              'Seancecoaching' => $repo->find($id),

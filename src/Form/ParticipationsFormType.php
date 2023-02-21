@@ -29,7 +29,7 @@ class ParticipationsFormType extends AbstractType
             ->add('dateParticipations')
             ->add('idseancefk', EntityType::class, [
                 'class' => Seancecoaching::class,
-                'choice_label' => 'TitreSeance',
+                'choice_label' => 'titreSeance',
                 'placeholder' => 'Choisir un titre ',
                 'mapped' => true])
             
