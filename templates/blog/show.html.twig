@@ -1,0 +1,40 @@
+{% extends 'backBase.html.twig' %}
+
+{% block body %}
+<button class="btn btn-info btn-xs" style="position:absolute;top:80px;right:2%;"><a class="fa fa-home" href="{{ path('app_blog_index') }}"> back to list
+                   </a> </button>
+     <br>
+    <br>
+<div class="col-lg-5">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">    <h3 align="center">Blog</h3>
+              <br>
+			  <div class="table-responsive">
+                <table class="table">
+   
+        <tbody align="center">
+            <tr>
+                <th>Id</th>
+                <td>{{ blog.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ blog.Titre }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ blog.Contenu }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ blog.Image }}</td>
+            </tr>
+        </tbody>
+    </table>
+              </div>
+        </div>
+      </div>
+    <button class="btn"><a class="fa fa-pencil" href="{{ path('app_blog_edit', {'id': blog.id}) }}"> Edit</a> </button>
+    {{ include('blog/_delete_form.html.twig') }}
+{% endblock %}

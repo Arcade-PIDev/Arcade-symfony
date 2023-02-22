@@ -1,0 +1,56 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block header %}{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+        <section id="login-reg">
+        <div class="overlay pb-120">
+            <div class="container">
+                <div class="top-area">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-sm-5 col">
+                            <a class="back-home" href="{{ path('app_home') }}">
+                                <img src="images/left-icon.png" alt="image">
+                                 Retour a la page d'accueil
+                            </a>
+                        </div>
+                        <div class="col-sm-5 col">
+                             <a class="site-logo site-title" href="{{ path('app_home') }}"><img style="height:250px;width:250px" src="{{ asset('front/images/logo3.png') }}" alt="site-logo"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-120 d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login-reg-main text-center">
+                            <h4>Saisir un nouvea Mot de Passe</h4>
+                            {{ form_start(requestForm) }}
+                            <div class="form-area">
+                                <form action="#">
+                                    <div>
+                                        <h6>
+                                            Entrez votre adresse e-mail et nous vous enverrons un
+                                            lien pour réinitialiser votre mot de passe.
+                                        </h6>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                     {{ form_row(requestForm.email) }}                                  
+                                  </div>        
+                                    <div class="form-group">
+                                        <button class="cmn-btn">Send password reset email</button>
+                                    </div>
+                                </form>
+                                {{ form_end(requestForm) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}{% endblock %}
+
