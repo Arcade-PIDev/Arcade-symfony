@@ -41,7 +41,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="col">ID</th>
+                                                {# <th class="col">ID</th> #}
                                                 <th class="col">Nom</th>
                                                 <th class="col">Description </th>
                                                 <th class="col">Image</th>
@@ -53,7 +53,7 @@
                                         <tbody>
                                     {% for jeu in Jeux %}
                                     <tr class="even pointer">
-                                        <td>{{ jeu.getId() }}</td>
+                                        {# <td>{{ jeu.getId() }}</td> #}
                                         <td>{{ jeu.getNom() }}</td>
                                         <td>{{ jeu.getDescription() }}</td>
 

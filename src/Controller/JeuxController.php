@@ -63,18 +63,29 @@ class JeuxController extends AbstractController
     {
         $form = $this->createForm(UpdatejeuxType::class, $Jeux);
         $form->handleRequest($request);
-        
+        $img=$Jeux->getImage();
         $entityManager->getRepository(Jeux::class)->find($id);
+        $Jeux->setImage($img);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $request->files->get('updatejeux')['image'];
+            if ($file)
+            {
             $filename = md5(uniqid()) . '.png';
             $file->move($this->getParameter('Jeux_directory'), $filename);
             $Jeux->setImage($filename);
             $entityManager->persist($Jeux);
             $entityManager->flush();
             return $this->redirectToRoute('app_afficherjeux');
+            }
+            else
+            {
+                $Jeux->setImage($img);
+                $entityManager->persist($Jeux);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_afficherjeux'); 
+            }
         }
 
         return $this->render('jeux/modifierjeux.html.twig', [

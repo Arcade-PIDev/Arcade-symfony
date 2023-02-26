@@ -33,6 +33,14 @@
                     </button>
                 </a>
             </div>
+              <div class="clearfix"></div>
+                <a href="{{ path("app_PdfTournois")}}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:59px;right:8%;">PDF
+                    </button>
+                </a>
+               
+            </div>
             <div class="x_content">
                 <div class="row">
                     <div class="col-sm-9">
@@ -41,7 +49,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="col">ID</th>
+                                                {# <th class="col">ID</th> #}
                                                 <th class="col">NBRparticipants</th>
                                                 <th class="col">DureeTournois </th>
                                                 <th class="col">DateDebutTournois</th>
@@ -53,7 +61,7 @@
                                         <tbody>
                                     {% for Tou in Tournois %}
                                     <tr class="even pointer">
-                                        <td>{{ Tou.getId() }}</td>
+                                        {# <td>{{ Tou.getId() }}</td> #}
                                         <td>{{ Tou.getNBRparticipants() }}</td>
                                         <td>{{ Tou.getDureeTournois() }}</td>
 

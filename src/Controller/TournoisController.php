@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use App\Entity\Tournois;
 use Doctrine\Persistence\ManagerRegistry;
+use Dompdf\Dompdf;
+use Symfony\Flex\Options;
 
 class TournoisController extends AbstractController
 {
@@ -73,6 +75,24 @@ class TournoisController extends AbstractController
 
         return $this->render('Tournois/modifierTournois.html.twig', [
             'formTournois' => $form->createView(),
+        ]);
+    }
+    #[Route('/TournoisPdf', name: 'app_PdfTournois')]
+    public function impressionPDF(ManagerRegistry $doctrine,TournoisRepository $repo)
+    {
+        $Tournois=new Tournois();
+
+        $pdfOptions = new Options();
+        $pdfOptions->get('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $html =  $this->render('Tournois/PDF.html.twig',[
+            'Tournois' => $repo->findAll(),
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("MonTournois.pdf", [
+            "Attachment" => true
         ]);
     }
      ///front///

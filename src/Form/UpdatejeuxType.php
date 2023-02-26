@@ -21,7 +21,11 @@ class UpdatejeuxType extends AbstractType
             ->add('description', null, [
                 'empty_data' => ''
             ])
-            ->add('image',FileType::class,array('data_class' => null))
+            ->add('image',FileType::class,[
+                'mapped'=> false,
+                'label'=>'please upload pictures',
+                //'multiple'=>true   
+                ],array('data_class' => null),)
             ->add('genre', null, [
                 'empty_data' => ''
             ])
