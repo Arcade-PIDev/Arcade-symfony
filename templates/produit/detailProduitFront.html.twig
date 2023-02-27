@@ -1,5 +1,10 @@
 {% extends 'frontBase.html.twig' %}
-{% block title %}Categories{% endblock %}
+{% block title %}Detail Produit{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{asset('front/css/xzoom.css')}}">
+<link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('front/css/owl.theme.default.min.css')}}">
+{% endblock %}
 {% block content %}
 
     <!-- banner Section start -->
@@ -15,13 +20,12 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-7">
                             <div class="main-content">
-                                <h1>Shop Details</h1>
+                                <h1>Detail du Produit</h1>
                                 <div class="breadcrumb-area">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb d-flex justify-content-center">
-                                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Magasin</a></li>
-                                            <li class="breadcrumb-item"><a href="#">Categories</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                                            <li class="breadcrumb-item"><a href="{{ path('app_afficherCategorieFront') }}">Magasin</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Detail Produit</li>
                                         </ol>
                                     </nav>
@@ -35,7 +39,7 @@
 
     </section>
     <!-- banner Section end -->
-<div id="shop-content">
+<div id="shop-content" style="margin-bottom:20%">
         <div class="container">
             <div class="shop-details-content">
                 <div class="row justify-content-center cus-pad">
@@ -56,16 +60,18 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="right-item">
-                            <h4>{{ produit.getNomProduit() }}</h4>
-                            <p>{{ produit.getDescription() }}</p>
-                            <div class="review">
+                            <div  style="margin-bottom:10%">
+                                <h4>{{ produit.getNomProduit() }}</h4>
+                                <p>{{ produit.getDescription() }}</p>
+                            </div>
+                            {# <div class="review">
                                 <a href="#"><i class="fas fa-star"></i></a>
                                 <a href="#"><i class="fas fa-star"></i></a>
                                 <a href="#"><i class="fas fa-star"></i></a>
                                 <a href="#"><i class="fas fa-star"></i></a>
                                 <a href="#"><i class="fas fa-star-half-alt"></i></a>
                                 <span class="text-sm">4.3 (79)</span>
-                            </div>
+                            </div> #}
                             <div class="prize">
                                 {% if produit.getQuantiteStock() == 0 %}
                                 <span class="text-sm" style="color:red">Out of stock</span>
@@ -81,7 +87,21 @@
                                     <i class="fas fa-plus increaseQty"></i>
                                 </div> #}
                                 <a href="{{path('app_ajouterPanier',{ id:produit.getId() } )}}" class="cmn-btn">Ajouter au panier</a>
+                                <a href="{{path('app_addWishlist',{ id:produit.getId() })}}">
+                                {% set i = 0 %}
+                                    {% for item in wish %}
+                                    {% set i = i + 1 %}
+                                    {% if item.getProduits().getId() == produit.getId() %}
+                                    {% set i = i - 1 %}
+                                    <i class="fas fa-heart" id="star" style="cursor: pointer;font-size:20px;margin-left:50px"></i>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if i == wish|length %}
+                                    <i class="far fa-heart" id="no_star" style="cursor: pointer;font-size:20px;margin-left:50px"></i>
+                                    {% endif %}
+                                </a>
                             </div>
+                            
                             <div class="social d-flex align-items-center">
                                 <p>Share:</p>
                                 <ul class="d-flex">
@@ -97,183 +117,33 @@
         </div>
     </div>
 
-    <section id="products-content" class="pb-120">
-        <div class="container">
-            <div class="row">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="information-tab" data-toggle="tab" href="#information" role="tab" aria-controls="information" aria-selected="false">Additional information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">reviews (5)</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                        <div class="description">
-                            <div class="single">
-                                <h5>Stay one step ahead</h5>
-                                <p>This fully customisable controller offers features and settings specially designed for eSports,
-                                so you can adapt to any competitive gameplay style.</p>
-                            </div>
-                            <div class="single">
-                                <h5>Features</h5>
-                                <p>Inheriting all the features that made the first REVOLUTION Pro Controller such a success, it also adds new customisation features for
-                                    competitive gamers. With two sticks using NACON-patented technology to provide up to 46° amplitude,
-                                    you can play with unrivalled precision.</p>
-                            </div>
-                            <div class="single">
-                                <h5>Technical specifications</h5>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="single-side">
-                                            <h6>Connectivity</h6>
-                                            <ul>
-                                                <li><span>Connection</span> <span>Detachable USB-C/USB cable</span></li>
-                                                <li><span>Wireless</span> <span>No</span></li>
-                                                <li><span>Cable included</span> <span>Yes</span></li>
-                                                <li><span>Cable length (cm)</span> <span>300</span></li>
-                                                <li><span>Software</span> <span>Yes</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="single-side">
-                                            <h6>Ergonomics</h6>
-                                            <ul>
-                                                <li><span>Joystick position</span> <span>Asymmetric</span></li>
-                                                <li><span>Wireless</span> <span>Profiles</span></li>
-                                                <li><span>Programmable buttons</span> <span>Yes</span></li>
-                                                <li><span>Backlighting</span> <span>RGB</span></li>
-                                                <li><span>LED player indicator</span> <span>Yes</span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="information" role="tabpanel" aria-labelledby="information-tab">
-                        <div class="information">
-                            <div class="single">
-                                <h5>Drivers and downloads</h5>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="single-side">
-                                            <h6>Documents</h6>
-                                            <ul>
-                                                <li><span>Certificate of Conformity</span> <span><a href="#">Download</a></span></li>
-                                                <li><span>User Manual</span> <span><a href="#">Download</a></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="single-side">
-                                            <h6>Software</h6>
-                                            <ul>
-                                                <li><span>Mac OS X</span> <span><a href="#">Download</a></span></li>
-                                                <li><span>Windows</span> <span><a href="#">Download</a></span></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                        <div class="comments">
-                            <div class="single">
-                                <h5>Comments</h5>
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="comments-side">
-                                            <div class="comment-single d-flex">
-                                                <div class="avatar">
-                                                    <img src="{{ asset('front/images/admin-img-1.png') }}" alt="image">
-                                                </div>
-                                                <div class="comnt-text">
-                                                    <div class="reply-icon">
-                                                        <a href="#">Reply <img src="{{ asset('front/images/reply-icon.png') }}" alt="image"></a>
-                                                    </div>
-                                                    <div class="comnt-info">
-                                                        <div class="name-review d-flex align-items-center">
-                                                            <h6>Lindsey Dokidis</h6>
-                                                            <div class="review">
-                                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <p class="text-sm date">November 20, 2021 at 8:31 pm</p>
-                                                        <p class="text-sm">Maecenas at turpis ut lacus posuere dapibus. Fusce et sollicitudin libero, 
-                                                            id vehicula sem. Morbi pharetra nisl eget neque commodo facilisis. Nunc malesuada dolor vitae.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="comment-form">
-                                            <div class="top-area">
-                                                <h5>Add A Review</h5>
-                                            
-                                                <div class="star-area d-flex align-items-center justify-content-between">
-                                                    <span>Your Rating:</span>
-                                                    <ul class="d-flex">
-                                                        <li>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                            <a href="#"><i class="fas fa-star"></i></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <form action="#" method="post">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input type="text" id="name" class="form-control" placeholder="Enter your Name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <input type="email" id="email" class="form-control" placeholder="Enter your email">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="email">Message</label>
-                                                    <textarea class="form-control" rows="10" placeholder="Enter your message"></textarea>
-                                                </div>
-                                                <button class="cmn-btn" type="submit">POST COMMENT</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 {% endblock %}
+{% block javaScript %}
+    <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom-setup.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+   $('#star').click((e) => {
+        console.log($('#star').attr('class'));
+        if ($('#star').attr('class') === "fas fa-star") {
+            $('#star').removeClass("fas fa-star").addClass("far fa-star");
+        }
+         else {
+            $('#star').removeClass("far fa-star").addClass("fas fa-star");
+        }
+    })
+
+    $('#no_star').click((e) => {
+        console.log($('#no_star').attr('class'));
+        if ($('#no_star').attr('class') === "fas fa-star") {
+            $('#no_star').removeClass("fas fa-star").addClass("far fa-star");
+        }
+         else {
+            $('#no_star').removeClass("far fa-star").addClass("fas fa-star");
+        }
+    })
+</script>
+{% endblock %}
+

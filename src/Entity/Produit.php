@@ -69,9 +69,13 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Panier::class, cascade:["remove"])]
     private Collection $paniers;
 
+    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Wishlist::class)]
+    private Collection $wishlists;
+
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
+        $this->wishlists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -211,6 +215,36 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($panier->getProduits() === $this) {
                 $panier->setProduits(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Wishlist>
+     */
+    public function getWishlists(): Collection
+    {
+        return $this->wishlists;
+    }
+
+    public function addWishlist(Wishlist $wishlist): self
+    {
+        if (!$this->wishlists->contains($wishlist)) {
+            $this->wishlists->add($wishlist);
+            $wishlist->setProduits($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWishlist(Wishlist $wishlist): self
+    {
+        if ($this->wishlists->removeElement($wishlist)) {
+            // set the owning side to null (unless already changed)
+            if ($wishlist->getProduits() === $this) {
+                $wishlist->setProduits(null);
             }
         }
 

@@ -31,7 +31,6 @@ class PanierController extends AbstractController
 
         $total = 0;
         foreach ($dataPanier as $item) {
-            // $total += $item['produit']->getPrix() * $item['quantite'];
             $total += $item['produit']->getPrix() * $item['quantite'];
         }
 

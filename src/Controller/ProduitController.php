@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use App\Entity\Produit;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\WishlistRepository;
 
 class ProduitController extends AbstractController
 {
@@ -69,7 +70,6 @@ class ProduitController extends AbstractController
         $form = $this->createForm(UpdateProduitType::class, $produit);
         $form->handleRequest($request);
         $produit->getImage();
-        //$produit = $this->getDoctrine()->getRepository(Products::class)->find($id);
         $entityManager->getRepository(Produit::class)->find($id);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,38 +84,11 @@ class ProduitController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_afficherProduit');
         }
-/*
-        $img=$produit->getImage();
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $files = $request->files->get('update_produit')['image'];
-            if($files){
-                $filenames = "";
-                foreach ($files as $file) {
-                    $filename = md5(uniqid()) . '.png';
-                    $file->move($this->getParameter('produit_directory'), $filename);
-                    $filenames .= $filename . "*";
-                }
-                $produit->setImage($filenames);
-                //$entityManager->persist($produit);
-                $entityManager->flush();
-                return $this->redirect($this->generateUrl('productsshow'));
-            }
-            else
-            {
-                $produit->setImage($img);
-                //$entityManager->persist($produit);
-                $entityManager->flush();
-                return $this->redirect($this->generateUrl('productsshow'));
-            }*/
-            //$product->setCreationDate(null);
 
         return $this->render('produit/modifierProduit.html.twig', [
             'formProd' => $form->createView(),
         ]);
     }
-
-
 
     //front
     #[Route('/afficherProduitFront/{cat}', name: 'app_afficherProduitFront')]
@@ -127,10 +100,11 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/detailProduitFront/{id}', name: 'app_detailProduitFront')]
-    public function detailProduitFront(ProduitRepository $repo,$id)
+    public function detailProduitFront(ProduitRepository $repo,$id,WishlistRepository $wish)
     {
         return $this->render('produit/detailProduitFront.html.twig', [
             'produit' => $repo->find($id),
+            'wish' => $wish->findAll()
         ]);
     }
 
