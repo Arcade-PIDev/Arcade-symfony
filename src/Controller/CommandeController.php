@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Services\qrCodeService;
 
 class CommandeController extends AbstractController
 {
     #[Route('/afficherCommande/{id}', name: 'app_afficherCommande')]
-    public function index(CommandeRepository $repo, ProduitRepository $product,$id,SessionInterface $session): Response
+    public function index(CommandeRepository $repo, ProduitRepository $product,$id,SessionInterface $session,qrCodeService $qrcodeserv): Response
     {
         $commande = $repo->find($id);
         $myCart = $session->get('panier', []);
@@ -27,9 +28,14 @@ class CommandeController extends AbstractController
             ];
         }
         
+        $data = "This is the QrCode of your Order: OrderNumber :".$commande->getId().
+        " totalPrice of your Order :".$commande->getPrixTotal()."DT";
+        $qrCode = $qrcodeserv->qrcode($data);
+        
         return $this->render('commande/afficherCommande.html.twig', [
             'commande' => $commande,
             'produits' => $productCart,
+            'qrCode'=>$qrCode
         ]);
 
         // $list = $repo->getOrders($id);
@@ -58,7 +64,6 @@ class CommandeController extends AbstractController
                 $product->getQuantiteStock($product->getQuantiteStock() - $quantity);
 
                 $total += $repo->find($id)->getPrix() * $quantity;
-                // $total += $totalItmanager;
 
                 $manager->persist($panier);
                 $commande->addpanier($panier);
