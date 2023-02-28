@@ -20,6 +20,12 @@
 <link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">
 <link rel="stylesheet" href="{{asset('front/css/owl.theme.default.min.css')}}">
     {% endblock %}
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_4085f7fd4e07ff76054c5131c078f4647'
+        });
+    </script>
 </head>
 
 <body>
@@ -70,14 +76,14 @@
                         </div>
                     </nav>
                     <div class="right-area header-action d-flex align-items-center">
-                        <div class="lang d-flex align-items-center">
+                        {# <div class="lang d-flex align-items-center">
                             <select>
                                 <option value="1">EN</option>
                                 <option value="2">BN</option>
                                 <option value="3">ES</option>
                                 <option value="4">NL</option>
                             </select>
-                        </div>
+                        </div> #}
                         <a href="login.html" class="login-btn">Login</a>
                         <a href="registration.html" class="cmn-btn">Signup</a>
                     </div>

@@ -38,11 +38,24 @@
                                         <tbody style="width:100px">
                                             {% for prod in produit %}
                                             <tr class="even pointer">
-                                                <td>{{ prod.getNomProduit() }}</td>
+                                                <td><p id="x">{{ prod.getNomProduit() }}</p></td>
                                                 <td>{{ prod.getCategorie().getNomCategorie() }}</td>
                                                 <td>{{ prod.getPrix() }}</td>
                                                 <td>{{ prod.getQuantiteStock() }}</td>
+<script>
+       const myElement = JSON.parse(localStorage.getItem('nomProduit'));
+               console.log("sdsqd");
 
+        console.log(JSON.parse(localStorage.getItem('nomProduit')));
+            $name = $request->get('nomProduit');
+
+        {# const response = await fetch('/api/nomProduit', {
+  method: 'GET'
+}); #}
+        console.log("sdsqd");
+        const names = await response.json();
+        console.log($names);
+       </script>
                                                 <td>
 
                                                     {% set images = prod.image| trim('*') | split("*") %}
@@ -88,3 +101,7 @@
     </div>
 
 {% endblock %}
+
+       {% block javaScript %}
+       
+       {% endblock %}
