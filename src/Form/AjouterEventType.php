@@ -11,10 +11,13 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class AjouterEventType extends AbstractType
@@ -24,8 +27,16 @@ class AjouterEventType extends AbstractType
         $builder
             ->add('NomEvent',TextType::class, ['label'=>'Nom Evenement '])
             ->add('lieu',TextType::class, ['label'=>'Lieu'])
-            ->add('DateDebutE',DateType::class, ['label'=>'Date Debut'])
-            ->add('DateFinE',DateType::class, ['label'=>'Date Fin'])
+            ->add('DateDebutE',DateTimeType::class, [
+                'date_widget' => 'single_text'
+            ])
+            ->add('DateFinE',DateTimeType::class, [
+                'date_widget' => 'single_text'
+            ])
+            ->add('all_day', RadioType:: class)
+            ->add('background_color', ColorType::class)
+            ->add('border_color', ColorType::class)
+            ->add('text_color', ColorType::class)
             ->add('AfficheE',FileType::class, ['label'=>'Affiche '])
             ->add('PrixTicket',NumberType::class, ['label'=>'Prix Ticket '])
             ->add('nbrPlaces',IntegerType::class, ['label'=>'Nombre de Places'])

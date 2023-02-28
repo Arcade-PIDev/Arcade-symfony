@@ -1,0 +1,39 @@
+{% extends 'backBase.html.twig' %}
+
+{% block content %}
+
+    
+        <div class="mt-3">
+        <div id='calendrier'></div>
+        </div>
+        
+ {% block js %}
+
+<script>
+    window.onload = () =>{
+        let calendarElt = document.querySelector("#calendrier")
+
+        let calendar = new  FullCalendar.Calendar (calendarElt, { 
+             initialView: 'dayGridMonth',
+            locale: 'fr',
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek'}, 
+                events: {{ data |raw }}
+        })
+
+        calendar.render()
+
+    }
+</script>
+
+ {% endblock %}
+	
+
+
+
+
+    
+{% endblock %}

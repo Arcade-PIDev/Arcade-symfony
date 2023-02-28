@@ -71,15 +71,61 @@
                             <div class="mid-area">
                                 <h4>{{ e.getNomEvent() }}</h4>
                                 <div class="title-bottom d-flex">
+                                
                                     <div class="time-area bg">
+                                       <div>
                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
                                         <span>Date de début</span>
-                                        <span class="time">{{  e.DateDebutE.format('d/m/Y') }}</span>
+                                        <span class="time">{{  e.DateDebutE.format('d/m/Y h:m:s') }}</span>
+                                       </div>
+                                       <div> 
+                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
+                                        <span>Date de Fin</span>
+                                        <span class="time">{{  e.DateFinE.format('d/m/Y h:m:s') }}</span>
+                                        </div>
                                     </div>
+                                    
                                      <div class="time-area bg">
                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
-                                        <span>Date de Fin</span>
-                                        <span class="time">{{  e.DateFinE.format('d/m/Y') }}</span>
+                                        <span>commence en:</span>
+                                       
+                                        <p id="e"></p>
+                                        <script>
+                                          
+ 
+
+                                             // Set the date we're counting down to
+                                      
+                                           var countDownDate = new Date(JSON.parse(JSON.stringify({Date: e.DateDebutE}))); 
+                                           
+                                            // Update the count down every 1 second
+                                            var x = setInterval(function() {
+
+                                            // Get today's date and time
+                                            var now = new Date().getTime();
+
+                                            // Find the distance between now and the count down date
+                                            var distance = countDownDate - now;
+
+                                            // Time calculations for days, hours, minutes and seconds
+                                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                            // Display the result in the element with id="demo"
+                                            document.getElementById('e').innerHTML = days + "d " + hours + "h "
+                                            + minutes + "m " + seconds + "s ";
+
+                                            // If the count down is finished, write some text
+                                            if (distance < 0) {
+                                                clearInterval(x);
+                                                document.getElementById('e').innerHTML = "EXPIRED";
+                                            }
+                                            }, 1000);
+                                          
+                                        </script>
+                                     
                                     </div>
                                    
                                 </div>

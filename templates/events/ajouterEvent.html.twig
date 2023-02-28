@@ -27,16 +27,41 @@
             </section> #}
             
            <div class="form-group">
-            <label for="input-3">{{form_label(form.DateDebutE)}}</label>
-              {{ form_widget(form.DateDebutE, {'attr': {'class': 'form-control'}} ) }}
+            <label for="input-3">{{form_label(form.DateDebutE, "Date Debut")}}</label>
+              {{ form_widget(form.DateDebutE, ) }}
               {{ form_errors(form.DateDebutE) }}
            </div>
            
            <div class="form-group">
-            <label for="input-4">{{form_label(form.DateFinE)}}</label>
-              {{ form_widget(form.DateFinE, {'attr': {'class': 'form-control'}} ) }}
+            <label for="input-4">{{form_label(form.DateFinE, "Date Fin")}}</label>
+              {{ form_widget(form.DateFinE,  ) }}
                {{ form_errors(form.DateFinE) }}
            </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.all_day, "journée entière" )}}</label>
+            {{ form_widget(form.all_day) }}
+              {{ form_errors(form.all_day) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.background_color, "couleur background")}}</label>
+            {{ form_widget(form.background_color ) }}
+              {{ form_errors(form.background_color) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.border_color, "couleur de bordure")}}</label>
+            {{ form_widget(form.border_color ) }}
+              {{ form_errors(form.border_color) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.text_color, "couleur de texte")}}</label>
+            {{ form_widget(form.text_color) }}
+              {{ form_errors(form.text_color) }}
+           </div>
+
            <div class="form-group">
             <label for="input-5">{{form_label(form.AfficheE)}}</label>
             {{ form_widget(form.AfficheE, {'attr': {'class': 'form-control'}} ) }}

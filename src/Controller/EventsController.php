@@ -12,12 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Form\AjouterEventType;
 use App\Form\ModifierEventType;
+use App\Repository\EvenementRepository;
 
 class EventsController extends AbstractController
 { 
   
-    
-
     #[Route('/afficherEvent', name: 'app_afficher_Event')]
     public function afficherEvent(ManagerRegistry $doctrine)
     {
@@ -52,8 +51,8 @@ class EventsController extends AbstractController
             
              $file = $request->files->get('ajouter_event')['AfficheE'];
              $filename = md5(uniqid()) . '.png';
-            $file->move($this->getParameter('event_directory'), $filename);
-            $E->setAfficheE($filename);
+             $file->move($this->getParameter('event_directory'), $filename);
+             $E->setAfficheE($filename);
 
                 $em->persist($E);
                 $em->flush();
@@ -97,11 +96,12 @@ class EventsController extends AbstractController
               
                 $em=$doctrine->getManager();
                 $em->persist($Ev);
-                $em->flush();
+                $em->flush(); 
                 return $this->redirectToRoute('app_afficher_Event');
                }
             
             return $this->renderForm("events/modifierEvent.html.twig",array("form"=>$form));}
     
-
+          
+        
 }

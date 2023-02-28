@@ -24,10 +24,18 @@
     <br>
 
     <div class="col-md-12 col-sm-12 ">
+       <a href="{{ path('app_calendar') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:-35px; right:3%;">Calendrier
+                    </button>
+                </a>
         <div class="x_panel">
+        
             <div class="x_title" style="display: inline-flex;">
+          
                 <h2>Evenements</h2>
                 <div class="clearfix"></div>
+                 
                 <a href="{{ path('app_ajouter_Event') }}">
                     <button type="button" class="btn btn-info btn-xs"
                             style="position:absolute;top:15px;right:3%;">Ajouter Evenement
