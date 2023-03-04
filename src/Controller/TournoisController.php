@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\HistoryRecord;
+use App\Repository\HistoryRecordRepository;
 use App\Repository\TournoisRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +17,9 @@ use App\Entity\Tournois;
 use Doctrine\Persistence\ManagerRegistry;
 use Dompdf\Dompdf;
 use Symfony\Flex\Options;
+use TCPDF;
+
+
 
 class TournoisController extends AbstractController
 {
@@ -49,15 +54,36 @@ class TournoisController extends AbstractController
     }
 
     #[Route('/deleteTournois/{id}', name: 'app_deleteTournois')]
-    public function deleteTournois(ManagerRegistry $doctrine,TournoisRepository $repo,$id)
+    public function deleteTournois(ManagerRegistry $doctrine, TournoisRepository $repo, $id): Response
     {
         $manager = $doctrine->getManager();
-        $Tou=$repo->find($id);
-        $manager->remove($Tou);
+        $tou = $repo->find($id);
+
+        if (!$tou) {
+            throw $this->createNotFoundException('No tournois found for id '.$id);
+        }
+
+        $historyRecord = new HistoryRecord();
+        $historyRecord->setEntityName(Tournois::class);
+        $historyRecord->setDeletedEntityId($tou->getId());
+        $historyRecord->setDeletedAt(new \DateTime());
+
+        $manager->remove($tou);
+        $manager->persist($historyRecord);
         $manager->flush();
+
         return $this->redirectToRoute('app_afficherTournois');
     }
+    #[Route('/history', name: 'app_history')]
+    public function history(HistoryRecordRepository $historyRecordRepository, EntityManagerInterface $entity_manager): Response
+    {
+        $historyRecords = $historyRecordRepository->findAll();
 
+        return $this->render('history/index.html.twig', [
+            'historyRecords' => $historyRecords,
+            'entity_manager' => $entity_manager,
+        ]);
+    }
     #[Route('/updateTournois/{id}', name: 'app_updateTournois')]
     public function updateTournois($id,Tournois $Tournois,Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -77,24 +103,8 @@ class TournoisController extends AbstractController
             'formTournois' => $form->createView(),
         ]);
     }
-    #[Route('/TournoisPdf', name: 'app_PdfTournois')]
-    public function impressionPDF(ManagerRegistry $doctrine,TournoisRepository $repo)
-    {
-        $Tournois=new Tournois();
-
-        $pdfOptions = new Options();
-        $pdfOptions->get('defaultFont', 'Arial');
-        $dompdf = new Dompdf($pdfOptions);
-        $html =  $this->render('Tournois/PDF.html.twig',[
-            'Tournois' => $repo->findAll(),
-        ]);
-        $dompdf->loadHtml($html);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        $dompdf->stream("MonTournois.pdf", [
-            "Attachment" => true
-        ]);
-    }
+   
+   
      ///front///
      #[Route('/afficherTournoisFront', name: 'app_afficherTournoisFront')]
      public function afficherTournoisFront(TournoisRepository $repo)
@@ -103,4 +113,34 @@ class TournoisController extends AbstractController
              'Tournois' => $repo->findAll(),
          ]);
      }
+    public function generatePdfAction()
+    {
+        // Get the list of tournois from the database
+        $tournois = $this->getDoctrine()->getRepository(Tournois::class)->findAll();
+
+// Set up the PDF document
+        $pdf = new \TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        $pdf->SetCreator('Your Name');
+        $pdf->SetAuthor('Your Name');
+        $pdf->SetTitle('List of Tournois');
+        $pdf->SetSubject('List of Tournois');
+
+// Add a page to the PDF document
+        $pdf->AddPage();
+
+// Add the tournois to the PDF document
+        $html = '<h1>List of Tournois</h1><table><tr><th>ID</th><th>NBRparticipants</th><th>DureeTournois</th><th>DateDebutTournois</th><th>nomTournois</th></tr>';
+        foreach ($tournois as $tournoi) {
+            $html .= '<tr><td>' . $tournoi->getId() . '</td><td>' . $tournoi->getNBRparticipants() . '</td><td>' . $tournoi->getDureeTournois() . '</td><td>' . $tournoi->getDateDebutTournois()->format('Y-m-d') . '</td><td>' . $tournoi->getIdjeuxfk()->getNom() . '</td></tr>';
+        }
+        $html .= '</table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+// Output the PDF document as a response
+        $response = new Response($pdf->Output('list_of_tournois.pdf', 'D'));
+        $response->headers->set('Content-Type', 'application/pdf');
+
+        return $response;
+    }
 }

@@ -1,0 +1,18 @@
+{% extends 'backBase.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/history.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1>History Records</h1>
+
+    <ul class="history-list">
+        {% for historyRecord in historyRecords %}
+            <li class="history-item">
+                <p class="entity-name">The tournament with ID <span class="entity-id">{{ historyRecord.getDeletedTournoisId() }}</span> has been deleted.</p>
+                <p class="deleted-at">Deleted At: <span class="deleted-at-date">{{ historyRecord.getDeletedAt()|date('Y-m-d H:i:s') }}</span></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

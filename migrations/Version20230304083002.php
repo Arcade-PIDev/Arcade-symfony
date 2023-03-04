@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230218162112 extends AbstractMigration
+final class Version20230304083002 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -24,6 +24,7 @@ final class Version20230218162112 extends AbstractMigration
         $this->addSql('CREATE TABLE categorie (id INT AUTO_INCREMENT NOT NULL, nom_categorie VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, creation_date DATETIME NOT NULL, modification_date DATETIME DEFAULT NULL, is_enabled TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE commande (id INT AUTO_INCREMENT NOT NULL, users_id INT DEFAULT NULL, prix_total DOUBLE PRECISION NOT NULL, is_paid TINYINT(1) NOT NULL, is_canceled TINYINT(1) NOT NULL, INDEX IDX_6EEAA67D67B3B43D (users_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE evenement (id INT AUTO_INCREMENT NOT NULL, lieu VARCHAR(255) NOT NULL, date_debut_e DATE NOT NULL, date_fin_e DATE NOT NULL, affiche_e VARCHAR(255) DEFAULT NULL, prix_ticket DOUBLE PRECISION NOT NULL, nbr_places INT NOT NULL, description_event VARCHAR(2000) DEFAULT NULL, nom_event VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE history_record (id INT AUTO_INCREMENT NOT NULL, entity_name VARCHAR(255) NOT NULL, deleted_entity_id INT NOT NULL, deleted_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE jeux (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, description VARCHAR(255) NOT NULL, image VARCHAR(255) NOT NULL, genre VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE panier (id INT AUTO_INCREMENT NOT NULL, produits_id INT DEFAULT NULL, commandes_id INT DEFAULT NULL, quantite INT NOT NULL, INDEX IDX_24CC0DF2CD11A2CF (produits_id), INDEX IDX_24CC0DF28BF5C2E6 (commandes_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE participation_evenement (id INT AUTO_INCREMENT NOT NULL, users_event_fk_id INT NOT NULL, p_event_fk_id INT NOT NULL, nbr_participants_e INT NOT NULL, INDEX IDX_65A1467513D9940E (users_event_fk_id), INDEX IDX_65A146757484E66B (p_event_fk_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -68,6 +69,7 @@ final class Version20230218162112 extends AbstractMigration
         $this->addSql('DROP TABLE categorie');
         $this->addSql('DROP TABLE commande');
         $this->addSql('DROP TABLE evenement');
+        $this->addSql('DROP TABLE history_record');
         $this->addSql('DROP TABLE jeux');
         $this->addSql('DROP TABLE panier');
         $this->addSql('DROP TABLE participation_evenement');

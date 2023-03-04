@@ -24,6 +24,7 @@
             <link href="{{asset('back/css/sidebar-menu.css')}}" rel="stylesheet"/>
             <!-- Custom Style-->
             <link href="{{asset('back/css/app-style.css')}}" rel="stylesheet"/>
+            <link rel="stylesheet" href="{{ asset('css/history.css') }}">
             {% endblock %}
 
           
@@ -66,6 +67,11 @@
           <i class="fa fa-trophy"></i> <span>Tournois</span>
         </a>
       </li>
+       <li>
+           <a href="{{ path('app_history') }}">
+               <i class="fa fa-trophy"></i> <span>History </span>
+           </a>
+       </li>
 
       <li>
         <a href="{{ path('app_afficherjeux') }}">

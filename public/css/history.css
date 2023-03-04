@@ -1,0 +1,28 @@
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.entity-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.entity-id {
+    color: #999;
+}
+
+.deleted-at {
+    color: #666;
+}
+
+.deleted-at-date {
+    color: #999;
+}
