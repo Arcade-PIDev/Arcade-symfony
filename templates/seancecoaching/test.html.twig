@@ -17,9 +17,11 @@
 
                 </div>
                <br>
+                  <input type="text" class="recherche">
+
                  <div class="row mb-40 mp-none">
                  
-                   
+                    
                     
                    
                 </div>
@@ -30,8 +32,8 @@
                         {% set images = Se.imageSeance| trim('*') | split("*") %}
                           <picture>
                                                 {% for imageSeance in images %}
-                                                    <img src="{{ asset('imagesnada/'~imageSeance) }}" alt="imageSeance"
-                                                         style="width:100px ;margin-bottom:20%">
+                                                    <img class="top-img" src="{{ asset('imagesnada/'~imageSeance) }}" alt="imageSeance"
+                                                         style="width:200px ;margin-bottom:30%">
 
                                                 {% endfor %}
 
@@ -70,10 +72,41 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% block javascripts %}
+    <script>
+        jQuery(document).ready(function () {
+            $('.recherche').keypress(function () {
+                $.ajax({
+                    url:   "{{ path('rechercheSeancecoaching') }}",
+                    type:'GET',
+                    dataType: 'JSON',
+                    data:{'evenm':$(this).val() },
+                    async: true,
+                    success:function (data) {
+                       $('#evt').html("");
+                       for(var i=0;i<data.length;i++){
+                           $('#evt').append("<tr>  <td>"+data[i].id+" </td>  <td>"+data[i].dateDebutSeance+" </td>  <td>"+data[i].dateFinSeance+" </td>  <td>"+data[i].prixSeance+" </td>  <td>"+data[i].descriptionSeance+" </td>  <td>"+data[i].imageSeance+" </td>  <td>"+data[i].titreSeance+" </td>   </tr>")
+                       }
+                    },
+                    error: function (xhr, textStatus,errorThrown) {
+                        alert("error");
+                    }
+                })
+            });
+        });
+    </script>
+
+{% endblock %}
+
                 
             </div>
         </div>
-    </section>
-    <!-- Browse Tournaments end -->
-
+        {# {% block js %}
+<script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/sprinkle.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/jquery-1.2.6.min.js"></script>
+<script language="JavaScript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/js/jquery-ui-personalized-1.5.2.packed.js"></script>
             {% endblock %}
+             #}
+    </section>
+
+{% endblock %}

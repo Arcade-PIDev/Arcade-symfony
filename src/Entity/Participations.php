@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ParticipationsRepository::class)]
 class Participations
@@ -17,7 +18,7 @@ class Participations
     private ?int $id = null;
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"nom joueur est invalide")]
-    #[Assert\Regex(pattern:"/[a-zA-Z]*/",message:"Le titre ne peut pas contenir des chiffres")]
+    #[Assert\Regex(pattern:"/[a-zA-Z]/",message:"Le titre ne peut pas contenir des chiffres")]
     private ?string $nomJoueur = null;
   
     #[ORM\Column]
@@ -46,6 +47,7 @@ class Participations
     #[Assert\NotBlank(message:"titre est invalide ")]
     #[ORM\ManyToOne(inversedBy: 'participations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[MaxDepth(1)]
     private ?Seancecoaching $idseancefk = null;
 
     public function __construct()
@@ -146,4 +148,5 @@ class Participations
 
         return $this;
     }
+
 }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SeancecoachingRepository::class)]
@@ -44,7 +45,7 @@ class Seancecoaching
     private ?string $titreSeance = null;
 
     #[ORM\OneToMany(mappedBy: 'idseancefk', targetEntity: Participations::class, cascade:["remove"])]
-    
+    #[MaxDepth(2)]
     private Collection $participations;
 
     public function __construct()

@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 class UpdateSeancecoachingType extends AbstractType
 {
@@ -36,7 +38,12 @@ class UpdateSeancecoachingType extends AbstractType
             ])
           
             
-            ->add('imageSeance',FileType::class,array('data_class' => null))
+            ->add('imageSeance',FileType::class,[
+                'mapped'=> false,
+                'label'=>'please upload pictures',
+                //'multiple'=>true   
+                ],array('data_class' => null),) 
+
             ->add('titreSeance', null, [
                 'empty_data' => ''
             ])

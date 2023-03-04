@@ -16,11 +16,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ParticipationsRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Participations::class);
     }
 
+    public function searchByNomJoueur(string $query): array
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->andWhere($qb->expr()->like('p.nomJoueur', ':query'))
+            ->setParameter('query', '%' . $query . '%');
+
+        return $qb->getQuery()->getResult();
+    }
     public function save(Participations $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);

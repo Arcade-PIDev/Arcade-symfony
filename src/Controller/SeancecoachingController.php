@@ -14,7 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use App\Entity\Seancecoaching;
 use Doctrine\Persistence\ManagerRegistry;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 class SeancecoachingController extends AbstractController
 {
     #[Route('/afficherSeancecoaching', name: 'app_afficherSeancecoaching')]
@@ -67,19 +68,35 @@ class SeancecoachingController extends AbstractController
     {
         $form = $this->createForm(UpdateSeancecoachingType::class, $Seancecoaching);
         $form->handleRequest($request);
+        $img=$Seancecoaching->getImageSeance();
+
         
         $entityManager->getRepository(Seancecoaching::class)->find($id);
+        $Seancecoaching->setImageSeance($img);
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             
             $file = $request->files->get('update_seancecoaching')['imageSeance'];
+            if ($file)
+            {
+
+            
             $filename = md5(uniqid()) . '.png';
             $file->move($this->getParameter('imagesnada_directory'), $filename);
             $Seancecoaching->setImageSeance($filename);
-
+            
             $entityManager->persist($Seancecoaching);
             $entityManager->flush();
             return $this->redirectToRoute('app_afficherSeancecoachingback');
+            }
+            else 
+            {
+                $Seancecoaching->setImageSeance($img);
+                $entityManager->persist($Seancecoaching);
+                $entityManager->flush();
+                return $this->redirectToRoute('app_afficherSeancecoachingback'); 
+            }
         }
 
         return $this->render('Seancecoaching/modifierSeancecoaching.html.twig', [
@@ -102,5 +119,37 @@ class SeancecoachingController extends AbstractController
              'Seancecoaching' => $repo->find($id),
         ]);
      }
-}
+     //recherche :
+     #[Route('/rechercheSeancecoaching', name: 'rechercheSeancecoaching')]
+         public function rechercheSeancecoaching(Request $request)
+    {
+        $Seancecoaching=$request->get('evenm');
+
+        $Seancecoaching=$this->getDoctrine()->getManager()->createQuery("select e from Seancecoaching e where e.titreSeance like '%".$Seancecoaching."%'")
+        ->getResult();
+
+        $jsonData=array();
+        $idx=0;
+        foreach ($Seancecoaching as $liv) {
+            $temp=array(
+                'id'=>$liv->getId(),
+                'dateDebutSeance'=>$liv->getDateDebutSeance(),
+                'DateFinSeance'=>$liv->getDateFinSeance(),
+                'PrixSeance'=>$liv->getPrixSeance(),
+                'DescriptionSeance'=>$liv->getDescriptionSeance(),
+                'ImageSeance'=>$liv->getImageSeance(),
+                'titreSeance'=>$liv->getTitreSeance(),
+            );
+            $jsonData[$idx++]=$temp;
+
+        }
+
+        return new JsonResponse($jsonData);
+
+    }
+   
+    }
+
+
+
 
