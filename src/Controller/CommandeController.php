@@ -28,8 +28,8 @@ class CommandeController extends AbstractController
             ];
         }
         
-        $data = "This is the QrCode of your Order: OrderNumber :".$commande->getId().
-        " totalPrice of your Order :".$commande->getPrixTotal()."DT";
+        $data = "Voici votre commande:\n" . "Num Commande: ".$commande->getId().
+        "\nPrix total de la commande: ".$commande->getPrixTotal()."DT";
         $qrCode = $qrcodeserv->qrcode($data);
         
         return $this->render('commande/afficherCommande.html.twig', [
@@ -61,7 +61,7 @@ class CommandeController extends AbstractController
                 $panier->setProduits($repo->find($id));
                 $panier->setQuantite($quantity);
 
-                $product->getQuantiteStock($product->getQuantiteStock() - $quantity);
+                $product->setQuantiteStock($product->getQuantiteStock() - $quantity);
 
                 $total += $repo->find($id)->getPrix() * $quantity;
 

@@ -25,19 +25,16 @@ class qrCodeService
     {
         $objDateTime = new \DateTime('NOW');
 
-        // set qrcode
         $result=$this->builder
         ->data($query)
         ->encoding(new Encoding('UTF-8'))
         ->size(200)
-        ->backgroundColor(new Color(221, 198, 143))
+        ->backgroundColor(new Color(251, 204, 209))
         ->build()
     ;
 
-        //generate name
         $namePng = uniqid('', '') . '.png';
 
-        //Save img png
         $result->saveToFile( $this->appKernel->getProjectDir().'/public/eshop/qrCode/'.$namePng);
 
         return $result->getDataUri();

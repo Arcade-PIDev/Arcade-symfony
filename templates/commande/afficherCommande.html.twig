@@ -46,8 +46,7 @@
                                 <a href="{{ path('app_cancelOrder',{ 'id':commande.id})}}" > <i class="fas fa-times"></i></a>
                             </div>
                         </div>
-                            {# <p>Price can change depending on shipping
-                                method and taxes of your state.</p> #}
+                        <label>
                         </div>
                         <div class="bottom-side text-center">
                             <ul class="bottom-area">
@@ -56,7 +55,8 @@
                                 {% for produit in produits %}
                                 <li>
                                 <img src="{{asset('eshop/produit/'~produit['produit'].image)}}" style="width:150px;height:80px" alt="">
-                                    <span style="margin-right:50%;margin-top:2%">{{produit['produit'].nomProduit}}</span>
+                                    <span style="margin-right:30%;margin-top:2%">{{produit['produit'].nomProduit}}</span>
+                                    <span style="margin-right:30%;margin-top:2%">{{produit['quantite'] * produit['produit'].prix}}</span>
                                     <span style="margin-right:10%;margin-top:2%">{{produit['quantite']}}</span>
                                 </li>
                                 {% endfor %}
@@ -85,4 +85,8 @@
 
 <!-- Shop Cart End -->
 
+{% endblock %}
+{% block javaScript %}
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&components=buttons,hosted-fields,funding-eligibility"></script>
 {% endblock %}

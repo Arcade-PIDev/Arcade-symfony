@@ -3,16 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
-use App\Repository\PanierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\PanierFormType;
-use App\Entity\Produit;
-use App\Entity\Panier;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Twig\Environment;
 use Doctrine\ORM\EntityManagerInterface;
 
 class PanierController extends AbstractController
@@ -46,15 +39,13 @@ class PanierController extends AbstractController
     public function ajouterPanier($id,ProduitRepository $repo,SessionInterface $session,EntityManagerInterface $manager)
     {
         $panier = $session->get('panier', []);
-        //$id = $produit->getId();
-        // var_dump($panier);
+
         if(!empty($panier[$id])){
             $panier[$id]++;
         }
         else
         $panier[$id]=1;
 
-        // On sauvegarde dans la session
         $session->set('panier', $panier);
 
         return $this->redirectToRoute("app_afficherPanier");
@@ -102,8 +93,8 @@ class PanierController extends AbstractController
     #[Route('/viderPanier', name: 'app_viderPanier')]
     public function viderPanier(SessionInterface $session)
     {
-        
         $session->clear();
+
         return $this->redirectToRoute("app_afficherCategorieFront");
     }
 }

@@ -69,13 +69,17 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Panier::class, cascade:["remove"])]
     private Collection $paniers;
 
-    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Wishlist::class)]
+    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Wishlist::class, cascade:["remove"])]
     private Collection $wishlists;
+
+    #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Review::class, cascade:["remove"])]
+    private Collection $reviews;
 
     public function __construct()
     {
         $this->paniers = new ArrayCollection();
         $this->wishlists = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -245,6 +249,36 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($wishlist->getProduits() === $this) {
                 $wishlist->setProduits(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduits($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduits() === $this) {
+                $review->setProduits(null);
             }
         }
 

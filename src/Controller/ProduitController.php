@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ProduitRepository;
+use Twig\Environment;
+use App\Entity\Review;
+use App\Entity\Produit;
+use App\Form\ReviewFormType;
 use App\Form\ProduitFormType;
 use App\Form\UpdateProduitType;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Twig\Environment;
-use App\Entity\Produit;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Repository\ReviewRepository;
+use App\Repository\ProduitRepository;
 use App\Repository\WishlistRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProduitController extends AbstractController
 {
@@ -99,12 +102,47 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/detailProduitFront/{id}', name: 'app_detailProduitFront')]
-    public function detailProduitFront(ProduitRepository $repo,$id,WishlistRepository $wish)
+    #[Route('/ajouterReview/{id}', name: 'app_ajouterReview')]
+    public function ajouterReview($id,Environment $twig,Request $request,EntityManagerInterface $manager)
     {
+        $Review=new Review();
+
+        $form=$this->createForm(ReviewFormType::class, $Review);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($Review);
+            $manager->flush();
+            return $this->redirectToRoute('app_afficherReview');
+           }
+
+        return new Response($twig->render('produit/detailProduitFront.html.twig',[
+            'formReview' => $form->createView()
+        ]));
+    }
+    
+    #[Route('/detailProduitFront/{id}', name: 'app_detailProduitFront')]
+    public function detailProduitFront(Produit $product,ProduitRepository $repo,ReviewRepository $review,$id,WishlistRepository $wish,Request $request,EntityManagerInterface $manager)
+    {
+        $Review=new Review();
+
+        $form=$this->createForm(ReviewFormType::class, $Review);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $Review->setProduits($product);
+            $manager->persist($Review);
+            $manager->flush();
+            return $this->redirectToRoute('app_detailProduitFront',array('id' => $id));
+           }
+
         return $this->render('produit/detailProduitFront.html.twig', [
             'produit' => $repo->find($id),
-            'wish' => $wish->findAll()
+            'wish' => $wish->findAll(),
+            'review' => $review->findByProduits($id),
+            'formReview' => $form->createView()
         ]);
     }
 

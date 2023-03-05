@@ -93,10 +93,6 @@ class CategorieController extends AbstractController
 
             }
             
-            
-            //
-            
-            
         }
         return $this->render('categorie/modifierCategorie.html.twig', [
             'formCategorie' => $form->createView(),

@@ -15,11 +15,9 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
-
-<link rel="stylesheet" href="{{asset('front/css/xzoom.css')}}">
-<link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">
-<link rel="stylesheet" href="{{asset('front/css/owl.theme.default.min.css')}}">
+    
     {% endblock %}
+       {% block css %}{% endblock %}
     <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
     <script>
         Weglot.initialize({
@@ -66,7 +64,7 @@
                                         <li><a href="{{ path('app_afficherPanier') }}">Panier</a></li>
                                         <li><a href="">Commandes</a>
                                         </li>
-                                        <li><a href="">WishList</a></li>
+                                        <li><a href="{{ path('app_wishlist') }}">WishList</a></li>
                                 </ul>
                                 </li>
                                   <li class=""><a href="">Evenements</a>
@@ -153,9 +151,8 @@
 <script src="{{ asset("front/js/main.js") }}"></script>
 <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
 
-    <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('front/js/xzoom.js') }}"></script>
-    <script src="{{ asset('front/js/xzoom-setup.js') }}"></script>
 {% endblock %}
+{% block javaScript %}{% endblock %}
+
 </body>
 </html>
