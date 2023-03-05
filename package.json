@@ -1,6 +1,19 @@
 {
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "fullcalendar": "^6.1.4"
+    "fullcalendar": "^6.1.4",
+    "notyf": "^3.10.0",
+    "rollup-plugin-css-only": "^4.3.0",
+    "sweetalert2": "^11.7.3"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+ 
+  "devDependencies": {
+    "sass": "^1.58.3",
+    "sass-loader": "^12.0.0"
   }
 }

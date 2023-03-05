@@ -26,6 +26,8 @@ class EventsController extends AbstractController
        
     }
 
+   
+   
     #[Route('/afficherFrontEvent', name: 'app_afficherFront_Event')]
     public function afficherFrontEvent(ManagerRegistry $doctrine)
     {
@@ -37,7 +39,7 @@ class EventsController extends AbstractController
 
 
     #[Route('/ajouterEvent', name: 'app_ajouter_Event')]
-        public function AddFormEventMaker(Request $request, ManagerRegistry $doctrine)
+        public function AjouterEvent(Request $request, ManagerRegistry $doctrine)
         {
             
             $em=$doctrine->getManager();
@@ -102,6 +104,31 @@ class EventsController extends AbstractController
             
             return $this->renderForm("events/modifierEvent.html.twig",array("form"=>$form));}
     
-          
+            #[Route('/sortByDate', name: 'app_sortByDate')]
+            function sortByDate(EvenementRepository $repo)
+            {
+                $list = $repo->sortByDate();
+                return $this->render('events/afficherFrontEvent.html.twig', ['listEvents' => $list]);
+            }  
         
+            #[Route('/sortByName', name: 'app_sortByName')]
+            function sortByName(EvenementRepository $repo)
+            {
+                $list = $repo->sortByName();
+                return $this->render('events/afficherFrontEvent.html.twig', ['listEvents' => $list]);
+            }  
+
+            #[Route('/sortPrix', name: 'app_sortPrix')]
+            function sortPrix(EvenementRepository $repo)
+            {
+                $list = $repo->sortPrix();
+                return $this->render('events/afficherFrontEvent.html.twig', ['listEvents' => $list]);
+            }  
+
+            #[Route('/sortByNbrP', name: 'app_sortByNbrP')]
+            function sortByNbrP(EvenementRepository $repo)
+            {
+                $list = $repo->sortByNbrP();
+                return $this->render('events/afficherFrontEvent.html.twig', ['listEvents' => $list]);
+            }  
 }

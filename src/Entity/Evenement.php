@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -15,59 +17,74 @@ class Evenement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("E")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Lieu Evenement ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $lieu = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"Date Debut ne doit pas etre vide")]
+    #[Groups("E")]
     private ?\DateTimeInterface $DateDebutE = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"Date Fin ne doit pas etre vide")]
+    #[Groups("E")]
    
     private ?\DateTimeInterface $DateFinE = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message:"Affiche ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $AfficheE = null;
 
     #[ORM\Column]
     #[Assert\Positive(message:"Prix Ticket ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Prix Ticket ne doit pas etre vide")]
+    #[Groups("E")]
     private ?float $PrixTicket = null;
 
     #[ORM\Column]
     #[Assert\Positive(message:"Nombre de Places ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Nombre de Places ne doit pas etre vide")]
+    #[Groups("E")]
     private ?int $nbrPlaces = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
     #[Assert\NotBlank(message:"Description ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $DescriptionEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'IDEventsFK', targetEntity: Sponsor::class, orphanRemoval: true)]
+    #[Groups("E")]
     private Collection $SponsorFK;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Nom Evenement ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $NomEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'pEventFK', targetEntity: ParticipationEvenement::class, orphanRemoval: true)]
+    #[Groups("E")]
     private Collection $participationEvenements;
 
     #[ORM\Column]
+    #[Groups("E")]
     private ?bool $all_day = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("E")]
     private ?string $background_color = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("E")]
     private ?string $border_color = null;
 
     #[ORM\Column(length: 7)]
+    #[Groups("E")]
     private ?string $text_color = null;
 
    

@@ -6,6 +6,12 @@
    <section id="tournaments-section" class="pt-120 tournaments">
         <div class="overlay pt-120 pb-120">
             <div class="container wow fadeInUp">
+            <div class="col-sm-5 col">
+                            <a class="back-home" href="{{path('app_afficherFront_Event')}}">
+                                <img src="{{ asset("front/images/left-icon.png")}}" alt="image">
+                               Evenements
+                            </a>
+                        </div>
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8 text-center">
                         <div class="section-header">
@@ -17,48 +23,33 @@
                 <div class="row mb-40 mp-none">
                     <div class="col-lg-3 col-md-3">
                         <div class="single-input">
-                            <span>Lieu</span>
-                            <select>
-                                <option>Lieu</option>
-                                <option value="1">Upcoming 1</option>
-                                <option value="2">Upcoming 2</option>
-                                <option value="3">Upcoming 3</option>
-                                <option value="5">Upcoming 5</option>
-                            </select>
+                           
+                           <span><a href="{{path('app_sortByDate')}}" class="cmn-btn-second" >Trier par Date Debut</a></span>
+                                
+                           
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="single-input">
-                            <span>Rechercher</span>
-                            <input type="text" placeholder="Search">
+                       <span><a href="{{path('app_sortByNbrP')}}" class="cmn-btn-second" >Trier par Nbr places</a></span>
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="single-input">
-                            <span>Nombre Places</span>
-                            <select>
-                                <option>Choisir nbr de places</option>
-                                <option value="1">Size 1</option>
-                                <option value="2">Size 2</option>
-                                <option value="3">Size 3</option>
-                                <option value="4">Size 4</option>
-                            </select>
+                       <span><a href="{{path('app_sortByName')}}" class="cmn-btn-second" >Trier par Nom Event</a></span>
+
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3">
                         <div class="single-input">
-                            <span>Prix Ticket</span>
-                            <select>
-                                <option>Choisir Prix Ticket</option>
-                                <option value="1">50</option>
-                                <option value="2">60</option>
-                                <option value="3">70</option>
-                                <option value="4">80</option>
-                            </select>
+                        <span><a href="{{path('app_sortPrix')}}" class="cmn-btn-second" >Trier par Prix Ticket</a></span>
+
                         </div>
                     </div>
                 </div>
-                {% for e in listEvents %}
+               
+                {% for e in listEvents %}     
                  
                 <div class="single-item">
                     <div class="row">
@@ -76,37 +67,39 @@
                                        <div>
                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
                                         <span>Date de début</span>
-                                        <span class="time">{{  e.DateDebutE.format('d/m/Y h:m:s') }}</span>
+                                        <span class="time"  >{{  e.DateDebutE.format('d/m/Y h:m:s') }}</span>
                                        </div>
                                        <div> 
                                          <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
                                         <span>Date de Fin</span>
-                                        <span class="time">{{  e.DateFinE.format('d/m/Y h:m:s') }}</span>
+                                        <span class="time" >{{  e.DateFinE.format('d/m/Y h:m:s') }}</span>
                                         </div>
                                     </div>
                                     
                                      <div class="time-area bg">
                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
                                         <span>commence en:</span>
-                                       
-                                        <p id="e"></p>
+                                   
+                                         <p id="dateEvent" >{{  e.DateDebutE.format('d/m/Y h:m:s') }}</p>
+                                     
                                         <script>
-                                          
- 
-
-                                             // Set the date we're counting down to
                                       
-                                           var countDownDate = new Date(JSON.parse(JSON.stringify({Date: e.DateDebutE}))); 
-                                           
+                                             // Set the date we're counting down to
+                                     
+                        
+                                           var countDownDate = JSON.parse(JSON.stringify(new Date( document.getElementById("dateEvent").innerHTML).getTime())); 
+                                           console.log(countDownDate) 
+                                        
                                             // Update the count down every 1 second
                                             var x = setInterval(function() {
-
+                                              
                                             // Get today's date and time
                                             var now = new Date().getTime();
-
+                                          
                                             // Find the distance between now and the count down date
+                                              
                                             var distance = countDownDate - now;
-
+                                           
                                             // Time calculations for days, hours, minutes and seconds
                                             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
                                             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -114,18 +107,18 @@
                                             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                                             // Display the result in the element with id="demo"
-                                            document.getElementById('e').innerHTML = days + "d " + hours + "h "
+                                            document.getElementById("dateEvent").innerHTML = days + "d " + hours + "h "
                                             + minutes + "m " + seconds + "s ";
 
                                             // If the count down is finished, write some text
                                             if (distance < 0) {
                                                 clearInterval(x);
-                                                document.getElementById('e').innerHTML = "EXPIRED";
+                                                document.getElementById("dateEvent").innerHTML = "EXPIRED";
                                             }
                                             }, 1000);
-                                          
+                                        
                                         </script>
-                                     
+                                    
                                     </div>
                                    
                                 </div>

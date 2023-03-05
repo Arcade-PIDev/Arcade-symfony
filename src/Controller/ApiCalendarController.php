@@ -11,9 +11,9 @@ use DateTime;
 class ApiCalendarController extends AbstractController
 { 
     
-    #[Route('/api/{id}/edit', name: 'api_event_edit', methods: ['PUT'])]
+    #[Route('/api/{id}', name: 'api_event_edit', methods: ['PUT'])]
   
-    public function majEvent(?Evenement $calendar, Request $request)
+    public function UpdateEventCalendar(?Evenement $calendar, Request $request)
     {
         // On récupère les données
         $donnees = json_decode($request->getContent());
@@ -26,7 +26,6 @@ class ApiCalendarController extends AbstractController
             isset($donnees->border_Color) && !empty($donnees->border_Color) &&
             isset($donnees->text_Color) && !empty($donnees->text_Color) 
            
-
         )
         
         { 

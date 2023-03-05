@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SponsorRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
 class Sponsor
@@ -12,41 +13,50 @@ class Sponsor
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("list")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Nom Sponsor ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $NomSponsor = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Positive(message:"Num Tel ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Num Tel ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $NumTelSponsor = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Email(message:"Adresse email invalide")]
     #[Assert\NotBlank(message:"Email ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $EmailSponsor = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message:"Domaine Sponsor ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $DomaineSponsor = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message:"Adresse Sponsor ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $AdresseSponsor = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Logo Sponsor ne doit pas etre vide")]
+    #[Groups("list")]
     private ?string $logoSponsor = null;
 
     #[ORM\Column]
     #[Assert\Positive(message:"Montant ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Montant Sponsoring ne doit pas etre vide")]
+    #[Groups("list")]
     private ?float $MontantSponsoring = null;
 
     #[ORM\ManyToOne(inversedBy: 'SponsorFK')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups("list")]
     private ?Evenement $IDEventsFK = null;
 
    

@@ -35,7 +35,7 @@
                 eventResizableFromStart: true
         })
          calendar.on('eventChange', (e) => {
-            let url = `/api/${e.event.id}/edit`
+            let url = `http://localhost/GestionEventSponsor/public/index.php/api/${e.event.id}`
             let donnees = {
                 "title": e.event.NomEvent,
                 

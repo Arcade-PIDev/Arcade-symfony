@@ -63,4 +63,45 @@ class EvenementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+function sortByDate()
+{
+    return $this->createQueryBuilder('s')
+        //->Where('s.creation_date <= CURRENT_DATE()')
+        ->orderBy('s.DateDebutE', 'DESC')
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult()
+    ; 
+}
+
+public function sortByName(): array
+{
+    return $this->createQueryBuilder('s')
+        ->orderBy('s.NomEvent', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
+public function sortPrix(): array
+{
+    return $this->createQueryBuilder('s')
+        ->orderBy('s.PrixTicket', 'ASC')
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
+
+public function sortByNbrP(): array
+{
+    return $this->createQueryBuilder('s')
+        ->orderBy('s.nbrPlaces', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
+
 }

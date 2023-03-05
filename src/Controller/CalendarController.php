@@ -10,7 +10,7 @@ use App\Repository\EvenementRepository;
 class CalendarController extends AbstractController
 {
     #[Route('/calendar', name: 'app_calendar')]
-    public function index(EvenementRepository $calendar)
+    public function afficherCalendar(EvenementRepository $calendar)
     {
         $events = $calendar->findAll();
 
