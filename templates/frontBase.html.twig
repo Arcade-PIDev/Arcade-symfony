@@ -64,7 +64,6 @@
                                 </li>
                                   <li class=""><a href="">Evenements</a>
                                 </li>
-                                <li><a href="{{ path('app_frontBlog') }}">Blog</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -77,8 +76,13 @@
                                 <option value="4">NL</option>
                             </select>
                         </div>
-                        <a href="{{ path('app_login') }}" class="login-btn">Login</a>
-                        <a href="{{ path('app_register') }}" class="cmn-btn">Signup</a>
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="cmn-btn">Logout</a> 
+
+                         {% else %}
+                         <a href="{{ path('app_login') }}" class="login-btn">Login</a>
+                        <a href="{{ path('app_register') }}" class="cmn-btn">Signup</a> 
+                        {% endif %}
                     </div>
                 </div>
             </div>

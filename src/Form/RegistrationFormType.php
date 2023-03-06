@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,7 +23,9 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('Username')
             ->add('email')
-            ->add('avatar',FileType::class)
+            ->add('avatar',FileType::class,[
+                'mapped'=> false,
+                ],array('data_class' => null))
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -57,9 +61,15 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'Le Mot de Passe nest pas correcte.',
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'mapped' => false,              
+                'mapped' => false,   
+               
+                             
             ])
-        ;
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'app_register',
+
+         ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -2,30 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Blog;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
-class BlogType extends AbstractType
+class ContactType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Titre')
-            ->add('Contenu')
-            ->add('Image',FileType::class,[
-                'mapped'=> false,
-                ],array('data_class' => null))
-            ->add('user')
+            ->add('email')
+            ->add('objet')
+            ->add('content', TextareaType::class)
+            ->add('envoyer', SubmitType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Blog::class,
+            // Configure your form options here
         ]);
     }
 }

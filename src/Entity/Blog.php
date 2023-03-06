@@ -29,9 +29,41 @@ class Blog
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'blog', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[JoinTable('user_blog_like')]
+    private Collection $Likes;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->Likes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function getLikes(): Collection
+    {
+        return $this->Likes;
+    }
+
+    public function addLike(User $Like): self
+    {
+        if(!$this->Likes->contains($Like)){
+            $this->Likes[] = $Like;
+        }
+        return $this;
+
+    }
+
+    public function removeLike(User $Like): self
+    {
+        $this->Likes->removeElement($Like);
+        return $this;
     }
 
     public function getTitre(): ?string
@@ -82,8 +114,44 @@ class Blog
         return $this;
     }
 
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setBlog($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getBlog() === $this) {
+                $comment->setBlog(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLikedByUser(User $user):bool
+    {
+        return $this->Likes->contains($user);
+
+    }
+
     public function __toString(): string
     {
-        return $this->Image;
+        return $this->Titre;
     }
 }

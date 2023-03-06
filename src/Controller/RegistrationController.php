@@ -42,8 +42,11 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-            
-            //$user->getRoles()->setTypeRole('User');
+            $file = $request->files->get('registration_form')['avatar'];
+            $filename = md5(uniqid()) . '.png';
+            $file->move($this->getParameter('userpic_directory'), $filename);
+            $user->setAvatar($filename); 
+            $user->setRole('user');
             $entityManager->persist($user);
             $entityManager->flush();
 
