@@ -50,6 +50,7 @@ class BlogController extends AbstractController
             'form' => $form,
         ]);
     }
+    
     #[Route('/afficherBlogFront/{id}', name: 'app_frontBlog')]
     public function afficherBlogFront(Request $request, CommentRepository $commentRepository,EntityManagerInterface $manager,$id,BlogRepository $blogRepository,Blog $blog): Response
     {

@@ -22,13 +22,16 @@
         <br>
         <br>
          <div class="comment-area my-5">
-                        <h3 class="mb-4 text-center">Number Commentaires</h3>
+                        {% set i=0 %}
                         {% for comment in comments %}
+                        {% set i = i + 1 %}
                         <div class="comment-area-box media">
                             <img alt="" src="images/blog-user-2.jpg" class="img-fluid float-left mr-3 mt-2">
 
                             <div class="media-body ml-4">
                                 <h4 class="mb-0">{{ comment.getUser() }} </h4>
+                                <img src="{{ asset('userpic/'~comment.getUser().getAvatar()) }}" alt="avatar"
+                                                                style="width:100px ;height:100px">
                                 <h6 class="mb-0">{{ comment.getCreatedAt() | date('y-M-d') }} </h6>
                                 <div class="comment-content mt-3">
                                     <p>{{ comment.getContent() }}</p>
@@ -36,15 +39,9 @@
                             </div>
                         </div>
                          {% endfor %} 
+                             <h4 class="mb-4 text-center">{{ i }} Commentaires</h4>
+
                     </div>
-                {# {{ form_start (form,{'attr': {'novalidate': 'novalidate'}} ) }}
-                        <h3 class="mb-4 text-center">Laissez un commentaire</h3>
-                        <div class="row">
-                            {{ form_widget (form.content,{'attr':{'class':'form-control mb-3'}}) }}
-                        </div>
-                        <a href="{{path('app_frontBlog',{ id:blog.getId() })}}">{{ form_row (form.Submit,{'attr':{'class':'btn btn-primary'}} )}}</a>
-                    </form>
-                {{ form_end (form)}} #}
     {{ include('comment/_form.html.twig') }}
                 </div>
 
