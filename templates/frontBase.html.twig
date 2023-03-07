@@ -28,14 +28,14 @@
     <!-- end preloader -->
 
     <a href="#" class="scrollToTop"><i class="fas fa-angle-double-up"></i></a>
-
+{% block header %}
     <!-- header-section start -->
     <header id="header-section">
         <div class="overlay">
             <div class="container">
                 <div class="d-flex header-area">
-                    <div class="logo-section flex-grow-1 d-flex align-items-center"><div>
-                        <a class="site-logo site-title" href="index-2.html"><img style="width:150px;height:80px" src="{{ asset('front/images/arcade.png') }}"
+                    <div class="logo-section flex-grow-1 d-flex align-items-center"><div><br>
+                        <a class="site-logo site-title" href="{{ path('app_home') }}"><img style="width:150px;height:120px" src="{{ asset('front/images/logo3.png') }}"
                                 alt="site-logo"></a></div>
                     </div>
                     <button class="navbar-toggler ml-auto collapsed" type="button" data-toggle="collapse"
@@ -46,11 +46,11 @@
                     <nav class="navbar navbar-expand-lg p-0">
                         <div class="navbar-collapse collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav main-menu ml-auto">
-                                <li><a href="">Accueil</a></li>
-                                <li class="menu_has_children"><a href="#0">Tournois</a>
+                                <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                                <li class="menu_has_children"><a href="#0">Activités</a>
                                     <ul class="sub-menu">
-                                        <li><a href="tournaments.html">Tournois</a></li>
-                                        <li><a href="tournaments-single.html">Jeux</a></li>
+                                        <li><a href="tournaments.html">Jeux</a></li>
+                                        <li><a href="tournaments-single.html">Coaching</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu_has_children"><a href=""> Magasin</a>
@@ -62,14 +62,8 @@
                                         <li><a href="">WishList</a></li>
                                 </ul>
                                 </li>
-                                  <li class="menu_has_children"><a href="">Evenements</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="">Evenements</a></li>
-                                        <li><a href="">Sponsors</a></li>
-                                    </ul>
+                                  <li class=""><a href="">Evenements</a>
                                 </li>
-                                 <li><a href="">Coaching</a></li>
-                                <li><a href="">Blog</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -82,8 +76,13 @@
                                 <option value="4">NL</option>
                             </select>
                         </div>
-                        <a href="login.html" class="login-btn">Login</a>
-                        <a href="registration.html" class="cmn-btn">Signup</a>
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="cmn-btn">Logout</a> 
+
+                         {% else %}
+                         <a href="{{ path('app_login') }}" class="login-btn">Login</a>
+                        <a href="{{ path('app_register') }}" class="cmn-btn">Signup</a> 
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -91,22 +90,24 @@
     </header>
     <!-- header-section end -->
 
-{% block content %}{% endblock %}
+    {% endblock %}
 
-    <!-- footer-section start -->
+{% block body %}{% endblock %}
+{% block footer %}
+   <!-- footer-section start -->
     <footer id="footer-section">
         <div class="footer-mid pt-120">
             <div class="container">
                 <div class="row d-flex">
                     <div class="col-lg-8 col-md-8 d-flex justify-content-md-between justify-content-center align-items-center cus-grid">
-                        <div class="logo-section">
-                            <a class="site-logo site-title" href="index-2.html"><img style="weight:100px;width:180px" src="{{ asset('front/images/arcade.png') }}" alt="site-logo"></a>
+                        <div class="logo-section"><br>
+                            <a class="site-logo site-title" href="index-2.html"><img style="height:280px;width:280px" src="{{ asset('front/images/logo3.png') }}" alt="site-logo"></a>
                             
                         </div>
                         <ul class="menu-side d-flex align-items-center">
-                            <li><a href="index-2.html" class="active">Accueil</a></li>
-                            <li><a href="about-us.html">A Propos</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="" class="active">Accueil</a></li>
+                            <li><a href="">A Propos</a></li>
+                            <li><a href="">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -127,8 +128,8 @@
                     <div class="row d-flex align-items-center justify-content-center">
                         <div class="col-lg-12 col-md-6">
                             <div class="left-area text-center">
-                                <p>Copyright © 2021. All Rights Reserved By
-                                    <a href="#">BEGAM</a>
+                                <p>Réalisé par
+                                    <a href="#">Arcade</a>
                                 </p>
                             </div>
                         </div>
@@ -138,9 +139,13 @@
         </div>
     </footer>
     <!-- footer-section end -->
+    {% endblock %}
 {% block js %}
 <script src="{{ asset("front/js/jquery-3.5.1.min.js") }}"></script>
 <script src="{{ asset("front/js/bootstrap.min.js") }}"></script>
+<script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+<script src="plugins/slick-carousel/slick.min.js"></script>
+<script src="plugins/magnific-popup/magnific-popup.js"></script>
 <script src="{{ asset("front/js/slick.js") }}"></script>
 <script src="{{ asset("front/js/jquery.nice-select.min.js") }}"></script>
 <script src="{{ asset("front/js/fontawesome.js") }}"></script>

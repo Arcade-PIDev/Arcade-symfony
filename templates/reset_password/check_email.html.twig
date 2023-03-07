@@ -1,0 +1,38 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block header %}{% endblock %}
+
+{% block body %}
+<section id="login-reg">
+        <div class="overlay pb-120">
+            <div class="container">
+                <div class="top-area">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-sm-5 col">
+                            <a class="back-home" href="{{ path('app_home') }}">
+                                <img src="images/left-icon.png" alt="image">
+                                  Retour a la page d'accueil
+                            </a>
+                        </div>
+                        <div class="col-sm-5 col">
+                            <a href="#">
+                                <img src="images/logo.png" alt="image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-120 d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login-reg-main text-center">
+                                <h4>Si un compte correspondant à votre adresse Email, un Email vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+                                 Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                                </h4>
+                                <h4>Si vous ne recevez pas d'Email, veuillez vérifier votre dossier spam ou<a href="{{ path('app_forgot_password_request') }}"><button class="cmn-btn">RÉESSAYER</button></a>.</h4>
+                                               </div>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}{% endblock %}

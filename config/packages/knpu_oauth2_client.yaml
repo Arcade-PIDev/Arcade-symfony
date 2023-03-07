@@ -1,0 +1,12 @@
+knpu_oauth2_client:
+    clients:
+        # configure your clients as described here: https://github.com/knpuniversity/oauth2-client-bundle#configuration
+        google:
+                    # this will be one of the supported types
+                    type: google
+                    client_id: '%env(resolve:GOOGLE_CLIENT_ID)%'
+                    client_secret: '%env(resolve:GOOGLE_CLIENT_SECRET)%'
+                    # the route that you're redirected to after
+                    # see the controller example below
+                    redirect_route: connect_google_check
+                    redirect_params: {}

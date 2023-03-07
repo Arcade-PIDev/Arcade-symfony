@@ -1,0 +1,81 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block header %}
+{% endblock %}
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <section id="login-reg">
+        <div class="overlay pb-120">
+            <div class="container">
+                <div class="top-area">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-sm-5 col">
+                            <a class="back-home" href="{{ path('app_home') }}">
+                                <img src="images/left-icon.png" alt="image">
+                                  Retour a la page d'accueil
+
+                            </a>
+                        </div>
+                        <div class="col-sm-5 col">
+                            <a class="site-logo site-title" href="{{ path('app_home') }}"><img style="height:250px;width:250px" src="{{ asset('front/images/logo3.png') }}" alt="site-logo"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-100 d-flex justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login-reg-main text-center">
+                            <h4>Commençons !</h4>
+                            {{ form_start(registrationForm) }}
+                            <div class="form-area">
+                                <form action="#">
+                                    <div class="form-group">
+                                        {{ form_row(registrationForm.email) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_row(registrationForm.Username,{ placeholder:"Entez votre Username" , type:"text" })}}
+                                    </div>
+                                    <div class="form-group">
+                                    {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Mot de Passe', type:"password"
+                                }) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label (registrationForm.avatar,"Avatar") }}
+                                        {{ form_widget (registrationForm.avatar,{'attr':{'class':'form-control form-control-rounded'}}) }}
+
+                                    </div>
+                                    {# <div class="form-group">
+                                        {{ form_label (registrationForm.roles,"roles") }}
+                                        {{ form_widget (registrationForm.roles,{'attr':{'class':'form-control form-control-rounded'}}) }}
+
+                                    </div> #}
+                                    <div class="form-group">
+                                    {{ form_row(registrationForm.agreeTerms) }}
+                                        <button type="submit" class="cmn-btn">Sign Up </button>
+                                    </div>
+                                </form>
+                                {{ form_end(registrationForm) }}
+                                   <div class="or">
+                                    <p>Ou bien</p>
+                                </div>
+                                <div class="reg-with">
+                                    <div class="social-area d-flex justify-content-center">
+                                        <a href="javascript:void(0)"><img src="images/social-icon-1.png" alt="image"></a>
+                                        <a class="google" href="javascript:void(0)"><img src="images/social-icon-3.png" alt="image"></a>
+                                    </div>
+                                </div>
+                                <div class="account">
+                                    <p>Vous avez deja un compte? <a href="{{ path('app_login') }}">Sign In</a></p>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block footer %}{% endblock %}
+

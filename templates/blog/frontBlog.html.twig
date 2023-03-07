@@ -1,0 +1,83 @@
+{% extends 'frontBase.html.twig' %}
+{% block body %}
+<body>
+  <section id="banner-section">
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="main-content">
+                   
+                    <tbody align="center">
+            <h1>{{ blog.titre }}</h1>
+            <div class="center">
+            {# <img src="{{ blog.getImage() }}" alt="Image"> #}
+            <img src="{{ asset('userpic/'~blog.image) }}" alt="image"
+                        style="width:100px ;margin-bottom:20%">
+            </div>
+            <p>{{ blog.contenu }}</p>
+            
+        </tbody>
+         {% include "blog/_share.html.twig" %}
+        <br>
+        <br>
+         <div class="comment-area my-5">
+       
+                        {% set i=0 %}
+                        {% for comment in comments %}
+                        {% set i = i + 1 %}
+                          {% if app.user == comment.getUser() %}
+                                <div class="comment__delete absolute right-0">
+                                </div>
+                            {% endif %}
+                        <div class="comment-area-box media">
+                            <img alt="" src="images/blog-user-2.jpg" class="img-fluid float-left mr-3 mt-2">
+
+                            <div class="media-body ml-4">
+                                <h4 class="mb-0">{{ comment.getUser() }} </h4>
+                                <img src="{{ asset('userpic/'~comment.getUser().getAvatar()) }}" alt="avatar"
+                                                                style="width:100px ;height:100px">
+                                <h6 class="mb-0">{{ comment.getCreatedAt() | date('y-M-d') }} </h6>
+                                <div class="comment-content md:ml-6">
+                                    <p>{{ comment.getContent()|raw }}</p>
+                                </div>
+                            </div>
+                        </div>
+                         {% endfor %} 
+                             <h4 class="mb-4 text-center">{{ i }} Commentaires</h4>
+
+                    </div>
+    {{ include('comment/_form.html.twig') }}
+                </div>
+
+
+                           
+            <h3 class="mb-4 text-center">Vous pouvez aussi aimer</h3>
+             <div class="testimonials-slider mp-none">
+                         {% for blog in Blogs %}
+                <div class="single" ><a href="{{ path('app_frontBlog', {'id': blog.id}) }}">
+                    <div class="single-item text-center" style="min-height: 450px;max-height: 500px" >
+                        <div class="img">
+                            <div class="img-area">
+                                <img src="{{asset('userpic/'~blog.Image)}}" alt="{{asset('userpic/'~blog.Image)}}">
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex justify-content-between"></div>
+                        <div>
+                            <h5>{{ blog.getTitre() }}</h5><br>
+                        </div>
+                        <p style="justify-content: center;display: flex;">{{ blog.getContenu() }}</p><br>
+                         <a href="{{ path('app_frontBlog', {'id': blog.id}) }}" class="cmn-btn">les details</a>
+                    </div>       
+                </a>    
+                </div> 
+                 {% endfor %}              
+            </div>
+                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+</body>
+    {% endblock %}

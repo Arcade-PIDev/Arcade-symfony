@@ -1,0 +1,105 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block body %}
+    <section id="banner-section">
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="main-content">
+                            <div class="top-area justify-content-center text-center">
+                                <h3>Que pensez vous ?</h3>
+                                <h1>Blogs</h1>
+                                <div class="btn-play d-flex justify-content-center align-items-center">
+                                    <a href="registration.html" class="cmn-btn">Get Started</a>
+                                    <a href="https://www.youtube.com/watch?v=MJ0zpsWQ_XM" class="mfp-iframe popupvideo">
+                                        <img src="front/images/play-icon.png" alt="play">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-6">
+                                            <div class="bottom-area text-center">
+                                                <img src="images/versus.png" alt="banner-vs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ani-illu">
+                    <img class="left-1 wow fadeInUp" src="front/images/left-banner.png" alt="image">
+                    <img class="right-2 wow fadeInUp" src="front/images/right-banner.png" alt="image">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials-section" style="margin-bottom: 20%;">
+    <div class="overlay pt-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-header text-center">
+                        <h2 class="title">Nos Blogs</h2>
+                        <p>Vous pouvez Ecrire des publications. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="ani-img">
+            <img class="img-1" src="{{ asset('front/images/banner-circle-1.png') }}" alt="icon">
+            <img class="img-2" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+            <img class="img-3" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+        </div>
+             <div class="testimonials-slider mp-none">
+                         {% for blog in Blogs %}
+                <div class="single" ><a href="{{ path('app_frontBlog', {'id': blog.id}) }}">
+                    <div class="single-item text-center" style="min-height: 450px;max-height: 500px" >
+                        <div class="img">
+                            <div class="img-area">
+                                <img src="{{asset('userpic/'~blog.Image)}}" alt="{{asset('userpic/'~blog.Image)}}">
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex justify-content-between"></div>
+                        <div>
+                            <h5>{{ blog.getTitre() }}</h5><br>
+                        </div>
+                        <p style="justify-content: center;display: flex;">{{ blog.getContenu()|u.truncate(100, '...') }}</p><br>
+                         <a href="{{ path('app_frontBlog', {'id': blog.id}) }}" class="cmn-btn">lire plus</a>
+                         {% include "blog/_like.html.twig" %}
+                    </div>       
+                </a>    
+                </div> 
+                 {% endfor %}              
+            </div>
+        </div>
+    </div>
+    <footer id="footer-section">
+        <div class="overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-top">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-8">
+                                    <div class="top-area text-center">
+                                        <h3>Contactez-nous</h3>
+                                    </div>
+                                    <form action="#">
+                                   {{ form (form) }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</section>
+
+{% endblock %}

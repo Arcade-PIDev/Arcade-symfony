@@ -10,6 +10,7 @@
             <script src="{{asset('back/js/pace.min.js')}}"></script>
             <!--favicon-->
             <link rel="icon" href="{{asset('back/images/arcadeIcon.ico')}}" type="image/x-icon">
+                <link rel="shortcut icon" href="{{ asset("userpic/avatars/av.png") }}" type="image/x-icon">
             <!-- Vector CSS -->
             <link href="{{asset('back/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
             <!-- simplebar CSS-->
@@ -50,13 +51,13 @@
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_user_index') }}">
           <i class="fa fa-solid fa-user"></i> <span>Comptes</span>
         </a>
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_afficherBlog') }}">
           <i class="fa fa-book"></i> <span>Blogs</span>
         </a>
       </li>
@@ -86,13 +87,13 @@
       </li>
 
        <li>
-        <a href="{{ path('app_afficherCategorie') }}">
+        <a href="">
           <i class="fa fa-tag"></i> <span>Categories</span>
         </a>
       </li>
 
       <li>
-        <a href="{{ path('app_afficherProduit') }}">
+        <a href="">
           <i class="fa fa-shopping-cart"></i> <span>Produits</span>
         </a>
       </li>
@@ -196,7 +197,7 @@
 	
 	 </div>
 
-     {% block content %}{% endblock %}
+     {% block body %}{% endblock %}
 
 	</div><!--End Row-->
 	
@@ -213,15 +214,7 @@
     <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
     <!--End Back To Top Button-->
 	
-	<!--Start footer-->
-	<footer class="footer">
-      <div class="container">
-        <div class="text-center">
-          Arcade
-        </div>
-      </div>
-    </footer>
-	<!--End footer-->
+
     <!--start color switcher-->
    <div class="right-sidebar">
     <div class="switcher-icon">

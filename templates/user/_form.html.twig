@@ -1,0 +1,37 @@
+ <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-lg-6">
+         <div class="card">
+           <div class="card-body">
+           <div class="card-title"> Utilisateur </div>
+           <hr>
+           {{ form_start(form) }}
+            <div class="form-group">
+          {{ form_label (form.Username,"Username") }}
+                      {{ form_widget (form.Username,{'attr':{'class':'form-control form-control-rounded'}}) }}
+           </div>
+            <div class="form-group">
+          {{ form_label (form.email,"Email") }}
+                      {{ form_widget (form.email,{'attr':{'class':'form-control form-control-rounded'}}) }}
+           </div>
+            <div class="form-group">
+          {{ form_label (form.password,"Password") }}
+                      {{ form_widget (form.password,{'attr':{'class':'form-control form-control-rounded'}}) }}
+           </div>
+            <div class="form-group">
+          {{ form_label (form.avatar,"Avatar") }}
+                      {{ form_widget (form.avatar,{'attr':{'class':'form-control form-control-rounded'}}) }}
+           </div>
+           <div class="form-group">
+           {{ form_label (form.role,"Role") }}
+             {{ form_row(form.role) }}
+           </div>
+           <div class="form-group">
+          {{ form_label (form.isVerified,"Verified") }}
+            {{ form_widget (form.isVerified,{'attr':{'class':'form-control form-control-rounded'}}) }}
+           </div>
+                <button class="btn btn-light px-5"> {{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+ </div>
+         </div>
+      </div>

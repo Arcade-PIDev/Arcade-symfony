@@ -5,12 +5,16 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,22 +23,25 @@ class User
 
     #[ORM\Column(length: 255)]
     private ?string $Username = null;
-    #[Assert\NotBlank(message:"Username is required")]
     
-    #[ORM\Column(length: 255)]
-    #[Assert\Email(message:"The email '{{ value }} is not a valid email")]
-    private ?string $Email = null;
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    #[SecurityAssert\UserPassword(message:"Password invalide")]
-    private ?string $mdp = null;
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $avatar = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Roles $roles = null;
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
+
+   
+    #[ORM\Column(length: 255)]
+    private ?string $role = null ;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Blog::class, cascade:["remove"])]
     private Collection $blogs;
@@ -50,14 +57,18 @@ class User
     #[ORM\JoinColumn(nullable: true)]
     private ?Participations $participations = null;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class)]
     private Collection $commandes;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
 
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
         $this->participationEvenements = new ArrayCollection();
         $this->commandes = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,24 +90,24 @@ class User
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->email;
     }
 
-    public function setEmail(string $Email): self
+    public function setEmail(string $email): self
     {
-        $this->Email = $Email;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getMdp(): ?string
+    public function getPassword(): string
     {
-        return $this->mdp;
+        return $this->password;
     }
 
-    public function setMdp(string $mdp): self
+    public function setPassword(string $password): self
     {
-        $this->mdp = $mdp;
+        $this->password = $password;
 
         return $this;
     }
@@ -113,18 +124,48 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?Roles
+    public function getRole(): ?string
     {
-        return $this->roles;
+        return $this->role;
     }
 
-    public function setRoles(?Roles $roles): self
+    public function setRole(string $role): self
     {
-        $this->roles = $roles;
+        $this->role = $role;
 
         return $this;
     }
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
 
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
     /**
      * @return Collection<int, Blog>
      */
@@ -238,4 +279,41 @@ class User
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->Username;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
