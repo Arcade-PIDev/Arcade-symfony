@@ -59,6 +59,12 @@ class Sponsor
     #[Groups("list")]
     private ?Evenement $IDEventsFK = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $latitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $longitude = null;
+
    
     public function getId(): ?int
     {
@@ -157,6 +163,30 @@ class Sponsor
     public function setIDEventsFK(?Evenement $IDEventsFK): self
     {
         $this->IDEventsFK = $IDEventsFK;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

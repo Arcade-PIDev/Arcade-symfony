@@ -109,5 +109,14 @@ class SponsorController extends AbstractController
             
             return $this->renderForm("sponsor/modifierSponsor.html.twig",array("form"=>$form));}
     
+            #[Route('/map/{id}', name: 'app_map')]
+            public function index(SponsorRepository $repo,$id)
+            {
+                return $this->render('sponsor/newMap.html.twig', [
+                    'listSponsors' => $repo->findById($id),
+                ]);
+            }
+           
+           
 
 }

@@ -29,6 +29,8 @@ class AjouterSponsorType extends AbstractType
             ->add('EmailSponsor', EmailType::class, ['label'=>'Email'])
             ->add('DomaineSponsor', TextType::class, ['label'=>'Domaine'])
             ->add('AdresseSponsor',TextareaType::class, ['label'=>'Adresse '])
+            ->add('latitude',TextareaType::class, ['label'=>'latitude '])
+            ->add('longitude',TextareaType::class, ['label'=>'longitude '])
             ->add('logoSponsor', FileType::class, ['label'=>'Logo '])
             ->add('MontantSponsoring', NumberType::class, ['label'=>'Montant Sponsoring'])
             ->add('IDEventsFK',  EntityType::class, [

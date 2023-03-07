@@ -37,6 +37,16 @@
             {{ form_widget(form.AdresseSponsor, {'attr': {'class': 'form-control'}} ) }}
               {{ form_errors(form.AdresseSponsor) }}
            </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.latitude)}}</label>
+            {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.latitude) }}
+           </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.longitude)}}</label>
+            {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.longitude) }}
+           </div>
             <div class="form-group">
             <label for="input-5">{{form_label(form.logoSponsor)}}</label>
               {{ form_widget(form.logoSponsor, {'attr': {'class': 'form-control'}} ) }}

@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NotyfController extends AbstractController
 {
-    #[Route('/{notyf}', name: 'app_notyf')]
+    #[Route('/notif/{notyf}', name: 'app_notyf')]
     public function index(?string $notyf = null): Response
     {
         if (null != $notyf) {

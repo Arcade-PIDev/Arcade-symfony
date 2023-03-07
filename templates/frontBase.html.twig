@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Arcade | {% block title %}{% endblock %} </title>
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     {% block styleSheet %}
     <link rel="shortcut icon" href="{{ asset("front/images/logo3.png") }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset("front/css/bootstrap.min.css") }}">
@@ -150,8 +151,7 @@
 <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
 
 
-    
-
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}

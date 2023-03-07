@@ -1,7 +1,14 @@
 {% extends 'baseNotyf.html.twig' %}
 {% block title %}Notyf 🚀
 {% endblock %}
-
+  {% block css %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('notyf') }}
+{% endblock %}
+{% block js %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('notyf') }}
+	{% endblock %}
 {% block body %}
 	<nav>
 		<ul>

@@ -1,0 +1,87 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block title %}map{% endblock %}
+  {% block content %}
+   <section id="banner-section" class="inner-banner profile">
+        <div class="ani-img">
+            <img class="img-1" src="{{ asset("front/images/banner-circle-1.png") }}" alt="icon">
+            <img class="img-2" src="{{ asset("front/images/banner-circle-2.png") }}" alt="icon">
+            <img class="img-3" src="{{ asset("front/images/banner-circle-2.png") }}" alt="icon">
+        </div>
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h4>Geolocalisation sponsor</h4>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                  
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Nous chargeons les fichiers CDN de Leaflet. Le CSS AVANT le JS -->
+       
+
+        <style type="text/css">
+            #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+                height:500px;
+                width:1100px;
+               
+            }
+        </style>
+        <title>Carte</title>
+    </head>
+    <body>
+        <div id="map">
+	    <!-- Ici s'affichera la carte -->
+	</div>
+
+        <!-- Fichiers Javascript -->
+        {% for s in listSponsors %}
+        <div id="lati" >{{  s.getLatitude }}</div>
+         <div id="longi" >{{  s.getLongitude }}</div>
+       {% endfor %}
+
+	<script type="text/javascript">
+            // On initialise la latitude et la longitude 
+            var lat = JSON.parse(JSON.stringify( document.getElementById("lati").innerHTML));;
+            var lon = JSON.parse(JSON.stringify( document.getElementById("longi").innerHTML));;;
+            var macarte = null;
+            // Fonction d'initialisation de la carte
+            
+            function initMap() {
+                // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+                macarte = L.map('map').setView([lat, lon], 11);
+                // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                    // Il est toujours bien de laisser le lien vers la source des données
+                    attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                    minZoom: 1,
+                    maxZoom: 20
+                }).addTo(macarte);
+                var marker = L.marker([lat, lon]).addTo(macarte);
+            }
+            window.onload = function(){
+		// Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
+		initMap(); 
+            };
+            
+        </script>
+    </body>
+</html>
+</div>
+</div>
+</div>
+{% endblock %}
