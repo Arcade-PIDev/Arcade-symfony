@@ -45,13 +45,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Blog::class, cascade:["remove"])]
     private Collection $blogs;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Tournois $tournois = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Participations $participations = null;
+    
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class, cascade:["remove"])]
     private Collection $commandes;
@@ -62,12 +57,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class, cascade:["remove"])]
     private Collection $reviews;
 
+    #[ORM\OneToMany(mappedBy: 'userFK', targetEntity: Evenement::class)]
+    private Collection $eventFK;
+
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Tournois::class)]
+    private Collection $tournois;
+
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Participations::class)]
+    private Collection $participations;
+
+   
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->eventFK = new ArrayCollection();
+        $this->tournois = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,30 +204,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTournois(): ?Tournois
-    {
-        return $this->tournois;
-    }
-
-    public function setTournois(?Tournois $tournois): self
-    {
-        $this->tournois = $tournois;
-
-        return $this;
-    }
-
-    public function getParticipations(): ?Participations
-    {
-        return $this->participations;
-    }
-
-    public function setParticipations(?Participations $participations): self
-    {
-        $this->participations = $participations;
-
-        return $this;
-    }
-
+   
     /**
      * @return Collection<int, Commande>
      */
@@ -313,6 +299,98 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEventFK(): Collection
+    {
+        return $this->eventFK;
+    }
+
+    public function addEventFK(Evenement $eventFK): self
+    {
+        if (!$this->eventFK->contains($eventFK)) {
+            $this->eventFK->add($eventFK);
+            $eventFK->setUserFK($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventFK(Evenement $eventFK): self
+    {
+        if ($this->eventFK->removeElement($eventFK)) {
+            // set the owning side to null (unless already changed)
+            if ($eventFK->getUserFK() === $this) {
+                $eventFK->setUserFK(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tournois>
+     */
+    public function getTournois(): Collection
+    {
+        return $this->tournois;
+    }
+
+    public function addTournoi(Tournois $tournoi): self
+    {
+        if (!$this->tournois->contains($tournoi)) {
+            $this->tournois->add($tournoi);
+            $tournoi->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTournoi(Tournois $tournoi): self
+    {
+        if ($this->tournois->removeElement($tournoi)) {
+            // set the owning side to null (unless already changed)
+            if ($tournoi->getUsers() === $this) {
+                $tournoi->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participations>
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participations $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations->add($participation);
+            $participation->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participations $participation): self
+    {
+        if ($this->participations->removeElement($participation)) {
+            // set the owning side to null (unless already changed)
+            if ($participation->getUsers() === $this) {
+                $participation->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 
 
 }

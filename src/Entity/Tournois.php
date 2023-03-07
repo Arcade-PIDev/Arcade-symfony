@@ -43,12 +43,13 @@ class Tournois
 
     private ?Jeux $Idjeuxfk = null;
 
-    #[ORM\OneToMany(mappedBy: 'tournois', targetEntity: User::class)]
-    private Collection $users;
+    #[ORM\ManyToOne(inversedBy: 'tournois')]
+    private ?User $users = null;
 
+   
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -104,33 +105,17 @@ class Tournois
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUsers(): ?User
     {
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function setUsers(?User $users): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setTournois($this);
-        }
+        $this->users = $users;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getTournois() === $this) {
-                $user->setTournois(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }

@@ -1,0 +1,78 @@
+ {% extends 'backBase.html.twig' %}
+ 
+
+{% block title %}Sponsors{% endblock %}
+
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Ajouter Sponsor</h2></div>
+           <hr>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+              <label for="input-2">{{form_label(form.NomSponsor)}}</label>
+              {{ form_widget(form.NomSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.NomSponsor) }}
+           </div>
+
+           <div class="form-group">
+              <label for="input-2">{{form_label(form.NumTelSponsor)}}</label>
+              {{ form_widget(form.NumTelSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.NumTelSponsor) }}
+           </div>
+
+           <div class="form-group">
+            <label for="input-3">{{form_label(form.EmailSponsor)}}</label>
+              {{ form_widget(form.EmailSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.EmailSponsor) }}
+           </div>
+           <div class="form-group">
+            <label for="input-4">{{form_label(form.DomaineSponsor)}}</label>
+              {{ form_widget(form.DomaineSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.DomaineSponsor) }}
+           </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.AdresseSponsor)}}</label>
+            {{ form_widget(form.AdresseSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.AdresseSponsor) }}
+           </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.latitude)}}</label>
+            {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.latitude) }}
+           </div>
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.longitude)}}</label>
+            {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.longitude) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.logoSponsor)}}</label>
+              {{ form_widget(form.logoSponsor, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.logoSponsor) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.MontantSponsoring)}}</label>
+              {{ form_widget(form.MontantSponsoring, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.MontantSponsoring) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.IDEventsFK,"Evenement Sponsorisé")}}</label>
+              {{ form_widget(form.IDEventsFK, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.IDEventsFK) }}
+           </div>
+           <div class="form-group">
+              {{ form_row(form.save, {'attr': {'class': 'btn btn-light px-5'}} )}}
+                </div>
+                    {{form_rest (form)}}
+
+            </form>
+                {{ form_end (form)}}
+            <div>
+                <a href="{{ path('app_afficher_Sponsor') }}">Liste des Sponsors</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

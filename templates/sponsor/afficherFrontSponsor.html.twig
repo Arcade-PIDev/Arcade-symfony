@@ -1,0 +1,148 @@
+{% extends 'frontBase.html.twig' %}
+
+{% block title %}Sponsor{% endblock %}
+
+{% block content %}
+ 
+    <section id="banner-section" class="inner-banner profile">
+        <div class="ani-img">
+            <img class="img-1" src="{{ asset("front/images/banner-circle-1.png") }}" alt="icon">
+            <img class="img-2" src="{{ asset("front/images/banner-circle-2.png") }}" alt="icon">
+            <img class="img-3" src="{{ asset("front/images/banner-circle-2.png") }}" alt="icon">
+        </div>
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Sponsors</h1>
+                       
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                  
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <div class="container">
+            <div class="heading-area">
+                <div class="row justify-content-between">
+                    <div class="col-md-6">
+                        <div class="profile-area d-flex align-items-center">
+                           <div class="col-lg-4 col-md-6 col-sm-6">
+                              <div class="single-item text-center">
+                                 <div class="img-area">
+                                   <img src="{{ asset("front/images/features-icon-2.png") }}" alt="image">
+                                 </div>
+                                 
+                              </div>
+                            </div>
+                          
+                            <div >
+                                <h4>Liste des sponsors de cet evenement :</h4>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex justify-content-center justify-content-md-end">
+                        <div class="right d-flex align-items-center">
+                           
+                            
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+    </section>
+    <!-- banner-section end -->
+
+    <!-- Trophies Content Start -->
+    {% for s in listSponsors %}
+    <section id="all-trophies" class="pb-120">
+        <div class="container">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="overview-tab">
+                   
+                    <div class="statistics-area">
+                    
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="total-area">
+                                    <div class="head-area d-flex justify-content-between">
+                                        <div class="left">
+                                            <h5>{{  s.getNomSponsor }}</h5>
+                                            <p class="text-sm">A propos de ce sponsor:</p>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="tab-content" id="myTabContents">
+                                        <div class="tab-pane fade show active" id="fortnite" role="tabpanel" aria-labelledby="fortnite-tab">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="single-item text-center">
+                                                        <h6>Numéro de Telephone</h6>
+                                                        <p>{{  s.getNumTelSponsor }}</p>
+                                                      
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-6">
+                                                    <div class="single-item text-center">
+                                                        <h6>Adresse Email</h6>
+                                                        <p>{{  s.getEmailSponsor }}</p>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-lg-3 col-md-6">
+                                                    <div class="single-item text-center">
+                                                      <a href=" {{path('app_map',{ id:s.id()})}} "><h6>Adresse</h6></a>
+                                                        <p>{{   s.getAdresseSponsor }}</p>
+                                                    </div>
+                                                </div>
+                                                 <div class="col-lg-3 col-md-6">
+                                                    <div class="single-item text-center">
+                                                        <h6>Domaine du Sponsor</h6>
+                                                        <p>{{  s.getDomaineSponsor }}</p>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sidebar-area">
+                                    <div class="title-area" >
+                                        <h5>{{  s.getNomSponsor }}</h5>
+                                        <p class="text-sm">Logo: </p>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                          <img src="{{ asset('esfiles/logoSponsor/'~s.logoSponsor) }}" alt="image" 
+                                             style="width:200px ">
+                                          
+                                        </li>
+                                        
+                                    </ul>
+                                     
+                                </div>
+                               
+                            </div>
+                        </div>
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     {% endfor %}
+{% endblock %}

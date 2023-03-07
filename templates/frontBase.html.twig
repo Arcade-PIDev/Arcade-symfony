@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Arcade | {% block title %}{% endblock %} </title>
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
     {% block styleSheet %}
     <link rel="shortcut icon" href="{{ asset("front/images/fav.png") }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset("front/css/bootstrap.min.css") }}">
@@ -18,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
+     <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     
     {% endblock %}
        {% block css %}{% endblock %}
@@ -72,7 +75,7 @@
                                     {% endif %}
                                 </ul>
                                 </li>
-                                  <li class=""><a href="">Evenements</a>
+                                  <li class=""><a href="{{path('app_afficherFront_Event')}}">Evenements</a>
                                 </li>
                             </ul>
                         </div>
@@ -164,8 +167,15 @@
 <script src="{{ asset("front/js/jquery.magnific-popup.min.js") }}"></script>
 <script src="{{ asset("front/js/wow.js") }}"></script>
 <script src="{{ asset("front/js/main.js") }}"></script>
+<script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
+ <script src="//code.jquery.com/jquery.js"></script>
+         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}
 {% block javaScript %}{% endblock %}
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

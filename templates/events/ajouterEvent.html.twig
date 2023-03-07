@@ -1,0 +1,98 @@
+ {% extends 'backBase.html.twig' %}
+{% block title %}Evenements{% endblock %}
+
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Ajouter Evenement</h2></div>
+           <hr>
+            {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+              <label for="input-2">{{form_label(form.NomEvent)}}</label>
+              {{ form_widget(form.NomEvent, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.NomEvent) }}
+           </div>
+
+           <div class="form-group">
+              <label for="input-2">{{form_label(form.lieu)}}</label>
+              {{ form_widget(form.lieu, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.lieu) }}
+           </div>
+
+           {# <section id="checkout" class="pt-120 pb-120">
+                <div class="form-group col-md-4">
+                   <input type="date" class="form-control" id="date">
+                </div>
+            </section> #}
+            
+           <div class="form-group">
+            <label for="input-3">{{form_label(form.DateDebutE, "Date Debut")}}</label>
+              {{ form_widget(form.DateDebutE, ) }}
+              {{ form_errors(form.DateDebutE) }}
+           </div>
+           
+           <div class="form-group">
+            <label for="input-4">{{form_label(form.DateFinE, "Date Fin")}}</label>
+              {{ form_widget(form.DateFinE,  ) }}
+               {{ form_errors(form.DateFinE) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.all_day, "journée entière" )}}</label>
+            {{ form_widget(form.all_day) }}
+              {{ form_errors(form.all_day) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.background_color, "couleur background")}}</label>
+            {{ form_widget(form.background_color ) }}
+              {{ form_errors(form.background_color) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.border_color, "couleur de bordure")}}</label>
+            {{ form_widget(form.border_color ) }}
+              {{ form_errors(form.border_color) }}
+           </div>
+
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.text_color, "couleur de texte")}}</label>
+            {{ form_widget(form.text_color) }}
+              {{ form_errors(form.text_color) }}
+           </div>
+
+           <div class="form-group">
+            <label for="input-5">{{form_label(form.AfficheE)}}</label>
+            {{ form_widget(form.AfficheE, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.AfficheE) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.PrixTicket)}}</label>
+              {{ form_widget(form.PrixTicket, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.PrixTicket) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.nbrPlaces)}}</label>
+              {{ form_widget(form.nbrPlaces, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.nbrPlaces) }}
+           </div>
+            <div class="form-group">
+            <label for="input-5">{{form_label(form.DescriptionEvent)}}</label>
+              {{ form_widget(form.DescriptionEvent, {'attr': {'class': 'form-control'}} ) }}
+              {{ form_errors(form.DescriptionEvent) }}
+           </div>
+           <div class="form-group">
+              {{ form_row(form.save, {'attr': {'class': 'btn btn-light px-5'}} )}}
+                </div>
+                    {{form_rest (form)}}
+
+            </form>
+                {{ form_end (form)}}
+            <div>
+                <a href="{{ path('app_afficher_Event') }}">Liste des Evenements</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

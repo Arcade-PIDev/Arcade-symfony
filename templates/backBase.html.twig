@@ -25,6 +25,9 @@
             <link href="{{asset('back/css/sidebar-menu.css')}}" rel="stylesheet"/>
             <!-- Custom Style-->
             <link href="{{asset('back/css/app-style.css')}}" rel="stylesheet"/>
+            <link href="{{asset('back/css/daterangepicker.scss')}}" rel="stylesheet">
+            <!--Full Calendar Css-->
+            <link href="{{asset('back/plugins/fullcalendar/css/fullcalendar.min.css')}}" rel='stylesheet'/>
             {% endblock %}
 
           
@@ -105,13 +108,13 @@
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_afficher_Event') }}">
           <i class="fa fa-calendar"></i> <span>Evenements</span>
         </a>
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_afficher_Sponsor') }}">
         <i class="zmdi zmdi-card-travel"></i> <span>Sponsors</span>
         </a>
       </li>
@@ -252,6 +255,7 @@
      </div>
    </div>
   <!--end color switcher-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
   	{% block js %}
             <script src="{{asset('back/js/jquery.min.js')}}"></script>
             <script src="{{asset('back/js/popper.min.js')}}"></script>
@@ -268,6 +272,10 @@
             <script src="{{asset('back/plugins/Chart.js/Chart.min.js')}}"></script>
             <!-- Index js -->
             <script src="{{asset('back/js/index.js')}}"></script>
+              <!-- Full Calendar -->
+            <script src="{{asset('back/plugins/fullcalendar/js/moment.min.js')}}"></script>
+            <script src="{{asset('back/plugins/fullcalendar/js/fullcalendar.min.js')}}"></script>
+            <script src="{{asset('back/plugins/fullcalendar/js/fullcalendar-custom-script.js')}}"></script>
   {% endblock %}
        {% block javaScript %}{% endblock %}
       </body>

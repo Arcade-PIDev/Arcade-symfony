@@ -83,9 +83,15 @@ class Evenement
     #[Groups("E")]
     private ?string $text_color = null;
 
+    #[ORM\ManyToOne(inversedBy: 'eventFK')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $userFK = null;
+
+  
     public function __construct()
     {
         $this->SponsorFK = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -271,6 +277,20 @@ class Evenement
 
         return $this;
     }
+
+    public function getUserFK(): ?User
+    {
+        return $this->userFK;
+    }
+
+    public function setUserFK(?User $userFK): self
+    {
+        $this->userFK = $userFK;
+
+        return $this;
+    }
+
+   
 
     
 }

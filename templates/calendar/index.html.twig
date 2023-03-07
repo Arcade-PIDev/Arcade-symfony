@@ -1,0 +1,74 @@
+{% extends 'backBase.html.twig' %}
+
+{% block content %}
+
+ 
+        <div class="mt-3">
+        <div id='calendar'></div>
+        </div>
+        
+ {% block js %}
+
+<script>
+    window.onload = () =>{
+        let calendarElt = document.querySelector("#calendar")
+
+        let calendar = new  FullCalendar.Calendar (calendarElt, {
+          
+             initialView: 'timeGridWeek',
+            locale: 'fr',
+            timeZone: 'Europe/Paris',
+            headerToolbar: {
+                start: 'prev,next today',
+                center: 'title',
+                end: 'dayGridMonth,timeGridWeek'}, 
+            buttonText:{
+                today: 'Aujourd\'hui',
+                month: 'Mois',
+                week: 'Semaine',
+               
+            }, 
+
+                events: {{data|raw}},
+                editable: true,
+                nowIndicator: true,
+                eventResizableFromStart: true
+        })
+         calendar.on('eventChange', (e) => {
+            let url = `http://localhost/GestionEventSponsor/public/index.php/api/${e.event.id}`
+            let donnees = {
+                "title": e.event.NomEvent,
+                
+                "start": e.event.DateDebutE,
+                "end": e.event.DateFinE,
+                "backgroundColor": e.event.background_color,
+                "borderColor": e.event.border_Color,
+                "textColor": e.event.text_Color,
+                "allDay": e.event.all_Day
+              
+
+
+            }
+            
+           
+            let xhr = new XMLHttpRequest
+
+            xhr.open('PUT', url)
+            xhr.send(JSON.stringify(donnees))
+        })
+
+        calendar.render()
+
+    }
+</script>
+
+ {% endblock %}
+	
+ <div>
+                <a href="{{ path('app_afficher_Event') }}">Liste des Evenements</a>
+            </div>
+
+
+
+    
+{% endblock %}

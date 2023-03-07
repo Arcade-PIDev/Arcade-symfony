@@ -39,8 +39,7 @@ class Participations
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateParticipations = null;
 
-    #[ORM\OneToMany(mappedBy: 'participations', targetEntity: User::class)]
-    private Collection $users;
+   
 
 
     
@@ -50,9 +49,12 @@ class Participations
     #[MaxDepth(1)]
     private ?Seancecoaching $idseancefk = null;
 
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    private ?User $users = null;
+
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -119,34 +121,18 @@ class Participations
         return $this;
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function getUsers(): ?User
     {
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function setUsers(?User $users): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->setParticipations($this);
-        }
+        $this->users = $users;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getParticipations() === $this) {
-                $user->setParticipations(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
 }
