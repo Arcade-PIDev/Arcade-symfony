@@ -1,0 +1,188 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Detail Produit{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{asset('front/css/xzoom.css')}}">
+<link rel="stylesheet" href="{{asset('front/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('front/css/owl.theme.default.min.css')}}">
+{% endblock %}
+{% block content %}
+
+    <!-- banner Section start -->
+    <section id="banner-section" class="inner-banner profile features shop-details">
+        <div class="overlay">
+            <div class="ani-img">
+                <img class="img-1" src="{{ asset('front/images/banner-circle-1.png') }}" alt="icon">
+                <img class="img-2" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+                <img class="img-3" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+            </div>
+            <div class="banner-content d-flex align-items-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-7">
+                            <div class="main-content">
+                                <h1>Detail du Produit</h1>
+                                <div class="breadcrumb-area">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb d-flex justify-content-center">
+                                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                                            <li class="breadcrumb-item"><a href="{{ path('app_afficherCategorieFront') }}">Magasin</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Detail Produit</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- banner Section end -->
+<div id="shop-content" style="margin-bottom:10%">
+        <div class="container">
+            <div class="shop-details-content">
+                <div class="row justify-content-center cus-pad">
+                    <div class="col-lg-6">
+                        <div class="xzoom-container">
+                            <img class="xzoom5" id="xzoom-magnific" alt="image" src="{{asset('eshop/produit/'~produit.image)}}"
+                                xoriginal="{{asset('eshop/produit/'~produit.image)}}" />
+                            <div class="xzoom-thumbs">
+
+                                <div class="all-slider">
+                                    <a href="{{asset('eshop/produit/'~produit.image)}}">
+                                        <img style="width:150px" class="xzoom-gallery5" alt="image" src="{{asset('eshop/produit/'~produit.image)}}">
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="right-item">
+                            <div  style="margin-bottom:10%">
+                                <h4>{{ produit.getNomProduit() }}</h4>
+                                <p>{{ produit.getDescription() }}</p>
+                            </div>
+                            <div class="prize">
+                                {% if produit.getQuantiteStock() == 0 %}
+                                <span class="text-sm" style="color:red">Out of stock</span>
+                                {% else %}
+                                <span class="text-sm" style="color:orange">In stock: {{ produit.getQuantiteStock() }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="bottom-area d-flex align-items-center">
+                                <h5>{{ produit.getPrix() }}DT</h5>
+                                <a href="{{path('app_ajouterPanier',{ id:produit.getId() } )}}" class="cmn-btn">Ajouter au panier</a>
+                                <a href="{{path('app_addWishlist',{ id:produit.getId() })}}">
+                                {% set i = 0 %}
+                                    {% for item in wish %}
+                                    {% set i = i + 1 %}
+                                    {% if item.getProduits().getId() == produit.getId() %}
+                                    {% set i = i - 1 %}
+                                    <i class="fas fa-heart" id="star" style="cursor: pointer;font-size:20px;margin-left:50px"></i>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% if i == wish|length %}
+                                    <i class="far fa-heart" id="no_star" style="cursor: pointer;font-size:20px;margin-left:50px"></i>
+                                    {% endif %}
+                                </a>
+                            </div>
+                            
+                            <div class="social d-flex align-items-center">
+                                <p>Share:</p>
+                                <ul class="d-flex">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="login-reg">
+            <div class="overlay pb-120">
+                <div class="row pt-120 d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="login-reg-main text-center">
+                            <h4>Laissez une note!</h4>
+                            <div class="form-area">
+                        {{ form_start(formReview,{'attr': {'novalidate': 'novalidate'}} ) }}
+                                <div class="form-group">
+                                    {{ form_widget (formReview.grade,{'attr':{'class':'form-control form-control-rounded','style':'width:24%;float: left;','placeholder':'Notez notre produit sur 5','type':'number'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget (formReview.content,{'attr':{'class':'form-control form-control-rounded','style':'width:75%;float: right;','placeholder':'Qu\'avez-vous pensé de nos produits ? (optionnel)','type':'text'}}) }}
+                                </div>
+                                <div class="form-group" style="align:center">
+                            <a href="{{path('app_detailProduitFront',{ id:produit.getId() })}}">{{ form_row (formReview.Submit,{'attr':{'class':'cmn-btn','style':'margin-top:20px;margin-right:800px;'}} )}}</a>
+                                </div>
+                        {{ form_end (formReview)}}
+                            </div>
+                            <div style="margin-top:5%" id="testimonials-section" class="testimonials-slider mp-none slick-initialized slick-slider">
+                                <div class="slick-list draggable">
+                                    <div class="slick-slide slick-cloned" data-slick-index="-3" id="" aria-hidden="true" tabindex="-1" style="width: 310px;">
+                                        {% for rev in review|batch(3) %}
+                                        <div class="single" style="margin-bottom:5%;display:flex;width:600px">
+                                            {% for r in rev %}
+                                            <div class="single-item">
+                                                <a style="float:right" href="{{ path('app_deleteReview',{'rev':r.id,'id':produit.id})}}" > <i class="fas fa-times"></i></a>
+                                                <p>{{r.content}}</p>
+                                                <div class="bottom-area d-flex justify-content-between">
+                                                    <div class="left-area d-flex">
+                                                        <div class="title-area">
+                                                            <h6>{{ user.username }}</h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="amount">
+                                                        <h6>{{r.grade}}/5</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}
+{% block javaScript %}
+    <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom.js') }}"></script>
+    <script src="{{ asset('front/js/xzoom-setup.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+   $('#star').click((e) => {
+        console.log($('#star').attr('class'));
+        if ($('#star').attr('class') === "fas fa-heart") {
+            $('#star').removeClass("fas fa-heart").addClass("far fa-heart");
+        }
+         else {
+            $('#star').removeClass("far fa-heart").addClass("fas fa-heart");
+        }
+        }
+    })
+
+    $('#no_star').click((e) => {
+        console.log($('#no_star').attr('class'));
+        if ($('#no_star').attr('class') === "fas fa-heart") {
+            $('#no_star').removeClass("fas fa-heart").addClass("far fa-heart");
+        }
+        }
+         else {
+            $('#no_star').removeClass("far fa-heart").addClass("fas fa-heart");
+        }
+        }
+    })
+</script>
+{% endblock %}
+

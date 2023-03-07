@@ -37,6 +37,12 @@ class Jeux
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Obligatoire")]
+    #[Assert\Length(
+        min: 5,
+        max: 255,
+        minMessage: 'le genre doit depasser  {{ limit }} characteres ',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $genre = null;
 
     #[ORM\OneToMany(mappedBy: 'Idjeuxfk', targetEntity: Tournois::class,cascade:["remove"] )]

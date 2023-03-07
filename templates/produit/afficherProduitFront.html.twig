@@ -1,0 +1,79 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+    <!-- banner-section start -->
+    <section id="banner-section" class="inner-banner profile features shop">
+        <div class="ani-img">
+            <img class="img-1" src="{{ asset('front/images/banner-circle-1.png') }}" alt="icon">
+            <img class="img-2" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+            <img class="img-3" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+        </div>
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Shop</h1>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb d-flex justify-content-center">
+                                        <li class="breadcrumb-item"><a href="">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Magasin</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+
+<!-- Testimonials In start -->
+<section id="featured-products" class="pt-120 pb-120">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 d-flex align-items-center">
+                    <div class="section-header text-center">
+                        <h2 class="title">Featured Products</h2>
+                        <p>Our goal is to deliver high quality gaming apparel and help grow the gaming community!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row cus-m">
+                {% for prod in produit %}
+                    {% if prod.getIsEnabled() == 1 %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-item">
+                        <div class="img-area text-center">
+                            <img src="{{asset('eshop/produit/'~prod.image)}}" alt="{{asset('eshop/produit/'~prod.image)}}">
+                        </div>
+                        <div class="bottom-item text-center">
+                            <a href="{{path('app_detailProduitFront',{ id:prod.getId() })}}"><h6>{{ prod.getNomProduit() }}</h6></a>
+                            <p class="text-sm" style="color:orange">Sur Commande</p>
+                                <h5>{{ prod.getPrix() }}DT</h5>
+                            <div class="review">
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star"></i></a>
+                                <a href="#"><i class="fas fa-star-half-alt"></i></a>
+                                <span class="text-sm">4.3 (79)</span>
+                            </div>
+                            <div class="bottom-area align-items-center justify-content-between">
+                                <a href="{{path('app_ajouterPanier',{ id:prod.getId() })}}" class="cmn-btn">Ajouter au panier</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+<!-- Testimonials In end -->
+{% endblock %}
+
+

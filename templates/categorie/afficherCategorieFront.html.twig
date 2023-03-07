@@ -1,0 +1,123 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    <!-- banner-section start -->
+    <section id="banner-section" class="inner-banner profile features shop">
+        <div class="ani-img">
+            <img class="img-1" src="{{ asset('front/images/banner-circle-1.png') }}" alt="icon">
+            <img class="img-2" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+            <img class="img-3" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+        </div>
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Shop</h1>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb d-flex justify-content-center">
+                                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Magasin</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+
+<!-- Testimonials In start -->
+<section id="testimonials-section" style="margin-bottom: 20%;">
+    <div class="overlay pt-120">
+        <div class="container wow fadeInUp">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-header text-center">
+                        <h2 class="title">Categories</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonials-slider mp-none">
+                {% for cat in categorie %}
+                    {% if cat.getIsEnabled() == 1 %}
+
+                <div class="single" ><a href="{{path('app_afficherProduitFront',{ cat:cat.getId()})}}">
+                    <div class="single-item text-center" style="min-height: 370px;max-height: 370px" >
+                        <div class="img">
+                            <div class="img-area">
+                                <img src="{{asset('eshop/categorie/'~cat.image)}}" style="width:351px;height:130px" alt="{{asset('eshop/categorie/'~cat.image)}}">
+                            </div>
+                        </div>
+                        <div class="bottom-area d-flex justify-content-between"></div>
+                        <div style="justify-content:center;display:flex;">
+                            <h5>{{ cat.getNomCategorie() }}</h5>
+                        </div>
+                        <div style="justify-content:center;display:flex;">
+                            {{ cat.getDescription() }}
+                        </div>
+                    </div>
+                </a>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Testimonials In end -->
+
+<!-- Policy Start -->
+<section id="policy-section" class="pb-120">
+    <div class="container">
+        <div class="main-content">
+            <div class="row cus-m">
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-box text-center">
+                        <div class="img-area text-center">
+                            <img src="{{asset('front/images/policy-icon-1.png')}}" alt="image">
+                        </div>
+                        <h5>Free Shipping</h5>
+                        <p class="text-sm">on all orders over $149.00</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-box text-center">
+                        <div class="img-area text-center">
+                            <img src="{{asset('front/images/policy-icon-2.png')}}" alt="image">
+                        </div>
+                        <h5>30 Days returns</h5>
+                        <p class="text-sm">Moneyback guarantee</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-box text-center">
+                        <div class="img-area text-center">
+                            <img src="{{asset('front/images/policy-icon-3.png')}}" alt="image">
+                        </div>
+                        <h5>Secure checkout</h5>
+                        <p class="text-sm">100% Protectted </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-box text-center">
+                        <div class="img-area text-center">
+                            <img src="{{asset('front/images/policy-icon-4.png')}}" alt="image">
+                        </div>
+                        <h5>Save Money</h5>
+                        <p class="text-sm">Save 10% money</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Policy End -->
+
+
+{% endblock %}

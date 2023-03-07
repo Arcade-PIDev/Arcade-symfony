@@ -1,0 +1,43 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Categorie</h2></div>
+           <hr>
+            {{ form_start(formCategorie,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formCategorie.nomCategorie,"Nom Categorie") }}</label>
+                    {{ form_widget (formCategorie.nomCategorie,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                        {{ form_errors (formCategorie.nomCategorie) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formCategorie.description,"Description") }}</label>
+                    {{ form_widget (formCategorie.description,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                        {{ form_errors (formCategorie.description) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formCategorie.image,"Image") }}</label>
+                    {{ form_widget (formCategorie.image,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                        {{ form_errors (formCategorie.image) }}
+                </div>
+                <div style="display: none;">
+                        {{ form_row (formCategorie.creationDate )}}
+                        {{ form_row (formCategorie.modificationDate )}}
+                        {{ form_row (formCategorie.isEnabled )}}
+                    </div>
+                <div class="form-group">
+                        {{ form_row (formCategorie.Ajouter,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formCategorie)}}
+
+            </form>
+                {{ form_end (formCategorie)}}
+            <div>
+                <a href="{{ path('app_afficherCategorie') }}">back to list</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

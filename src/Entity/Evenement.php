@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: EvenementRepository::class)]
 class Evenement
@@ -15,52 +17,75 @@ class Evenement
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("E")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Lieu Evenement ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $lieu = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"Date Debut ne doit pas etre vide")]
+    #[Groups("E")]
     private ?\DateTimeInterface $DateDebutE = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank(message:"Date Fin ne doit pas etre vide")]
+    #[Groups("E")]
+   
     private ?\DateTimeInterface $DateFinE = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank(message:"Affiche ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $AfficheE = null;
 
     #[ORM\Column]
     #[Assert\Positive(message:"Prix Ticket ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Prix Ticket ne doit pas etre vide")]
+    #[Groups("E")]
     private ?float $PrixTicket = null;
 
     #[ORM\Column]
     #[Assert\Positive(message:"Nombre de Places ne peut pas etre négatif")]
     #[Assert\NotBlank(message:"Nombre de Places ne doit pas etre vide")]
+    #[Groups("E")]
     private ?int $nbrPlaces = null;
 
     #[ORM\Column(length: 2000, nullable: true)]
     #[Assert\NotBlank(message:"Description ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $DescriptionEvent = null;
 
     #[ORM\OneToMany(mappedBy: 'IDEventsFK', targetEntity: Sponsor::class, orphanRemoval: true)]
+    #[Groups("E")]
     private Collection $SponsorFK;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Nom Evenement ne doit pas etre vide")]
+    #[Groups("E")]
     private ?string $NomEvent = null;
 
-    #[ORM\OneToMany(mappedBy: 'pEventFK', targetEntity: ParticipationEvenement::class, orphanRemoval: true)]
-    private Collection $participationEvenements;
+    #[ORM\Column]
+    #[Groups("E")]
+    private ?bool $all_day = null;
+
+    #[ORM\Column(length: 7)]
+    #[Groups("E")]
+    private ?string $background_color = null;
+
+    #[ORM\Column(length: 7)]
+    #[Groups("E")]
+    private ?string $border_color = null;
+
+    #[ORM\Column(length: 7)]
+    #[Groups("E")]
+    private ?string $text_color = null;
 
     public function __construct()
     {
         $this->SponsorFK = new ArrayCollection();
-        $this->participationEvenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,33 +224,53 @@ class Evenement
         return (string) $this->getId();
     }
 
-    /**
-     * @return Collection<int, ParticipationEvenement>
-     */
-    public function getParticipationEvenements(): Collection
+    public function isAllDay(): ?bool
     {
-        return $this->participationEvenements;
+        return $this->all_day;
     }
 
-    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    public function setAllDay(bool $all_day): self
     {
-        if (!$this->participationEvenements->contains($participationEvenement)) {
-            $this->participationEvenements->add($participationEvenement);
-            $participationEvenement->setPEventFK($this);
-        }
+        $this->all_day = $all_day;
 
         return $this;
     }
 
-    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    public function getBackgroundColor(): ?string
     {
-        if ($this->participationEvenements->removeElement($participationEvenement)) {
-            // set the owning side to null (unless already changed)
-            if ($participationEvenement->getPEventFK() === $this) {
-                $participationEvenement->setPEventFK(null);
-            }
-        }
+        return $this->background_color;
+    }
+
+    public function setBackgroundColor(string $background_color): self
+    {
+        $this->background_color = $background_color;
 
         return $this;
     }
+
+    public function getBorderColor(): ?string
+    {
+        return $this->border_color;
+    }
+
+    public function setBorderColor(string $border_color): self
+    {
+        $this->border_color = $border_color;
+
+        return $this;
+    }
+
+    public function getTextColor(): ?string
+    {
+        return $this->text_color;
+    }
+
+    public function setTextColor(string $text_color): self
+    {
+        $this->text_color = $text_color;
+
+        return $this;
+    }
+
+    
 }

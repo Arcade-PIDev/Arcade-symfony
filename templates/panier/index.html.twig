@@ -1,0 +1,145 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+<!-- banner-section start -->
+    <section id="banner-section" class="inner-banner profile features shop">
+        <div class="ani-img">
+            <img class="img-1" src="{{ asset('front/images/banner-circle-1.png') }}" alt="icon">
+            <img class="img-2" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+            <img class="img-3" src="{{ asset('front/images/banner-circle-2.png') }}" alt="icon">
+        </div>
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Shop</h1>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb d-flex justify-content-center">
+                                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="{{ path('app_afficherCategorieFront') }}">Magasin</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+
+<section id="shop-cart-section" class="pt-120 pb-120">
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="shop-cart-top">
+                        <div class="row align-items-center">
+                            <div class="col-sm-8">
+                                <div class="shop-cart-left">
+                                    <p class="text-sm">This Is The List Of Products That Has Been Added To Your
+                                        Cart.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 d-flex justify-content-sm-end justify-content-center">
+                                <div class="shop-cart-right">
+                                    <a href="{{ path('app_afficherCategorieFront') }}" class="text-sm">Continue shopping<img
+                                            src="{{asset('front/images/right-icon.png')}}" alt="image"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Produit</th>
+                                    <th scope="col">Prix</th>
+                                    <th scope="col">Quantité</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in dataPanier %}
+                                <tr>
+
+                                    <th scope="row" style="margin-bottom: 5%;display:flex;">
+
+                                        {% set images = item.produit.image| trim('*') | split("*") %}
+                                        <img src="{{asset('eshop/produit/'~images[0])}}" alt="image"
+                                            style="width: 150px;height:100px">
+
+                                        <p style="display: ruby;margin-right: -80px;margin-left: 10px;width:250px;">
+                                            {{ item.produit.getNomProduit() }}</p>
+                                    </th>
+                                    <td>{{ item.produit.getPrix() * item.quantite}} DT</td>
+                                    <td>
+
+                                        <div class="qtySelector text-center">
+                                            <a href="{{path('app_moins',{ id:item.produit.getId() })}}"><i class="fas fa-minus decreaseQty"></i> </a>
+
+                                            <a href=""><input type="text" class="qtyValue" value="{{ item.quantite }}" name="quantity[]"></a>
+                                            <a href="{{path('app_plus',{ id:item.produit.getId() })}}"><i class="fas fa-plus increaseQty "> </i> </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="cart-dismiss" style="margin-bottom: 5%;">
+                                            <a href="{{path('app_remove',{ id:item.produit.getId() })}}"><i class="fas fa-times"></i></i></a>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="right-sidebar">
+                        <div class="top-area">
+                            <h5>Order Summary</h5>
+                            <p>Price can change depending on shipping
+                                method and taxes of your state.</p>
+                        </div>
+                        <div class="bottom-side text-center">
+                            {# <ul>
+                                <li>
+                                    <span>Subtotal</span>
+                                    <span>€49.90</span>
+                                </li>
+                                <li>
+                                    <span class="text-sm">Delivery (Standard)</span>
+                                    <span class="text-sm">€1.80</span>
+                                </li>
+                                <li>
+                                    <span class="text-sm">Taxes & Fees</span>
+                                    <span class="text-sm">€7.30</span>
+                                </li>
+                            </ul> #}
+                            <form action="#">
+                                <div class="apply d-flex">
+                                    <input type="text" placeholder="Enter pomo Code">
+                                    <button class="cmn-btn">Apply</button>
+                                </div>
+                            </form>
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                    <span>Total Order</span>
+                                    <h4>{{total}} DT</h4>
+                                </li>
+                            </ul>
+                            <a href="{{ path('app_ajouterCommande') }}" class="cmn-btn checkout">proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

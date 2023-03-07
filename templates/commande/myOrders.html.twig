@@ -1,0 +1,95 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}MyOrders{% endblock %}
+{% block content %}
+<!-- banner-section start -->
+<section id="banner-section" class="inner-banner profile features shop">
+    <div class="ani-img">
+        <img class="img-1" src="{{asset('front/images/banner-circle-1.png')}}" alt="icon">
+        <img class="img-2" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+        <img class="img-3" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+    </div>
+    <div class="banner-content d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="main-content">
+                        <h1>My Orders</h1>
+                        <div class="breadcrumb-area">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb d-flex justify-content-center">
+                                    <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">My Orders </li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner-section end -->
+
+<!-- Trophies Content Start -->
+<section id="all-trophies" class="pb-120">
+    <div class="container">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="overview-tab">
+                <div class="statistics-area" style="display: flex;flex-wrap:wrap;">
+
+                    {% for order in productOrdered %}
+
+                     {% if order['order'].isCanceled == 0 and order['order'].isPaid == 1 %}
+                       {% set carts = order['order'].getCarts() %}
+                       
+                       
+                    <div class="col-lg-3">
+
+                        <div class="sidebar-area" style="margin-bottom: 2em;">
+                            <div class="title-area">
+                                <h5>My Order</h5>
+                                <p class="text-sm">{{user.username}}</p>
+                            </div>
+                            <ul>  
+                                <li>
+                                    <span><img src="{{asset('front/images/my-statistics-icon-1.png')}}"
+                                            alt="image">Order ID:</span>
+                                    <span>{{order['order'].id}}</span>
+                                </li>
+                              
+                                {% if carts %}
+                                 {% for cart in carts %}
+                                 {% set product = cart.product %}
+                                <li>
+                                    <span><img src="{{asset('front/images/my-statistics-icon-2.png')}}" alt="image">
+                                        {{product.nameProduct}}  </span>
+                                    <span>{{product.price}} * {{cart.quantity}} </span>
+                                </li>
+                                {% endfor %}
+                                {% endif %}
+                                <li >
+                                    <i class="fas fa-coins" style="margin-right: -15px;"></i> <span
+                                        style="font-weight: bold;font-size: 15px;margin-right:initial">Total
+                                        Price:</span>
+                                    <span
+                                        style="font-size: 18px;color: orange;font-weight: bold;">{{order['order'].totalprice}} Coins</span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                   
+                   
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- Trophies Content End -->
+
+{% endblock %}

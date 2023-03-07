@@ -1,0 +1,86 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Categories</h2>
+                <div class="clearfix"></div>
+                <a href="{{ path('app_ajouterCategorie') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;right:3%;">Ajouter une categorie
+                    </button>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col">Nom</th>
+                                                <th class="col">User</th>
+                                                <th class="col">Image</th>
+                                                <th class="col">Description </th>
+                                                <th class="col">Creation Date </th>
+                                                <th class="col">Modif. Date </th>
+                                                <th class="col no-link last"><span class="nobr">IsEnabled</span>
+                                                </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                    {% for cat in categorie %}
+                                    <tr class="even pointer">
+                                        <td>{{ cat.getNomCategorie() }}</td>
+                                        <td>{{ user }}</td>
+
+                                        <td>
+
+                                            {% set images = cat.image| trim('*') | split("*") %}
+                                            <picture>
+                                                {% for image in images %}
+                                                    <img src="{{ asset('eshop/categorie/'~image) }}" alt="image"
+                                                         style="width:100px ;margin-bottom:20%">
+
+                                                {% endfor %}
+
+                                            </picture>
+                                        </td>
+                                        <td>{{ cat.getDescription() }}</td>
+                                        <td>{{ cat.getCreationDate() | date('y-M-d') }}</td>
+                                        <td>{{ cat.getModificationDate() | date('y-M-d') }}</td>
+                                        <td>{% if cat.getIsEnabled() == 0 %}
+                                                <span class="badge badge-danger">isDisabled</span>
+                                            {% else %}
+                                                <span class="badge badge-success">isEnabled</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a class="fa fa-pencil"
+                                               href="{{ path('app_updateCategorie',{'id':cat.id }) }}">update</a>
+                                            <br/>
+                                        </td>
+                                        <td>
+                                            <a class="fa fa-trash"
+                                               href="{{ path('app_deleteCategorie',{'id':cat.id }) }}">Delete</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

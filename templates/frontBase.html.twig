@@ -18,7 +18,15 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
+    
     {% endblock %}
+       {% block css %}{% endblock %}
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_4085f7fd4e07ff76054c5131c078f4647'
+        });
+    </script>
 </head>
 
 <body>
@@ -53,13 +61,15 @@
                                         <li><a href="tournaments-single.html">Coaching</a></li>
                                     </ul>
                                 </li>
-                                <li class="menu_has_children"><a href=""> Magasin</a>
+                                <li class="menu_has_children"><a href="{{ path('app_afficherCategorieFront') }}"> Magasin</a>
                                 <ul class="sub-menu">
-                                        <li><a href="">Categories</a></li>
-                                        <li><a href="">Panier</a></li>
-                                        <li><a href="">Commandes</a>
+                                        <li><a href="{{ path('app_afficherCategorieFront') }}">Categories</a></li>
+                                        <li><a href="{{ path('app_afficherPanier') }}">Panier</a></li>
+                                      {% if app.user %}
+                                        {# <li><a href="{{ path('app_myOrders',{ user:user.id}) }}">Commandes</a> #}
                                         </li>
-                                        <li><a href="">WishList</a></li>
+                                        <li><a href="{{ path('app_wishlist') }}">WishList</a></li>
+                                    {% endif %}
                                 </ul>
                                 </li>
                                   <li class=""><a href="">Evenements</a>
@@ -92,7 +102,7 @@
 
     {% endblock %}
 
-{% block body %}{% endblock %}
+{% block content %}{% endblock %}
 {% block footer %}
    <!-- footer-section start -->
     <footer id="footer-section">
@@ -154,6 +164,8 @@
 <script src="{{ asset("front/js/jquery.magnific-popup.min.js") }}"></script>
 <script src="{{ asset("front/js/wow.js") }}"></script>
 <script src="{{ asset("front/js/main.js") }}"></script>
+
 {% endblock %}
+{% block javaScript %}{% endblock %}
 </body>
 </html>

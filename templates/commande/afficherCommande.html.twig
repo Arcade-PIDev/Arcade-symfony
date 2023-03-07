@@ -1,0 +1,135 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}CheckOut{% endblock %}
+{% block content %}
+<!-- banner-section start -->
+<section id="banner-section" class="inner-banner profile features shop">
+    <div class="ani-img">
+        <img class="img-1" src="{{asset('front/images/banner-circle-1.png')}}" alt="icon">
+        <img class="img-2" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+        <img class="img-3" src="{{asset('front/images/banner-circle-2.png')}}" alt="icon">
+    </div>
+    <div class="banner-content d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="main-content">
+                        <h1>Check Out</h1>
+                        <div class="breadcrumb-area">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb d-flex justify-content-center">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ path('app_afficherCategorieFront') }}">Magasin</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Check Out</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- banner-section end -->
+
+<!-- Check Out Start -->
+<section id="checkout" class="pt-120 pb-120">
+    <div class="overlay">
+        <div class="container" style="margin-right:20%">
+            <div class="row" style="width: 300%;">
+                <div class="col-lg-4">
+                    <div class="right-sidebar">
+                        <div class="top-area">
+                            <div style="display: flex">
+                                <h5>Order Summary</h5>
+                                <div style="display: flex;margin-left:68%">
+                                <a href="{{ path('app_viderPanier')}}" style="margin-right:50%;" > <i class="fas fa-check"></i></a>
+                                <a href="{{ path('app_cancelOrder',{ 'id':commande.id})}}" > <i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                        <label>
+                        </div>
+                        <div class="bottom-side text-center">
+                            <ul class="bottom-area">
+                                <li>
+                                </li>
+                                {% for produit in produits %}
+                                <li>
+                                <img src="{{asset('eshop/produit/'~produit['produit'].image)}}" style="width:150px;height:80px" alt="">
+                                    <span style="margin-right:30%;margin-top:2%">{{produit['produit'].nomProduit }}</span>
+                                    <span style="margin-right:30%;margin-top:2%">{{produit['quantite'] * produit['produit'].prix}}</span>
+                                    <span style="margin-right:10%;margin-top:2%">{{produit['quantite']}}</span>
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+                            <ul>
+                                <li class="d-flex align-items-center" style="margin-right:5%">
+                                    <span>Total Order</span>
+                                    <h4>{{ commande.getPrixTotal() }} DT</h4>
+
+                                </li>
+                            </ul>
+                        <div id="paypal-button-container"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:50px">
+                    <p> Scannez votre qrCode içi!</p>
+                    <img src="{{qrCode}}" alt="qr-code">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Shop Cart End -->
+
+{% endblock %}
+{% block javaScript %}
+
+{# <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&components=buttons,hosted-fields,funding-eligibility"></script> #}
+
+<script src="https://www.paypal.com/sdk/js?client-id=sb&commit=false"></script>
+
+<script>
+
+paypal.Buttons({
+    env: 'sandbox', /* sandbox | production */
+    style: {
+                layout: 'horizontal',   // horizontal | vertical 
+                size:   'responsive',   /* medium | large | responsive*/
+                shape:  'pill',         /* pill | rect*/
+                color:  'gold',         /* gold | blue | silver | black*/
+                fundingicons: false,    /* true | false */
+                tagline: false          /* true | false */
+            }, 
+    createOrder: function() {
+        var CREATE_URL = 'https://api.sandbox.paypal.com/v2/checkout/orders';
+        return fetch(CREATE_URL)
+         .then(function(res) {
+          return res.json();
+         }).then(function(data) {
+          return data.orderID;
+         });
+ 
+    },
+    onApprove: function(data, actions) {
+        var EXECUTE_URL = 'https://api.sandbox.paypal.com/v2/checkout/orders/5O190127TN364715T/capture';
+        return fetch('/my-server/capture-paypal-transaction', {
+         body: JSON.stringify({
+          orderID: data.orderID
+         })
+        }).then(function(res) {
+         return res.json();
+        }).then(function(details) {
+         alert('Transaction funds captured from ' + details.payer_given_name);
+        });
+ 
+    }
+ 
+}).render('#paypal-button-container');
+ 
+</script>
+
+{% endblock %}

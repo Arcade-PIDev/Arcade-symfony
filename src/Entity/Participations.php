@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ParticipationsRepository::class)]
 class Participations
@@ -16,22 +17,23 @@ class Participations
     #[ORM\Column]
     private ?int $id = null;
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"nom joueur is invalid")]
+    #[Assert\NotBlank(message:"nom joueur est invalide")]
+    #[Assert\Regex(pattern:"/[a-zA-Z]/",message:"Le titre ne peut pas contenir des chiffres")]
     private ?string $nomJoueur = null;
   
     #[ORM\Column]
-    #[Assert\NotBlank(message:"NSC is invalid")]
-    #[Assert\PositiveOrZero]
+    #[Assert\NotBlank(message:"nombre participants est invalide")]
+    #[Assert\Positive (message:" Le nombre de participants doit etre positive ")]
     #[Assert\Range(
         min: 2,
-        max: 100,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+        max: 50,
+        minMessage: 'Le nombre de participants doit au moins 2 participants',
+        maxMessage: 'Le nombre de participants ne peut pas dépasser 50 participants ',
     )]
     private ?int $nombreParticipants = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"niveau is invalid")]
+    #[Assert\NotBlank(message:"niveau est invalide")]
     private ?string $niveau = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -39,6 +41,14 @@ class Participations
 
     #[ORM\OneToMany(mappedBy: 'participations', targetEntity: User::class)]
     private Collection $users;
+
+
+    
+    #[Assert\NotBlank(message:"titre est invalide ")]
+    #[ORM\ManyToOne(inversedBy: 'participations')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[MaxDepth(1)]
+    private ?Seancecoaching $idseancefk = null;
 
     public function __construct()
     {
@@ -49,7 +59,7 @@ class Participations
     {
         return $this->id;
     }
-
+   
     public function getNomJoueur(): ?string
     {
         return $this->nomJoueur;
@@ -97,6 +107,17 @@ class Participations
 
         return $this;
     }
+    public function getIdseancefk(): ?Seancecoaching
+    {
+        return $this->idseancefk;
+    }
+
+    public function setIdseancefk(?Seancecoaching $idseancefk): self
+    {
+        $this->idseancefk = $idseancefk;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, User>
@@ -127,4 +148,5 @@ class Participations
 
         return $this;
     }
+
 }

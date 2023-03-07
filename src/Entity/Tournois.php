@@ -20,11 +20,18 @@ class Tournois
     #[ORM\Column]
     #[Assert\NotBlank(message:"Obligatoire")]
     #[Assert\Positive(message:"le nombre doit etre positif")]
-
+    #[Assert\Range(
+        min: 2,
+        max: 20,
+        minMessage: 'Le nombre de participants doit au moins contenir 2 participants',
+        maxMessage: 'Le nombre de participants ne doit pas dépasser 20 participants ',
+    )]
     private ?int $NBRparticipants = null;
 
     #[ORM\Column]
     #[Assert\NotBlank(message:"Obligatoire")]
+    #[Assert\Positive(message:"la duree doit etre positive")]
+
     private ?String $DureeTournois = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -61,12 +68,12 @@ class Tournois
         return $this;
     }
 
-    public function getDureeTournois(): ?float
+    public function getDureeTournois(): ?String
     {
         return $this->DureeTournois;
     }
 
-    public function setDureeTournois(float $DureeTournois): self
+    public function setDureeTournois(String $DureeTournois): self
     {
         $this->DureeTournois = $DureeTournois;
 

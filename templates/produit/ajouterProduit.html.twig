@@ -1,0 +1,58 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Produits{% endblock %}
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Produit</h2></div>
+           <hr>
+            {{ form_start(formProduit,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.nomProduit,"Nom Produit") }}</label>
+                    {{ form_widget (formProduit.nomProduit,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                {{ form_errors (formProduit.nomProduit) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.description,"Description") }}</label>
+                    {{ form_widget (formProduit.description,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                {{ form_errors (formProduit.description) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.image,"Image") }}</label>
+                    {{ form_widget (formProduit.image,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                {{ form_errors (formProduit.image) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.prix,"Prix") }}</label>
+                    {{ form_widget (formProduit.prix,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                {{ form_errors (formProduit.prix) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.quantiteStock,"Quantite Stock") }}</label>
+                    {{ form_widget (formProduit.quantiteStock,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                        {{ form_errors (formProduit.quantiteStock,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formProduit.categorie,"Categorie") }}</label>
+                    {{ form_widget (formProduit.categorie,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                {{ form_errors (formProduit.categorie) }}
+                </div>
+                
+                <div style="display: none;">
+                    {{ form_row (formProduit.creationDate )}}
+                    {{ form_row (formProduit.modificationDate )}}
+                </div>
+                <div class="form-group">
+                        {{ form_row (formProduit.Submit,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formProduit)}}
+
+            </form>
+                {{ form_end (formProduit)}}
+            <div>
+                <a href="{{ path('app_afficherProduit') }}">back to list</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

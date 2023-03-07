@@ -87,19 +87,19 @@
       </li>
 
        <li>
-        <a href="">
+        <a href="{{ path('app_afficherCategorie') }}">
           <i class="fa fa-tag"></i> <span>Categories</span>
         </a>
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_afficherProduit') }}">
           <i class="fa fa-shopping-cart"></i> <span>Produits</span>
         </a>
       </li>
 
       <li>
-        <a href="">
+        <a href="{{ path('app_afficherCommandeBack') }}">
           <i class="fa fa-barcode"></i> <span>Commandes</span>
         </a>
       </li>
@@ -197,7 +197,7 @@
 	
 	 </div>
 
-     {% block body %}{% endblock %}
+     {% block content %}{% endblock %}
 
 	</div><!--End Row-->
 	
@@ -244,7 +244,7 @@
         <li id="theme10"></li>
         <li id="theme11"></li>
         <li id="theme12"></li>
-		<li id="theme13"></li>
+		    <li id="theme13"></li>
         <li id="theme14"></li>
         <li id="theme15"></li>
       </ul>
@@ -269,5 +269,6 @@
             <!-- Index js -->
             <script src="{{asset('back/js/index.js')}}"></script>
   {% endblock %}
+       {% block javaScript %}{% endblock %}
       </body>
 </html>

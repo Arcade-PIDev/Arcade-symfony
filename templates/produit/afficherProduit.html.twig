@@ -1,0 +1,105 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Produits{% endblock %}
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title" style="display: inline-flex;">
+                <h2>Table Produits</h2>
+                <div class="clearfix"></div>
+                <a href="{{ path('app_ajouterProduit') }}">
+                    <button type="button" class="btn btn-info btn-xs"
+                            style="position:absolute;top:15px;right:3%;">Ajouter un produit
+                    </button>
+                </a>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="col">Nom</th>
+                                                <th class="col">Categorie</th>
+                                                <th class="col">Prix</th>
+                                                <th class="col">Stock</th>
+                                                <th class="col">Image</th>
+                                                <th class="col">Description</th>
+                                                <th class="col">Creation Date</th>
+                                                <th class="col">Modif. Date</th>
+                                                <th class="col no-link last"><span class="nobr">IsEnabled</span>
+                                                </th>
+                                                <th></th><th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="width:100px">
+                                            {% for prod in produit %}
+                                            <tr class="even pointer">
+                                                <td><p id="x">{{ prod.getNomProduit() }}</p></td>
+                                                <td>{{ prod.getCategorie().getNomCategorie() }}</td>
+                                                <td>{{ prod.getPrix() }}</td>
+                                                <td>{{ prod.getQuantiteStock() }}</td>
+<script>
+       const myElement = JSON.parse(localStorage.getItem('nomProduit'));
+               console.log("sdsqd");
+
+        console.log(JSON.parse(localStorage.getItem('nomProduit')));
+            $name = $request->get('nomProduit');
+
+        {# const response = await fetch('/api/nomProduit', {
+  method: 'GET'
+}); #}
+        console.log("sdsqd");
+        const names = await response.json();
+        console.log($names);
+       </script>
+                                                <td>
+
+                                                    {% set images = prod.image| trim('*') | split("*") %}
+                                                    <picture>
+                                                        {% for image in images %}
+                                                            <img src="{{ asset('eshop/produit/'~image) }}" alt="image"
+                                                                style="width:100px ;margin-bottom:20%">
+
+                                                        {% endfor %}
+
+                                                    </picture>
+                                                </td>
+                            
+
+                                                <td>{{ prod.getDescription() }}</td>
+                                                <td>{{ prod.getCreationDate()| date('y-M-d') }}</td>
+                                                <td>{{ prod.getModificationDate()| date('y-M-d') }}</td>
+                                                <td>{% if prod.getIsEnabled() == 0 %}
+                                                        <span class="badge badge-danger">isDisabled</span>
+                                                    {% else %}
+                                                        <span class="badge badge-success">isEnabled</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <a class="fa fa-pencil"
+                                                    href="{{ path('app_updateProduit',{'id':prod.id }) }}">update</a>
+                                                    <br/>
+                                                </td>
+                                                <td>
+                                                    <a class="fa fa-trash"
+                                                    href="{{ path('app_deleteProduit',{'id':prod.id }) }}">Delete</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                    </table>
+                                </div>
+                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -39,15 +39,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-   
     #[ORM\Column(length: 255)]
     private ?string $role = null ;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Blog::class, cascade:["remove"])]
     private Collection $blogs;
-
-    #[ORM\OneToMany(mappedBy: 'usersEventFk', targetEntity: ParticipationEvenement::class, orphanRemoval: true)]
-    private Collection $participationEvenements;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: true)]
@@ -57,18 +53,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: true)]
     private ?Participations $participations = null;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class)]
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class, cascade:["remove"])]
     private Collection $commandes;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Review::class, cascade:["remove"])]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->blogs = new ArrayCollection();
-        $this->participationEvenements = new ArrayCollection();
         $this->commandes = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,36 +195,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, ParticipationEvenement>
-     */
-    public function getParticipationEvenements(): Collection
-    {
-        return $this->participationEvenements;
-    }
-
-    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
-    {
-        if (!$this->participationEvenements->contains($participationEvenement)) {
-            $this->participationEvenements->add($participationEvenement);
-            $participationEvenement->setUsersEventFk($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
-    {
-        if ($this->participationEvenements->removeElement($participationEvenement)) {
-            // set the owning side to null (unless already changed)
-            if ($participationEvenement->getUsersEventFk() === $this) {
-                $participationEvenement->setUsersEventFk(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getTournois(): ?Tournois
     {
         return $this->tournois;
@@ -309,6 +278,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUser() === $this) {
                 $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getUser() === $this) {
+                $review->setUser(null);
             }
         }
 
