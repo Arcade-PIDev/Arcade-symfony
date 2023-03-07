@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
+           <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
     {% endblock %}
 </head>
 
@@ -149,11 +151,13 @@
 <script src="{{ asset("front/js/wow.js") }}"></script>
 <script src="{{ asset("front/js/main.js") }}"></script>
 <script src="{{ asset('front/js/countdown.jquery.js') }}"></script>
-
+ <script src="//code.jquery.com/jquery.js"></script>
+         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
 
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 {% endblock %}
+ {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 </html>

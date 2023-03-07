@@ -68,9 +68,6 @@
                                         <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
                                         <span>Date de début</span>
                                         <span class="time"  >{{  e.DateDebutE.format('d/m/Y h:m:s') }}</span>
-                                          {%  if "now"|date('Y-m-d') == e.DateDebutE|date('Y-m-d') %}
-                                        <a href="{{path('app_notif',{ id:e.id()})}}" > <button class="btn btn-danger">News!</button></a>
-                                             {% endif %}
                                        </div>
                                        <div> 
                                          <img src="{{ asset("front/images/waitng-icon.png") }}" alt="image">
@@ -128,9 +125,7 @@
                                 <div class="single-box d-flex">
                                     <div class="box-item">
                                         <span class="head">Places disponibles</span>
-                                          
                                         <span class="sub">{{  e.nbrPlaces }} </span>
-                                      
                                     </div>
                                     <div class="box-item">
                                         <span class="head">Lieu</span>
@@ -150,9 +145,7 @@
                                 <div class="contain-area">
                                     <span class="prize"><img src="{{ asset("front/images/price-coin.png") }}" alt="image">Prix Ticket</span>
                                     <h4 class="dollar">{{  e.PrixTicket }}DNT</h4>
-                                  
                                     <a href="{{path('app_notif',{ id:e.id()})}}" class="cmn-btn">S'inscrire</a>
-                               
                                     <p>{{  e.DescriptionEvent }}</p>
                                 </div>
                             </div>

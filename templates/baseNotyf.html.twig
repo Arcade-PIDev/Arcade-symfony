@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html data-theme="dark">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-       {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
-  
-{% endblock %}
-{% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
- 
-{% endblock %}
+        <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+        {% block stylesheets %}
+       <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+        {% endblock %}
+
+      
     </head>
     <body>
-    <main class="container">
-        {% include '_notyf.html.twig' %}
         {% block body %}{% endblock %}
-    </main>
-
+          {% block javascripts %}
+        <script src="//code.jquery.com/jquery.js"></script>
+         <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+        
+        {% endblock %}
+           {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+    </body>
 </html>

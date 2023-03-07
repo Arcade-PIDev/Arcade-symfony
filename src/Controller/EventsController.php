@@ -14,6 +14,8 @@ use App\Form\AjouterEventType;
 use App\Form\ModifierEventType;
 use App\Repository\EvenementRepository;
 
+
+
 class EventsController extends AbstractController
 { 
   
@@ -36,8 +38,8 @@ class EventsController extends AbstractController
         return $this->render("events/afficherFrontEvent.html.twig", ['listEvents'=>$list]);
        
     }
-
-
+     
+    
     #[Route('/ajouterEvent', name: 'app_ajouter_Event')]
         public function AjouterEvent(Request $request, ManagerRegistry $doctrine)
         {
