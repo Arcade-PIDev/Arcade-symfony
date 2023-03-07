@@ -22,9 +22,14 @@
         <br>
         <br>
          <div class="comment-area my-5">
+       
                         {% set i=0 %}
                         {% for comment in comments %}
                         {% set i = i + 1 %}
+                          {% if app.user == comment.getUser() %}
+                                <div class="comment__delete absolute right-0">
+                                </div>
+                            {% endif %}
                         <div class="comment-area-box media">
                             <img alt="" src="images/blog-user-2.jpg" class="img-fluid float-left mr-3 mt-2">
 
@@ -33,8 +38,8 @@
                                 <img src="{{ asset('userpic/'~comment.getUser().getAvatar()) }}" alt="avatar"
                                                                 style="width:100px ;height:100px">
                                 <h6 class="mb-0">{{ comment.getCreatedAt() | date('y-M-d') }} </h6>
-                                <div class="comment-content mt-3">
-                                    <p>{{ comment.getContent() }}</p>
+                                <div class="comment-content md:ml-6">
+                                    <p>{{ comment.getContent()|raw }}</p>
                                 </div>
                             </div>
                         </div>

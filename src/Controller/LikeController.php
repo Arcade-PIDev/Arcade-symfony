@@ -23,11 +23,9 @@ class LikeController extends AbstractController
         {
             $blog->removeLike($user);
             $manager->flush();
-            return $this->json(['message'=>'Le Like a ete supprimé.']);
-        }
+            return $this->redirectToRoute('app_home');        }
         $blog->addLike($user);
         $manager->flush();
-        return $this->json(['message'=>'Le Like a ete ajouté.']);
-    }
+return $this->redirectToRoute('app_home');    }
 
 }
