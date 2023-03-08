@@ -93,7 +93,7 @@ class EventsController extends AbstractController
             $form->handleRequest($request);
             
             if ($form->isSubmitted() && $form->isValid()) {
-                $E->setUserFK($this->getUser());
+                $Ev->setUserFK($this->getUser());
                 $file = $request->files->get('modifier_event')['AfficheE'];
                 $filename = md5(uniqid()) . '.png';
                 $file->move($this->getParameter('event_directory'), $filename);

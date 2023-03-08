@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tournois List</title>
+</head>
+<body>
+<h1>Tournois List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>NBRparticipants</th>
+        <th>DureeTournois</th>
+        <th>DateDebutTournois</th>
+        <th>NomJeux</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tournoi in tournois %}
+        <tr>
+            <td>{{ tournoi.getNBRparticipants() }}</td>
+            <td>{{ tournoi.getDureeTournois() }}</td>
+            <td>{{ tournoi.getDateDebutTournois()|date('Y-m-d') }}</td>
+            <td>{{ tournoi.getIdjeuxfk().getNom() }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

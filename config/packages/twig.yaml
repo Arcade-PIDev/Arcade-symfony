@@ -1,4 +1,6 @@
 twig:
+    # paths:
+    #     '%kernel.project_dir%/vendor/brokoskokoli/star-rating-bundle/Resources/views': StarRatingBundle
     default_path: '%kernel.project_dir%/templates'
 
 when@test:

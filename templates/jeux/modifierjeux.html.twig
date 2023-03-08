@@ -1,0 +1,57 @@
+{% extends 'backBase.html.twig' %}
+{% block title %}Jeux{% endblock %}
+{% block css %}
+    <link href="{{ asset('back/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}"
+          rel="stylesheet">
+    <link href="{{ asset('back/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}"
+          rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Jeux</h2></div>
+           <hr>
+            {{ form_start(formJeux,{'attr': {'novalidate': 'novalidate'}} ) }}
+            <form>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formJeux.nom,"Nom jeux") }}</label>
+                    {{ form_widget(formJeux.nom,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formJeux.nom) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formJeux.description,"Description") }}</label>
+                    {{ form_widget(formJeux.description,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formJeux.description) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formJeux.image,"Image") }}</label>
+                    {{ form_widget(formJeux.image,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formJeux.image) }}
+
+                </div>
+                 <div class="form-group">
+                    <label for="input-6">{{ form_label (formJeux.genre,"Genre") }}</label>
+                    {{ form_widget(formJeux.genre,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formJeux.genre) }}
+
+                </div>
+                        
+                <div class="form-group">
+                        {{ form_row (formJeux.Modifier,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formJeux)}}
+            </form>
+                {{ form_end (formJeux)}}
+            <div>
+                <a href="{{ path('app_afficherjeux') }}">RETOUR</a>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

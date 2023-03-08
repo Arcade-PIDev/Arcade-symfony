@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{{ asset("front/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/animate.css") }}">
     <link rel="stylesheet" href="{{ asset("front/css/style.css") }}">
-     <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
     
     {% endblock %}
        {% block css %}{% endblock %}
@@ -60,8 +60,8 @@
                                 <li><a href="{{ path('app_home') }}">Accueil</a></li>
                                 <li class="menu_has_children"><a href="#0">Activités</a>
                                     <ul class="sub-menu">
-                                        <li><a href="tournaments.html">Jeux</a></li>
-                                        <li><a href="tournaments-single.html">Coaching</a></li>
+                                        <li><a href="{{ path('app_afficherJeuxFront') }}">Jeux</a></li>
+                                        <li><a href="{{ path('app_afficherSeancecoaching') }}">Coaching</a></li>
                                     </ul>
                                 </li>
                                 <li class="menu_has_children"><a href="{{ path('app_afficherCategorieFront') }}"> Magasin</a>

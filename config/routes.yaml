@@ -1,3 +1,10 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+participation_search:
+  path: /participation/search
+  controller: App\Controller\ParticipationsController::search
+  methods: [GET]
+generate_pdf:
+  path: /generate-pdf
+  controller: App\Controller\SeancecoachingController::generatePdfAction

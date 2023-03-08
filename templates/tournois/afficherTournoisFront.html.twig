@@ -1,0 +1,89 @@
+ {% extends 'frontBase.html.twig' %}
+{% block title %}Tournois{% endblock %}
+{# {% block css %}
+    <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/style.css">
+{% endblock %}  #}
+
+{% block content %}
+
+    <!-- banner-section start -->
+    <section id="banner-section" class="inner-banner">
+        
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Nos Tournois</h1>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb d-flex justify-content-center">
+                                        <li class="breadcrumb-item"><a href="afficherJeuxFront">Jeux</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Tournois</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- banner-section end -->
+
+    <!-- Browse Tournaments start -->
+    <section id="tournaments-section" class="pt-100 tournaments">
+        <div class="overlay pt-100 pb-100">
+            <div class="container wow fadeInUp">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <div class="section-header">
+                            <h2 class="title">Les Tournois</h2>
+                            <p>Dans le sport, on gagne un grand tournoi ou une grande course pour soi.</p>
+                        </div>
+                    </div>
+                </div>
+                {% for Tou in Tournois %}
+                <div class="single-item">
+                           <div class="row">
+                        <div class="col-lg-6 col-md-9 d-flex align-items-center">
+                            <div class="mid-area">
+                            <span>Nom Jeu:</span>
+                                <h4>{{ Tou.getIdjeuxfk().getNom() }}</h4>
+                                <div class="title-bottom d-flex">
+                                    <div class="time-area bg">
+                                        <span>Duree Tournois</span>
+                                        <span class="time">{{ Tou.getDureeTournois() }}</span>
+                                    </div>
+                                    <div class="date-area bg">
+                                     {# <span>Date Tournois:</span> #}
+                                        <span class="date">{{ Tou.getDateDebutTournois() | date}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 d-flex align-items-center">
+                            <div class="prize-area text-center">
+                                <div class="contain-area">
+                                    <h4 class="dollar">Nombre Participant</h4>
+                                    <a class="cmn-btn">{{ Tou.getNBRparticipants() }} Parciticipants</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a ><img style="width:250px;height:259px" src="{{ asset('front/images/zeineb.png') }}"></a>
+                    </div>
+                </div>
+                 {% endfor %}
+                 
+    </section>
+    <!-- Browse Tournaments end -->
+
+                    {% endblock %}

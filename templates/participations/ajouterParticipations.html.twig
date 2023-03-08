@@ -1,0 +1,61 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}Seance Coaching{% endblock %}
+
+{% block content %}
+
+<div class="card-body">
+           <div class="card-title"><h2>Formulaire Participation</h2></div>
+           <hr>
+
+            {{ form_start(formParticipations,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+            <form>
+             {# <div class="form-group">
+                        {{ form_row (formParticipations.dateDebutSeance )}}
+                        {{ form_row (formParticipations.dateFinSeance )}}
+                    </div> #}
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.nomJoueur,"Nom Joueur") }}</label>
+                    {{ form_widget (formParticipations.nomJoueur,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.nomJoueur) }}
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.nombreParticipants,"Nombre Participants") }}</label>
+                    {{ form_widget (formParticipations.nombreParticipants,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                     {{ form_errors (formParticipations.nombreParticipants) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.niveau,"Niveau DE SEANCE") }}</label>
+                    {{ form_widget (formParticipations.niveau,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                    {{ form_errors (formParticipations.niveau) }}
+
+                    
+                </div>
+                 <div class="form-group">
+                        {{ form_row (formParticipations.dateParticipations )}}
+                       
+                    </div>
+                      <div class="form-group">
+                    <label for="input-6">{{ form_label (formParticipations.idseancefk," titreSeance") }}</label>
+                    {{ form_widget (formParticipations.idseancefk,{'attr':{'class':'form-control form-control-rounded'}}) }}
+                     {{ form_errors (formParticipations.idseancefk) }}
+
+                    
+                </div>
+               
+                <div class="form-group">
+                        {{ form_row (formParticipations.Submit,{'attr':{'class':'btn btn-success'}} )}}
+                </div>
+                    {{form_rest (formParticipations)}}
+
+            
+                {{ form_end (formParticipations)}}
+            <div>
+                        <i class="fa fa-home" aria-hidden="true">
+                <a href="{{ path('app_afficherParticipations') }}"> back to list</a></i>
+            </div>
+         </div>
+</div>
+
+{% endblock %}

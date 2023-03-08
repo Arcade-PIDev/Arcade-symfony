@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SeancecoachingRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use PHPUnit\TextUI\XmlConfiguration\Groups;
+use App\Repository\SeancecoachingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -48,7 +49,11 @@ class Seancecoaching
     #[MaxDepth(2)]
     private Collection $participations;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups("post:read")]
+    private ?int $rating = null;
     public function __construct()
+    
     {
         $this->participations = new ArrayCollection();
     }
@@ -160,6 +165,18 @@ class Seancecoaching
                 $participation->setIdseancefk(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }

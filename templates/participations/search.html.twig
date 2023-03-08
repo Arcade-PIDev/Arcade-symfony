@@ -1,0 +1,100 @@
+{% extends 'backbase.html.twig' %}
+
+{% block content %}
+    <h3>Chercher Participations</h3>
+    {{ form_start(form) }}
+    {{ form_widget(form.query, {'attr': {'class': 'form-control', 'placeholder': 'Chercher selon le nom'}}) }}
+    <button type="submit"  class="btn btn-info btn-xs"
+            style="position:absolute;top:155px;right:3%;">
+        <i class="fa fa-search" aria-hidden="true"> Recherche</i>
+    </button>
+    {{ form_end(form) }}
+
+    {% if result is not empty %}
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_title" style="display: inline-flex;">
+                    <h2>Table Participations</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        <div class="col-sm-9">
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="col">nomjoueur</th>
+                                        <th class="col">nombreParticipants</th>
+                                        <th class="col">niveau </th>
+                                        <th class="col">  dateParticipations </th>
+                                        <th class="col">  titre seance </th>
+
+                                        </th>
+                                        <th></th><th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in result %}
+                                        <tr class="even pointer">
+                                            <td>{{ item.getNomJoueur() }}</td>
+                                            <td>{{ item.getNombreParticipants()}}</td>
+                                            <td>{{ item.getNiveau() }}</td>
+                                            <td>{{ item.getDateParticipations()| date('y-M-d') }}</td>
+                                            <td>{{ item.getIdseancefk().getTitreSeance()}}</td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const form = document.querySelector('form');
+            const tbody = document.querySelector('#participation-list');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                const url = '{{ path('participation_search') }}?' + new URLSearchParams(formData).toString();
+
+                fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Data received:', data);
+                        tbody.innerHTML = '';
+
+                        data.forEach(participation => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                            <td>${participation.nomJoueur}</td>
+                            <td>${participation.nombreParticipants}</td>
+                            <td>${participation.niveau}</td>
+                            <td>${participation.dateParticipations}</td>
+                            <td>${participation.titreSeance}</td>
+                        `;
+                            tbody.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            });
+        </script>
+  
+    {% else %}
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-size: 24px;">
+            <p>Aucun résultat trouvé.</p>
+        </div>
+    {% endif %}
+{% endblock %}

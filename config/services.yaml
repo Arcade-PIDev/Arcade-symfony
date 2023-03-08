@@ -9,6 +9,8 @@ parameters:
     produit_directory: '%kernel.project_dir%/public/eshop/produit'
     event_directory: '%kernel.project_dir%/public/esfiles/afficheEvent'
     sponsor_directory: '%kernel.project_dir%/public/esfiles/logoSponsor'
+    Jeux_directory: '%kernel.project_dir%/public/Jeux'
+    imagesnada_directory: '%kernel.project_dir%/public/imagesnada'
 
 services:
     # default configuration for services in *this* file

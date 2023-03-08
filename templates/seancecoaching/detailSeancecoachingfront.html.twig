@@ -1,0 +1,112 @@
+{% extends 'frontBase.html.twig' %}
+{% block title %}Seance {% endblock %}
+{% block css %}
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bundles/starrating/css/rating.css') }}">
+   {% endblock %}
+{% block content %}
+
+   <section id="banner-section" class="inner-banner tournaments">
+       
+        <div class="banner-content d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="main-content">
+                            <h1>Seance Coaching</h1>
+                            <div class="breadcrumb-area">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb d-flex justify-content-center">
+                                        
+                                        <li class="breadcrumb-item active" aria-current="page"> Details Seance coaching</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="headign-info">
+                <div class="top-area">
+                    <div class="row">
+                        
+                        <div class="col-lg- col-md-4 col-sm-4 d-flex align-items-center justify-content-sm justify-content-center">
+                            <div class="mid-area text-center">
+                               
+                            </div>
+                        </div>
+             
+                    </div>
+                </div>
+                <div class="bottom-area">
+                    <div class="bottom">
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-lg-8 col-md-8 justify-content-sm-center d-grid">
+                               <h4> {{ Seancecoaching.getTitreSeance()  }}</h4>
+                                <div class="title-bottom d-flex">
+                                    <div class="time-area bg">
+                                       
+                                        <span>DEBUTE </span>
+                                        
+                                         <h2> {{Seancecoaching.getDateDebutSeance()| date('y-M-d')}}  </h2>
+                                    </div>
+                                    <div class="time-area bg">
+                                     <span>SE TERMINE </span>
+                                     <h2> {{Seancecoaching.getDateFinSeance()| date('y-M-d')}}  </h2>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 text-center">
+                                <h2> {{Seancecoaching.getprixSeance()}} DT </h2>
+                                <a href="" class="cmn-btn">Join Now!</a>
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        
+                           <div class="col-lg-9 col-md-8 text-center">
+                             {# <div class="single-box d-flex">
+                            
+                                        <span class="sub">{{Seancecoaching.getdescriptionSeance()}}</span>
+                                    
+                                </div> #}
+                            </div>
+                            <div class="col-lg-9 col-md-8 text-center">
+                                <div class="single-box d-flex">
+                                <br>
+                                <h5> Votre Avis : </h5>
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+
+                                    {{ form_end(form) }}
+
+                                </div>
+                            </div>
+                                  <div class="single-box d-flex">
+                            
+                                        <span class="sub">{{Seancecoaching.getdescriptionSeance()}}</span>
+                                    
+                                </div>
+                          
+                            
+                        </ul>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="col-lg-10 col-md-8 text-right">
+                <a href="{{ path('app_afficherSeancecoaching') }}">back to list</a>
+                 <div>
+                
+            </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- banner-section end -->
+    {% endblock %}
+{% block js %}
+    <script src="{{ asset('bundles/brokoskokoli/starrating/js/rating.js') }}"></script>
+{% endblock %}

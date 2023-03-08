@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des séances de coaching</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Titre</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for seance in seances %}
+            <tr>
+                <td>{{ seance.id }}</td>
+                <td>{{ seance.dateDebutSeance|date('d/m/Y') }}</td>
+                <td>{{ seance.dateFinSeance|date('d/m/Y') }}</td>
+                <td>{{ seance.prixSeance }}</td>
+                <td>{{ seance.descriptionSeance }}</td>
+                <td>{{ seance.imageSeance }}</td>
+                <td>{{ seance.titreSeance }}</td>
+                <td>{{ seance.rating }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
